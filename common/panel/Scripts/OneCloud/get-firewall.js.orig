@@ -1,0 +1,230 @@
+﻿$(function () {
+  var Firewall = {
+    config: {
+      addRuleBtn: '#add_rule',
+      addRuleModal: '#addFirewallRuleModal',
+      validateForm: '#firewall-add-rule-form',
+      rulesTable: '#firewall-rules-list',
+      saveChangesBtn: '#firewall-save-changes-btn',
+      saveChangesBlock: '.firewall__save-changes',
+      firewallBlock: '#server-firewall-section',
+      protocol: $('#Protocol'),
+      port: $('#Port'),
+      internalDirection: $('[name="TrafficDirection"]').val()
+    },
+    modal: {
+      toggleBlock: function () {
+        $(c.addRuleBtn).click(function () {
+          $(c.addRuleModal).modal('show');
+        });
+      },
+      init: function () {
+        Firewall.modal.toggleBlock()
+      }
+    },
+    getRulesOrder: function () {
+      var rulesNames = [];
+
+      $(c.rulesTable).find('tbody tr').each(function () {
+        rulesNames.push($(this).find('[data-for="Name"]').text());
+      });
+
+      return rulesNames.join(', ');
+    },
+    validate: {
+      submit: function () {
+        $(c.validateForm).submit(function (e) {
+          e.preventDefault();
+          var obj = Firewall.validate.getRuleModel($(this));
+          if ($(this).valid()) {
+            sendAjaxRequest(c.validateForm, $(c.validateForm).attr('action'), obj, function () {
+              Firewall.addRuleRow(obj);
+            });
+          };
+        });
+      },
+      getRuleModel: function (addRuleForm) {
+        return {
+          Name: addRuleForm.find('[name="Name"]').val(),
+          TrafficDirection: addRuleForm.find('[name="TrafficDirection"]').val(),
+          Action: addRuleForm.find('[name="Action"]').val(),
+          Protocol: addRuleForm.find('#Protocol').val(),
+          Source: (c.internalDirection === 'Outgoing') ? addRuleForm.find('#server-source-list').val() : addRuleForm.find('[name="Source"]').val(),
+          Destination: (c.internalDirection === 'Incoming') ? addRuleForm.find('#server-destination-list').val() : addRuleForm.find('[name="Destination"]').val(),
+          Port: addRuleForm.find('[name="Port"]').val()
+        }
+      },
+      setInternalDirection: function () {
+        var directionSelect = $('#TrafficDirection'),
+          ipSelect = $('#public-ip-address'),
+          sourceBlock = $('#server-source'),
+          destinationBlock = $('#server-destination');
+
+        directionSelect.on('change', function () {
+          var curVal = $(this).val(); 
+          c.internalDirection = curVal;
+
+          errorMessageRemove($('[name="Source"]'));
+          errorMessageRemove($('[name="Destination"]'));
+          if (curVal == 'Incoming') {
+            setControlVisibility(sourceBlock, false);
+            setControlVisibility(destinationBlock, true);
+          } else if (curVal == 'Outgoing') {
+            setControlVisibility(destinationBlock, false);
+            setControlVisibility(sourceBlock, true);
+          };
+
+          function setControlVisibility(block, bool) {
+            var input = block.find('input[type="text"]'),
+              select = block.find('select'),
+              label = block.find('.firewall__small-descr');
+            if (bool) {
+              input.addClass('hidden');
+              input.val('');
+              label.addClass('hidden');
+              select.removeClass('hidden');
+            } else {
+              input.removeClass('hidden');
+              input.val('');
+              label.removeClass('hidden');
+              select.addClass('hidden');
+            }
+          };
+        })
+      },
+      init: function () {
+        Firewall.validate.submit();
+        Firewall.validate.setInternalDirection();
+      }
+    },
+    dragAndDrop: {
+      toggleRulesTableSortable: function () {
+        var curRulesCount = $(c.rulesTable).find('tbody tr').length;
+        var tbody = $(c.rulesTable + ' tbody');
+        if (curRulesCount > 1) {
+          tbody.sortable('enable');
+          $(c.rulesTable).on('sortupdate', function (event, ui) {
+            Firewall.dragAndDrop.toggleSaveChangesVisibility();
+          });
+        } else {
+          tbody.sortable('disable');
+        }
+      },
+      toggleSaveChangesVisibility: function() {
+        var currentState = Firewall.getRulesOrder(),
+          isChanged = currentState !== c.rulesOrder;
+        
+        $(c.saveChangesBlock)[isChanged ? 'addClass' : 'removeClass']('firewall__save-changes--active');
+      }
+    },
+    addRuleRow: function (ruleObj) {
+      var tpl = $('#firewall-row-template').clone(),
+        newRow = $(tpl.prop('content')),
+        rulesTable = $(c.rulesTable);
+      
+      for (var key in ruleObj) {
+        newRow.find('[data-for="' + key + '"]').text(ruleObj[key]);
+      }
+
+      newRow.find('.firewall__rule-id').text(rulesTable.find('tbody tr').length + 1);
+
+      $(c.rulesTable + ' tbody').append(newRow);
+
+      $(c.addRuleModal).modal('hide');
+      $(c.validateForm)[0].reset();
+      Firewall.dragAndDrop.toggleRulesTableSortable();
+      Firewall.dragAndDrop.toggleSaveChangesVisibility();
+    },
+    saveRules: function (e) {
+      e.preventDefault();
+      var modelObj = getFirewallModel();
+      
+      sendAjaxRequest(c.firewallBlock, $(c.firewallBlock).data('action'), {
+        serverId: serverId,
+        model: modelObj
+      }, function () {
+        location.reload();
+      }, showErrorFirewall, 'PUT');
+      
+      function getFirewallModel() {
+        return {
+          Rules: getFirewallRules()
+        }
+
+        function getFirewallRules() {
+          var rows = $(c.rulesTable).find('tbody tr');
+          var rules = new Array();
+
+          rows.each(function () {
+            rules.push({
+              Name: $(this).find('[data-for="Name"]').text(),
+              TrafficDirection: $(this).find('[data-for="TrafficDirection"]').text(),
+              Action: $(this).find('[data-for="Action"]').text(),
+              Protocol: $(this).find('[data-for="Protocol"]').text(),
+              Source: $(this).find('[data-for="Source"]').text(),
+              Destination: $(this).find('[data-for="Destination"]').text(),
+              Port: $(this).find('[data-for="Port"]').text()
+            });
+          });
+
+          return rules;
+        }
+      }
+
+      function showErrorFirewall() {
+        
+      }
+    },
+    deleteRuleRow: function(e) {
+      e.preventDefault();
+      var tr = $(this).closest('tr');
+
+      var confirm = new ConfirmPopup({
+        text: 'Вы действительно хотите удалить данное правило?',
+        cbProceed: function () {
+          tr.remove();
+          Firewall.dragAndDrop.toggleSaveChangesVisibility();
+        },
+        alertText: 'Для того, чтобы окончательно удалить данное правило, необходимо будет сохранить изменения.',
+        alertType: 'info',
+      });
+    },
+    setPort: function () {
+      c.protocol.change(function (e) {
+        e.preventDefault();
+        setAnyPort($(this).val());
+      });
+      function setAnyPort(protocol) {
+<<<<<<< HEAD
+        var isHidden = (protocol === 'Any' || protocol === 'Icmp');
+
+        if (isHidden) {
+=======
+        if (protocol === 'Any' || protocol === 'Icmp') {
+>>>>>>> panel frontend: edits in server Firewall
+          c.port.prop('disabled', true).val('any');
+          c.port.parents('.firewall__request').addClass('hidden');
+        } else {
+          c.port.prop('disabled', false);
+          c.port.parents('.firewall__request').removeClass('hidden');
+        }
+
+        c.port.parent()[(isHidden) ? "addClass" : "removeClass"]("hidden");
+      }
+    },
+    init: function () {
+      c.rulesOrder = Firewall.getRulesOrder();
+      Firewall.modal.init();
+      Firewall.validate.init();
+      $(c.saveChangesBtn).click(Firewall.saveRules);
+      $(c.rulesTable + ' tbody').sortable();
+      Firewall.dragAndDrop.toggleRulesTableSortable();
+      
+      $(c.rulesTable).on('click', '.firewall__rules-delete', Firewall.deleteRuleRow);
+
+      Firewall.setPort();
+    }
+  };
+  var c = Firewall.config;
+  Firewall.init();
+});

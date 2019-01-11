@@ -1,0 +1,29 @@
+﻿$(function () {
+  var autopaymentDisableBtn = $('#autopayment-disable-btn');
+
+  if (autopaymentDisableBtn.length > 0) {
+    autopaymentDisableBtn.click(function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      let confirm = new ConfirmPopup(resources.Account_Usersettings_Autopayment_Disable_Confirm, autoPaymentUnsubscribe);
+      confirm.show();
+    });
+  }
+
+  function autoPaymentUnsubscribe() {
+    sendSimpleAjaxPostRequest(autopaymentDisableBtn.attr('data-href'), {}, function () {
+      location.reload();
+    }, function () {
+      $('#autopayment-disable-block').addClass('loading loading--full');
+<<<<<<< HEAD
+        }, function (data) {
+      $('#autopayment-disable-block').removeClass('loading loading--full');
+            handleAjaxErrors(data, '#autopayment-disable-block');
+=======
+    }, function () {
+      $('#autopayment-disable-block').removeClass('loading loading--full');
+>>>>>>> origin/Develop
+    });
+  }
+});

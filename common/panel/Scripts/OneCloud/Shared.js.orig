@@ -1,0 +1,866 @@
+﻿var errorClass = 'field-validation-error',
+  errorSelector = '.' + errorClass,
+  errorSummaryClass = 'error-summary alert alert-danger',
+  errorSummarySelector = '.error-summary';
+
+var errorElem = $('<span/>', {
+  'class': errorClass,
+  'text': textRequired
+});
+
+if ([].indexOf) {
+
+  var findInArr = function (array, value) {
+    return array.indexOf(value);
+  }
+
+} else {
+  var findInArr = function (array, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === value) return i;
+    }
+    return -1;
+  }
+}
+var removeFromArray = function (array, value) {
+  let index = findInArr(array, value);
+  if (index > -1) {
+    array.splice(index, 1);
+  }
+}
+
+$(function () {
+  // RESET ALL PASSWORD FIELDS AFTER PAGE LOADED
+  setTimeout(function () {
+    $('input[type="password"]').each(function () {
+      $(this).val('');
+    });
+  }, 1000);
+
+
+  // SET CHOSEN COMBOBOX DROP UP, IF IT'S PLACED NEAR BOTTOM OF CONTENT
+  $(document).bind('chosen:ready', function (e, params) {
+    var offsetMax = $('.contents').offset().top + $('.contents').innerHeight(),
+      chosenTarget = $(params.chosen.form_field).parent();
+
+    if ((offsetMax - chosenTarget.offset().top) < 240) {  // 240 - default height of chosen dropdown
+      chosenTarget.find('.chosen-container').addClass('chosen-up');
+    }
+  });
+
+  $('#Subject').on('input', function () {
+    var phrase = $('#Subject').val();
+    $.get('/help/search', { phrase: phrase }, function (data) {
+      $("#help_result").html(data);
+    });
+  });
+  $('#content nav li').each(function () {
+    var location = window.location.href;
+    var link = this.firstElementChild.href;
+    if (location == link) {
+      $(this).addClass('active');
+    }
+  });
+  $('.payment-rare-button').click(function (e) {
+    e.preventDefault();
+    $('.rare').animate({
+      "height": "toggle"
+    }, 200);
+    $('.payment-rare-button').toggleClass('hidden');
+  });
+  $('.billing-rare-button a').click(function (e) {
+    e.preventDefault();
+    $('.rare').animate({
+      "height": "toggle"
+    }, 200);
+    $('.billing-rare-button').toggleClass('hidden');
+  });
+  $('.support-rare-button').click(function () {
+    $('.rare').animate({
+      "height": "toggle"
+    }, 200);
+    $('.support-rare-button').toggleClass('hidden');
+  });
+  $('.invoices-rare-button').click(function () {
+    $('.rare-invoice').animate({
+      "height": "toggle"
+    }, 1);
+    $('.invoices-rare-button').toggleClass('hidden');
+  });
+
+  $('section.billing-detalization a.detal_minus').click(function () {
+    CollapseBillingDetalization($(this));
+  });
+
+  $('.float-label-container input[type="text"], .float-label-container input[type="number"], .float-label-container input[type="password"], .float-label-container input[type="email"], .float-label-container textarea').on('blur', function () {
+    if (!$(this).val() == "") {
+      $(this).next().addClass('stay');
+    } else {
+      $(this).next().removeClass('stay');
+    }
+  });
+  $('.float-label-container input[type="text"], .float-label-container input[type="number"], .float-label-container input[type="password"], .float-label-container input[type="email"], .float-label-container textarea').each(function () {
+    if (!$(this).val() == "") {
+      $(this).next().addClass('stay');
+    } else {
+      $(this).next().removeClass('stay');
+    }
+  });
+
+  $('.float-label-container label').click('blur', function () {
+    $(this).prev().focus();
+
+  });
+  $('#main .faq-question').click(function () {
+    var _contenctObj = $(this).next();
+
+    if (_contenctObj.css('display') == 'none') {
+      _contenctObj.slideDown();
+    } else {
+      _contenctObj.slideUp();
+    }
+  });
+
+  // JQUERY UI TABS INITIALIZATION ( structure: .tabs-onecloud > (ul.tabs-buttons + (div1 + div2 ...))
+
+  $(".tabs-onecloud").tabs({
+    active: ($(this).find('.tabs-buttons li.active').index() == -1) ? 0 : $(this).find('.tabs-buttons li.active').index(),
+
+  });
+
+  if ($('.onecloud-print').length > 0) {
+    removeHeaderForPrintPage();
+  }
+  function setActiveTabOnLoad(key) {
+    var linkedTab = $('a[href="' + key + '"]');
+    if (linkedTab && linkedTab.hasClass('ui-tabs-anchor')) {
+      linkedTab.click();
+    };
+  }
+  if (window.location.hash !== "") {
+    setActiveTabOnLoad(window.location.hash);
+  };
+
+
+  /* =============== DIFFERENT DECORATIONS =============== */
+  $('.numberToThousands').each(function () {
+    var price = $(this).text();
+    if (typeof Number(price) === 'number') {
+      $(this).html(numberWithThousands(price));
+    }
+  });
+
+  /* ============== ADD FILE UPLOAD LISTENER ============= */
+  $('input[type="file"][id!="swift-files"]').on('click', function () {
+    listenFile(this);
+  });
+});
+
+/*
+ * Function to set non-breaking spaces into thousands rank
+ */
+function numberWithThousands(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "&nbsp;");
+}
+
+// PRINT PAGE
+function removeHeaderForPrintPage() {
+  var main = document.querySelector('#main'),
+    header = main.querySelector('.heading');
+  main.removeChild(header);
+}
+function printThisPage() {
+  window.print();
+}
+
+function AjaxSuccess(result) {
+  if (result.redirectTo) {
+    window.location.href = result.redirectTo;
+  }
+};
+function AjaxOnSuccess(idForm, idSuccess) {
+  if ($('#' + idForm).find(errorSelector).length < 1) {
+    $('#' + idSuccess).removeClass('hidden').slideDown();
+    setTimeout(function () {
+      $('#' + idSuccess).slideUp();
+    }, 4000);
+  }
+};
+function AjaxOnFailure(data) {
+  console.log(data.responseText);
+}
+
+function CollapseBillingDetalization(e) {
+  var next_tr = $(e).parent().parent().next();
+  next_tr.toggleClass('hidden');
+
+  if (next_tr.hasClass('hidden')) {
+    $(e).text('+')
+  }
+  else {
+    $(e).text('-')
+  }
+};
+
+
+// hide tooltip for "choose our high servers pool"
+function HideTooltipOnSlider(e) {
+  var id_tooltip = $(e).parent().find('span.tooltip').attr('id');
+  var tooltips = $('#' + id_tooltip).tooltip({});
+  tooltips.tooltip("close");
+}
+
+/*
+ * Initiates countdown timer in seconds, and texts its value to concrete element
+ * @obj countdownObj - jQuery object, where we will show rest of seconds
+ * @number startFrom - start timer number
+ * @function cb - callback function, which will fire, when timer down to 0 (optional)
+ */
+function setCountdownTimer(countdownObj, startFrom, cb) {
+  var timer,
+    start = startFrom;
+
+  countdownObj.text(start);
+  timer = setInterval(function () {
+    countdownObj.text(--start);
+    if (start <= 0) {
+      clearInterval(timer);
+      if (typeof cb === 'function') {
+        cb();
+      }
+    }
+  }, 1000);
+}
+
+function sendAjaxGetRequest(url, successFunction) {
+  $.get(url, successFunction).fail(function (data) {
+    if (data.status) {
+      alert(data.status + ' - ' + data.statusText);
+    }
+
+  });
+}
+
+function addRequestVerificationToken(block, data) {
+  data.__RequestVerificationToken = $(block).find('input[name=__RequestVerificationToken]').val();
+  return data;
+};
+
+function sendAjaxRequest(blockId, url, obj, successFunction, errFunction, type) {
+  // submitting trigger must have [type="submit"] attribute or class 'btn-send'
+  var sendBtn = ($(blockId).find('.btn-send').length > 0) ? $(blockId).find('.btn-send') : $(blockId).find('[type="submit"]'),
+    forgery = $(blockId).find('[name="__RequestVerificationToken"]'),
+    isSent = false;
+
+  if (sendBtn.length !== 0) {
+    if (!sendBtn.hasClass('btn-inprogress')) {
+      addProgressStylesToButton(sendBtn);
+    } else {
+      isSent = true;
+      return false;
+    }
+  }
+
+  if (!isSent) {
+    $.ajax({
+      type: (typeof type !== 'undefined') ? type : 'POST',
+      context: (forgery.length > 0) ? document.body : this,
+      url: url,
+      data: (forgery.length > 0) ? addRequestVerificationToken(blockId, obj) : JSON.stringify(obj),
+      contentType: (forgery.length > 0) ? 'application/x-www-form-urlencoded; charset=UTF-8' : 'application/json',
+      dataType: "json",
+      success: function (data) {
+        if (typeof data !== 'undefined' && data.redirectTo) {
+          window.location.href = data.redirectTo;
+        } else {
+          removeProgressStylesFromButton(sendBtn);
+          if (typeof successFunction === 'function') {
+            successFunction(data);
+          }
+        }
+      },
+      error: function (data, status) {
+        removeProgressStylesFromButton(sendBtn);
+        if (data.status === 200 && data.state() === 'rejected') { // case of 302 redirect
+          location.href = loginUrl;
+          return;
+        }
+        handleAjaxErrors(data, blockId, errFunction);
+      }
+    });
+  }
+}
+
+function sendSimpleAjaxPostRequest(url, obj, successFunc, processFunc, errFunction) {
+  if (typeof processFunc === 'function') {
+    processFunc();
+  }
+
+  $.ajax({
+    type: "POST",
+    contentType: 'application/json',
+    url: url,
+    data: JSON.stringify(obj),
+    dataType: "json",
+    success: function (data) {
+      if (typeof successFunc === 'function') {
+        successFunc(data);
+      }
+    },
+    error: function (data, status) {
+      handleAjaxErrors(data, null, errFunction);
+      if (typeof errFunction === 'function') {
+        errFunction();
+      }
+    }
+  });
+}
+
+function addProgressStylesToButton(btn) {
+  switch (btn.prop('tagName').toLowerCase()) {
+    case 'input':
+      textSendCur = btn.val();
+      btn.val(textSending);
+      break;
+    default:
+      textSendCur = btn.text();
+      btn.text(textSending);
+  }
+  btn.addClass('btn-inprogress');
+}
+function removeProgressStylesFromButton(btn) {
+  if (btn.length !== 0) {
+    switch (btn.prop('tagName').toLowerCase()) {
+      case 'input':
+        btn.val(textSendCur);
+        break;
+      default:
+        btn.text(textSendCur);
+    }
+    btn.removeClass('btn-inprogress');
+  }
+}
+
+function handleAjaxErrors(data, blockId, errorFunction) {
+  if (data.status == 500) {
+    showServerErrorBootstrapModal();
+    return;
+  }
+
+  if (data.responseJSON != undefined) {
+    var errObj = (typeof data.responseJSON === 'string') ? JSON.parse(data.responseJSON) : data.responseJSON;
+    var errorRange = Number(data.status) - 400;
+
+    if (errorRange >= 0 && errorRange < 100 && typeof errObj.ModelState !== 'undefined') {
+      var errArray = Object.keys(errObj.ModelState);
+      if (errArray.length === 1 && errArray[0] === '') {
+        showSummaryMessage(errObj.ModelState[''].toString(), blockId);
+      } else {
+        for (var i = 0; i < errArray.length; i++) {
+          var errElem = (blockId === null) ? $('[name="' + errArray[i] + '"]') : $(blockId).find('[name="' + errArray[i] + '"]');
+          if (errElem.parent().find('.error__message').length > 0) {
+            errorMessageRemove(errElem);
+          }
+          errorMessageAdd(errElem, errObj.ModelState[errArray[i]].toString().replace(/\n/g, '<br />'));
+        }
+      }
+
+      if (typeof errorFunction === 'function') {
+        errorFunction(errObj.ModelState);
+      }
+    } else {
+      var errMsg = (errObj.Message) ? errObj.Message : data;
+      if ($(errorSummarySelector).length > 0) {
+        $(errorSummarySelector + ' p').text(errMsg);
+      } else {
+        showSummaryMessage(errMsg, blockId);
+      }
+      if (typeof errorFunction === 'function') {
+        errorFunction(errMsg);
+      }
+    }
+  } else {
+    console.log(resources.ErrorMsg_NoDescription + ':' + data);
+  }
+}
+
+function showSummaryMessage(msg, blockId) {
+  var errMsgBlock = $('<div />', {
+    class: errorSummaryClass,
+    'html': '<p>' + msg + '</p>'
+  });
+  var errMsgBlockClose = $('<span/>', {
+    class: 'glyphicon glyphicon-remove error-summary-close',
+    click: function () {
+      $(this).closest(errorSummarySelector).remove();
+    }
+  });
+  errMsgBlock.append(errMsgBlockClose);
+
+  $(errorSummarySelector).remove();
+
+  if (blockId !== null && typeof blockId !== 'undefined') {
+    $(blockId).prepend(errMsgBlock);
+  } else {
+    errMsgBlock.insertAfter($('#main > header'));
+  }
+}
+
+function errorMessageAdd(errObj, errMsg) {
+  if (errObj.siblings(errorSelector).length < 1) {
+    var errObjParent = errObj.parent(),
+      errorNew = errorElem.clone();
+
+    errObjParent.addClass('error');
+    errorNew.html(errMsg).appendTo(errObjParent);
+
+    errObj.bind('click change',
+      function () {
+        errorMessageRemove(errObj);
+      });
+
+    if (errObj.siblings('.btn').length > 0) {
+      errObj.siblings('.btn').bind('click',
+        function () {
+          errorMessageRemove(errObj);
+        });
+    }
+  }
+}
+function errorMessageRemove(errObj) {
+  var errObjParent = errObj.parent();
+  errObjParent.removeClass('error').find(errorSelector).remove();
+}
+function showServerErrorBootstrapModal() {
+  var modalBlock = $('<div />', {
+    'id': 'modalServerError',
+    'class': 'modal onecloud__modal onecloud__modal--error fade'
+  }),
+    modalDialog = $('<div class="modal-dialog"/>'),
+    modalContent = $('<div class="modal-content"/>'),
+    modalHeader = $('<div />', {
+      'class': 'modal-header',
+      'html': '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h3 class="modal-title">' + textServerErrorTitle + '</h3>'
+    }),
+    modalBody = $('<div />', {
+      'class': 'modal-body',
+      'html': resources.ServerError
+    }),
+    modalFooter = $('<div />', {
+      'class': 'modal-footer',
+      'html': '<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>'
+    });
+
+  modalContent.append(modalHeader, modalBody, modalFooter).appendTo(modalDialog);
+  modalBlock.append(modalDialog).modal('show');
+}
+
+/*
+ * Appends block with custom success message for 4 seconds and then removes it
+ * @obj successBlock - jQuery object to append success message
+ * @string successMsg - text to be shown
+ */
+function successMessageShow(successBlock, successMsg) {
+  var successElem = $('<div/>', {
+    class: 'success-action',
+    'text': successMsg
+  });
+  successBlock.append(successElem);
+  setTimeout(function () {
+    successElem.slideUp(400, function () {
+      successElem.remove();
+    });
+  }, 4000);
+};
+
+/*
+ * Function initiates check of multiple Task execution.
+ * @string checkUrl - url for further post request
+ * @number interval - interval of sending post requests
+ * @number maxChecks - maximum times to check each task process
+ * @number cb - callback function, for task completion. If specified will be fired with parameter task id, if not, further it will be redefined to page reload
+ */
+function StartTasksStatusCheck(checkUrl, interval, maxChecks, cb) {
+  var taskList = [];
+
+  if ($('#server-history .progress').length > 0) {
+    $('#server-history .progress').each(function () {
+      var taskId = $(this).find('.bar').attr('id').replace('task_', '');
+      var checkedTimes = 0;
+      var callback = (typeof cb === 'function') ? cb : function () { location.reload(); };
+
+      taskList[taskId] = window.setInterval(function () {
+        CheckStatusTaskNew(checkUrl.replace('defaultId', taskId), taskId, callback);
+
+        checkedTimes++;
+        if (checkedTimes == maxChecks) {
+          clearInterval(taskList[taskId]);
+        }
+      }, interval);
+    });
+  }
+}
+
+/*
+ * Simple function to check end of Task execution.
+ * @string url - url for further post request
+ * @number id - task id
+ * @function cb - callback function, which fires, when task is complete (default - page reload)
+ */
+function CheckStatusTaskNew(url, id, cb) {
+  $('div.bar#task_' + id).addClass('active');
+
+  $.post(url, null, function (data) {
+    if (data.ProgressPercent > 0) {
+      $('div.bar#task_' + id).css("width", data.ProgressPercent + "%");
+    }
+    if (data.TaskIsComplited == true) {
+      cb(id);
+    }
+  }, "json");
+}
+
+/* Validation for upload file */
+function validateFile(input) {
+  var isValid = true,
+    names = [];
+
+  for (var i = 0; i < input.files.length; i++) {
+    var file = input.files[i],
+      ext = file.name.match(/\.(.+)$/)[1];
+
+    switch (ext) {
+      case 'png':
+      case 'jpeg':
+      case 'jpg':
+      case 'gif':
+      case 'doc':
+      case 'docx':
+      case 'rtf':
+      case 'txt':
+      case 'pdf':
+        break;
+
+      default:
+        isValid = false;
+    }
+
+    if (file.size > numberUploadMaxSize) {
+      isValid = false;
+    }
+
+    names.push(file.name);
+  }
+
+  if (!isValid) {
+    input.value = null;
+    names = [];
+    errorMessageAdd($(input), textUploadFileError);
+  } else {
+    if (input.classList.contains('onecloud-file-input')) {
+      var textElem = document.querySelector('.onecloud-file-text[data-for="' + input.name + '"]');
+      textElem.textContent = names.join(', ');
+    }
+  }
+}
+function listenFile(input) {
+  if (!$(input).val()) {
+    //Initial Case when no document has been uploaded
+    $("input[type='file']").change(function () {
+      validateFile(input)
+    });
+
+  } else {
+    //Subsequent cases when the exact same document will be uploaded several times
+    $(input).val('');
+    if ($(input).hasClass('onecloud-file-input')) {
+      var textElem = $(input).parent().find('.onecloud-file-text');
+      textElem.html(textElem.attr('data-empty-text'));
+    }
+    $("input[type='file']").unbind('change');
+    $("input[type='file']").change(function () {
+      validateFile(input);
+    });
+  }
+}
+
+/*
+ * Constructor for increase/decrease element 
+ * @obj - DOM object of amount block
+ * @function cbIncrease - callback function for clicking on increase button (optional)
+ * @function cbDecrease - callback function for clicking on decrease button (optional)
+ */
+var Amount = function (obj, cbIncrease, cbDecrease, customErrFunc) {
+  var amount = this,
+    btnIncrease = obj.querySelector('.amount__increase'),
+    btnDecrease = obj.querySelector('.amount__decrease'),
+    input = obj.querySelector('.amount__input'),
+    min = Number(input.min),
+    max = Number(input.max),
+    step = (input.step) ? Number(input.step) : 1,
+    errMsgConfig = {
+      max: resources.Shared_MaxValue + ': ',
+      min: resources.Shared_MinValue + ': ',
+      closest: resources.Shared_ClosestValue + ': '
+    };
+
+  this.increaseAmount = function () {
+    var prevVal = Number(input.value);
+    if (prevVal + step > max) {
+      return false;
+    } else {
+      input.value = prevVal + step;
+      btnIncrease.disabled = (prevVal + step * 2 > max) ? true : false;
+      btnDecrease.disabled = false;
+
+      if (typeof cbIncrease === 'function') {
+        cbIncrease();
+      }
+    }
+  };
+
+  this.decreaseAmount = function (prevVal) {
+    var prevVal = Number(input.value);
+    if (prevVal - step < min) {
+      return false;
+    } else {
+      input.value = prevVal - step;
+      btnDecrease.disabled = (prevVal - step * 2 < min) ? true : false;
+      btnIncrease.disabled = false;
+
+      if (typeof cbDecrease === 'function') {
+        cbDecrease();
+      }
+    }
+  };
+
+  this.init = function () {
+    var timeout;
+    if (typeof btnIncrease === 'undefined' || typeof btnDecrease === 'undefined') {
+      return false;
+    } else {
+      if (Number(input.value) === min) {
+        btnDecrease.disabled = true;
+      }
+      if (Number(input.value) === max) {
+        btnIncrease.disabled = true;
+      }
+
+      if (typeof customErrFunc === 'function') {
+        amount.showError = customErrFunc;
+      }
+
+      btnIncrease.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        amount.increaseAmount();
+      });
+
+      btnDecrease.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        amount.decreaseAmount();
+      });
+
+      input.addEventListener('keyup', function (e) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          amount.checkBtn();
+          amount.inputChange();
+          cbIncrease();
+        }, 800)
+      });
+      $(input).on('change', function (e) {
+        e.preventDefault();
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          amount.checkBtn();
+          amount.inputChange();
+          cbIncrease();
+        }, 800)
+      });
+    }
+  }
+
+  this.checkBtn = function () {
+    if (Number(input.value) === min) {
+      btnDecrease.disabled = true;
+    } else {
+      btnDecrease.disabled = false;
+    };
+    if (Number(input.value) === max) {
+      btnIncrease.disabled = true;
+    } else {
+      btnIncrease.disabled = false;
+    };
+  };
+
+  this.inputChange = function () {
+    input.value = Math.ceil(input.value);
+    var curStep = (Number(input.value) - min) / step;
+    if (curStep % 1 !== 0) {
+      input.value = Math.ceil(curStep) * step + min;
+      amount.showError(errMsgConfig.closest + input.value);
+    };
+    if (Number(input.value) > max) {
+      input.value = max;
+      amount.showError(errMsgConfig.max + max);
+    };
+    if (Number(input.value) < min) {
+      input.value = min;
+      amount.showError(errMsgConfig.min + min);
+    };
+
+  };
+
+  this.showError = function (msg) {
+    amount.removeErr();
+    var parentBlock = $(input).parent();
+    $('<span class="amount-tooltip amount-tooltip--active">' + msg + '</span>').hide().insertAfter(parentBlock).fadeIn(400);
+    setTimeout(amount.removeErr, 5000);
+  };
+
+  this.removeErr = function () {
+    if ($(input).parent().next('.amount-tooltip').length > 0) {
+      $(input).parent().next('.amount-tooltip').remove();
+    }
+  };
+
+  this.init();
+}
+
+function showErrorsWithPrefix(data, itemSelector, prefix, showErrorFunc) {
+  if (typeof prefix === 'undefined' || typeof itemSelector === 'undefined') {
+    return;
+  }
+  var items = document.querySelectorAll(itemSelector);
+  var keys = Object.keys(data);
+
+  for (var i = 0; i < items.length; i++) {
+    var message = '';
+    var errors = keys.filter(function (it, j, arr) {
+      return it.indexOf((prefix + '[' + i + ']')) > -1;
+    });
+
+    if (errors.length > 0) {
+      errors.forEach(function (it, i, arr) {
+        message += (data[it].join(', '));
+        if (i < arr.length - 1) {
+          message += ', ';
+        }
+      });
+    }
+
+    if (message !== '' && typeof showErrorFunc === 'function') {
+      showErrorFunc(items[i], message);
+    }
+  }
+}
+
+function checkIfHtml(text) {
+  var reg = /<(.|\n)*?>/g;
+  return reg.test(text);
+}
+
+/*
+ * Generates confirm block. To show this block you should use inner "show" method
+ * @string text - text message to be shown in popup (required)
+ * @function cbProceed - callback function, which will fire, when confirm button is pressed. (required)
+ * @function cbCancel - callback function, which will fire, when cancel button is pressed.
+ * @string title - title for confirm block
+ * @string alertText - if you want to show additional decorated text (for instance "This action can not be undone" in alert block)
+ * @string alertType - type of alert decoration (info, warning, success, danger)
+ */
+var ConfirmPopup = function (text, cbProceed, cbCancel, title, alertText, alertType) {
+  let confirm = this;
+  let c = {
+    blockSelector: '.confirm',
+    blockActiveClass: 'confirm--active',
+    innerSelector: '.confirm__inner',
+    titleSelector: '.confirm__title',
+    alertSelector: '.confirm__alert',
+    textSelector: '.confirm__text',
+    cancelSelector: '.confirm__btn-cancel',
+    proceedSelector: '.confirm__btn-proceed'
+  }
+
+  if (!text || typeof cbProceed !== 'function') {
+    throw new ReferenceError('No confirm text or confirm function provided');
+  }
+
+  this.create = function () {
+    let tpl = document.getElementById('template-confirm'),
+      tplContainer = 'content' in tpl ? tpl.content : tpl,
+      newItem = tplContainer.querySelector(c.blockSelector).cloneNode(true),
+      newItemInner = newItem.querySelector(c.innerSelector),
+      newItemAlert = newItem.querySelector(c.alertSelector);
+    
+    newItem.querySelector(c.textSelector).textContent = text;
+    if (title) {
+      newItem.querySelector(c.titleSelector).textContent = title;
+    }
+    if (alertText) {
+      newItemAlert.textContent = alertText;
+      newItemAlert.classList.add('alert', 'alert-' + (alertType ? alertType : 'danger'));
+    } else {
+      newItemInner.removeChild(newItemAlert);
+    }
+
+    addBtnListener('proceed');
+    addBtnListener();
+
+    return newItem;
+
+    function addBtnListener(type) {
+      let isProceed = type === 'proceed';
+      let btn = newItem.querySelector(isProceed ? c.proceedSelector : c.cancelSelector);
+      let callback = isProceed ? cbProceed : cbCancel;
+
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        newItem.classList.remove(c.blockActiveSelector);
+
+        if (typeof callback === 'function') {
+          callback();
+        }
+
+        confirm.close();
+      });
+    }
+  };
+
+  this.show = function () {
+    let block = confirm.create();
+
+    document.body.appendChild(block);
+    setTimeout(function () {
+      block.classList.add(c.blockActiveClass);
+    }, 100);
+<<<<<<< HEAD
+=======
+
+    document.addEventListener('click', watchClickOuter);
+>>>>>>> origin/Develop
+  };
+
+  this.close = function () {
+    let block = document.querySelector(c.blockSelector);
+
+    block.classList.remove(c.blockActiveClass);
+    setTimeout(function () {
+      document.body.removeChild(block);
+    }, 400);
+<<<<<<< HEAD
+  };
+=======
+
+    document.removeEventListener('click', watchClickOuter);
+  };
+
+  function watchClickOuter(e) {
+    if (e.target.classList.contains(c.blockSelector.replace('.', ''))) {
+      confirm.close();
+    }
+  }
+>>>>>>> origin/Develop
+};
