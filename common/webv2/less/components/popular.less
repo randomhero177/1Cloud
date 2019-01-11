@@ -1,0 +1,93 @@
+// main: ../main.less
+
+.popular{
+  background-color: @color-light-back;
+
+  &-list{
+    font-size: 0;
+  }
+
+  .oc-block-item;
+  
+  &__header{
+    border-bottom-width: 3px;
+    border-bottom-color: @color-primary;
+    padding: @pad*2 0 @pad;
+    margin: 0 @pad*2;
+      
+    @media @view-tablets-only{
+        padding: @pad 0;
+        margin: 0 @pad;
+    }
+  }
+  &__title{
+      margin: 0;
+      @media @view-tablets-only{
+          font-size: 20px;
+      }
+      @media @view-desktop{
+          font-size: @fz*1.5;
+      }
+  }
+  &__price{
+    padding-bottom: @pad;
+    border-bottom: 3px solid @color-primary;
+    &.price{
+        font-size: @fz*2;
+    }
+    @media @view-tablets-only{
+        &.price{
+            font-size: @fz*1.5;
+        }
+    }
+  }
+  &__per{
+    font-size: @fz*1.125;
+  }
+  &__content{
+    padding-top: @pad;
+    padding-left: @pad*2;
+    padding-right: @pad*2;
+    @media @view-tablets{
+        text-align: center;
+    }
+    @media @view-tablets-only{
+        font-size: @fz*0.875;
+        padding-left: @pad;
+        padding-right: @pad;
+    }
+  }
+  &__item{
+      padding-bottom: 0;
+      @media @view-tablets{
+          padding-bottom: 180px;
+      }
+  }
+  &__footer{
+      border-top: 3px solid @color-primary;
+      width: calc(~"100% - @{pad}*4");
+      left: @pad*2;
+      right: @pad*2;
+      
+      @media @view-xs, @view-mobile-only{
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        margin: 0 auto;
+      }
+      @media @view-tablets-only{
+          width: calc(~"100% - @{pad}*2");
+          left: @pad;
+          right: @pad;
+          padding-left: 0;
+          padding-right: 0;
+
+          & .btn{
+              padding-left: @pad;
+              padding-right: @pad;
+          }
+      }
+  }
+}

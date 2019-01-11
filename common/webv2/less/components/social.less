@@ -1,0 +1,29 @@
+// main: ../main.less
+
+.social{
+  &__item{
+    display: inline-block;
+    vertical-align: top;
+    text-decoration: none;
+    margin: 0 @pad/3;
+    font-size: @fz*1.5;
+
+    &:before{
+      display: inline-block;
+      font-family: @ff-icons;
+      content: "\e91c"; // VK
+    }
+    &--facebook:before{
+      content: "\e914";
+    }
+    &--twitter:before{
+      content: "\e917";
+    }
+    &--linkedin:before{
+      content: "\e916";
+    }
+    &--habr:before{
+      content: "\e915";
+    }
+  }
+}

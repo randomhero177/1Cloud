@@ -1,0 +1,151 @@
+.tabs {
+
+  &-buttons {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 0;
+    background-color: @color-inverse;
+
+    &::after {
+      position: absolute;
+      left: -@pad*1.333;
+      right: -@pad*1.333;
+      bottom: 0;
+      height: 1px;
+      display: block;
+      content: "";
+      background-color: @color-border;
+      z-index: 1;
+    }
+
+    & > li {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: @fz;
+      margin-left: 0px;
+      border-radius: 0;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: @color-inverse;
+      }
+
+      & + li {
+        margin-left: @pad*2;
+      }
+    }
+
+    & > .ui-state-active {
+      &,
+      &:hover {
+        position: relative;
+        background-color: @color-inverse;
+        z-index: 2;
+
+        &::after {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -1px;
+          display: block;
+          height: 4px;
+          content: "";
+          background-color: @color-secondary;
+        }
+      }
+    }
+
+    & a {
+      display: block;
+      box-sizing: border-box;
+      color: @color-base;
+      font-size: @fz;
+      font-weight: 400;
+      text-align: center;
+      padding: @pad/1.5 4px;
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &:active {
+        outline: none;
+        text-decoration: none;
+      }
+
+      &:hover {
+        color: @color-secondary;
+      }
+    }
+
+    & .active {
+      & a {
+        color: @color-base;
+      }
+    }
+  }
+
+  &-main > &-buttons {
+    &::after {
+      background-color: @link-color;
+    }
+
+    & > li {
+      &:hover,
+      &.ui-state-active,
+      &.ui-state-active:hover {
+        background-color: @color-inverse;
+      }
+
+      & + li {
+        margin-left: -1px;
+      }
+    }
+
+    & a {
+      padding: @pad/1.5 @pad*1.333;
+      border: 1px solid @color-base;
+      border-radius: @br-input;
+      color: @color-base;
+
+      &:hover {
+        color: @link-color;
+      }
+    }
+
+    & > .ui-state-active,
+    & > .ui-state-active:hover {
+      &::after {
+        display: none;
+      }
+
+      & a {
+        color: @link-color;
+        border-color: @link-color;
+        border-bottom-color: @color-inverse;
+        position: relative;
+        z-index: 2;
+      }
+    }
+  }
+}
+
+[role="tabpanel"] {
+  padding: @pad 0;
+  .clear;
+}
+
+#billing_tab_act_reconciliation {
+  min-height: 400px;
+}
+
+/*.tabs-buttons a .icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin-left: 10px;
+  float: left;
+}*/
+

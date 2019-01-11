@@ -1,0 +1,25 @@
+/****** BLOCK WITH ANGLE STYLES *****/
+.angle {
+  &-block {
+    padding: 15px;
+    margin-top: 15px;
+    border: 1px solid @color-primary;
+    position: relative;
+    background-color: @color-inverse;
+
+    &::before {
+      display: block;
+      content: "";
+      width: 15px;
+      height: 15px;
+      border-left: 1px solid @color-primary;
+      border-top: 1px solid @color-primary;
+      background-color: @color-inverse;
+      position: absolute;
+      top: -9px;
+      left: 27px;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+}

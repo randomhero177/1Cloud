@@ -1,0 +1,169 @@
+// main: ../main.less
+.infra {
+  padding-top: @pad-root;
+  padding-bottom: @pad-root;
+  background-color: @color-light-back;
+  &__list {
+    font-size: 0;
+  }
+  &__item {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding: 0 @pad*2 @pad*2;
+    font-size: @fz*0.8235;
+    color: @color-base;
+    background-color: @color-inverse;
+    border: 1px solid @color-gray;
+    margin-bottom: @pad*2;
+    &:hover {
+      background-color: @color-blue;
+      color: @color-inverse;
+      text-decoration: none;
+    }
+    &:last-of-type{
+      margin-bottom: 0;
+    }
+
+    &--inactive {
+      position: relative;
+      overflow: hidden;
+      background-color: @color-light-back;
+      &:hover{
+        background-color: @color-light-back;
+        color: @color-base;
+      }
+      &::before,
+      &::after{
+        position: absolute;
+        z-index: 2;
+        transition: all 0.2s;
+      }
+      &:before{
+        display: block;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background-color: @color-blue;
+        opacity: 0.9;
+        left: 0;
+        top: -100%;
+      }
+      &::after{
+        display: block;
+        vertical-align: top;
+        text-align: center;
+        content: "Страница в разработке";
+        font-size: @fz*1.5;
+        line-height: 1.125em;
+        color: @color-inverse;
+        left: 50%;
+        bottom: -100%;
+        transform: translate(-50%, 50%);
+        -webkit-transform: translate(-50%, 50%);
+      }
+      &:hover::before{
+        top: 0;
+      }
+      &:hover::after{
+        bottom: 50%;
+      }
+      @media @view-xs, @view-mobile-only {
+        display: none;
+      }
+    }
+  }
+  &__header {
+    display: block;
+    text-align: center;
+    padding-top: @pad*2;
+    padding-bottom: @pad;
+  }
+  &__title {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: @fz*1.375;
+    line-height: 1.125em;
+  }
+  &__info {
+    display: block;
+    padding-top: @pad;
+    page-break-after: left;
+    border-top: 5px solid @color-primary;
+    &::before{
+      display: none;
+    }
+  }
+}
+@media @view-tablets{
+  .infra{
+    &__header{
+      height: 100px;
+      padding-top: @pad/2;
+      padding-bottom: 0;
+      line-height: 100px - @pad/2;
+      overflow: hidden;
+    }
+    &__info{
+      padding-top: @pad*2;
+      padding-left: 90px;
+      position: relative;
+
+      &::before{
+        display: block;
+        width: 80px;
+        text-align: left;
+        color: @color-primary;
+        font-size: @fz*4;
+        position: absolute;
+        left: 0;
+        top: @pad*2;
+      }
+    }
+  }
+}
+@media @view-tablets-only{
+  .infra{
+    &__item{
+      width: 48.5%;
+      margin-right: 3%;
+
+      &:nth-child(2n){
+        margin-right: 0;
+      }
+    }
+  }
+}
+@media @view-desktop{
+  .infra{
+    &__item{
+      width: 31.333%;
+      margin-right: 3%;
+      margin-bottom: @pad*4;
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+    &__info{
+      padding-left: 60px;
+
+      &::before{
+        width: 55px;
+        font-size: @fz*3.25;
+      }
+    }
+  }
+}
+@media @view-large{
+  .infra{
+    &__info{
+      padding-left: 115px;
+
+      &::before{
+        width: 100px;
+        font-size: @fz*5;
+      }
+    }
+  }
+}

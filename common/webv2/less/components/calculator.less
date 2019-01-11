@@ -1,0 +1,449 @@
+// main: ../pages/vds.less
+@calculator-gray: #f8f8f8;
+@calculator-gray-border: #c4c4c4;
+
+.calculator {
+  text-align: center;
+
+  &__label {
+    display: block;
+    margin-bottom: @pad/1.5;
+  }
+
+  &__extra-info {
+    padding-top: @pad;
+    font-size: @fz*0.75;
+    color: @color-base;
+    opacity: 0.7;
+  }
+
+  &__chars {
+    padding-top: @pad*2 - @pad/3;
+  }
+
+  &__base-params,
+  &__bonus,
+  &__chars,
+  &__price {
+    padding-bottom: @pad;
+    border-bottom: 1px solid @color-border;
+
+    & .form-group:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__bonus {
+    padding-bottom: @pad*2;
+  }
+
+  &__option {
+    .clear;
+    position: relative;
+
+    & .switch {
+      margin-top: 12.5px;
+    }
+
+    & + .tooltip {
+      z-index: 2;
+    }
+  }
+
+  &__text {
+    &--performance {
+      display: none;
+      font-size: @fz*0.75;
+      line-height: @fz*1.125;
+      color: @color-base;
+      opacity: 0.7;
+    }
+  }
+
+  &__slider {
+    width: 80%;
+    float: left;
+
+    &-value {
+      overflow: hidden;
+      text-align: left;
+      padding-left: @pad/2;
+      padding-top: @pad/2;
+      height: 30px;
+      white-space: nowrap;
+    }
+  }
+
+  &__storage-switch {
+    padding-left: 0;
+  }
+
+  &__additional,
+  &__order {
+    padding-top: @pad*2;
+  }
+
+  &__bonus {
+    padding-top: @pad;
+  }
+
+  &__toggle {
+    .dropdown &-trigger {
+      display: inline-block;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__toggle-block &__label,
+  &__toggle-block &__text {
+    padding-top: 0;
+  }
+
+  &__links {
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: @pad;
+    list-style: none;
+
+    & li + li {
+      margin-top: @pad;
+    }
+
+    & a {
+      font-size: @fz*0.875;
+
+      &::after {
+        display: inline-block;
+        content: "\00BB";
+        padding-left: @pad/3;
+      }
+
+      @media @view-desktop-only {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__price {
+    & .price {
+      position: relative;
+      top: 6px;
+
+      @media @view-desktop {
+        padding-left: @pad/1.5;
+        padding-right: @pad/1.5;
+      }
+
+      &__sum {
+        letter-spacing: -2px;
+      }
+    }
+
+    @media @view-xs, @view-mobile-only, @view-tablets-only {
+      & > * {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  &__to-order {
+    display: none;
+    margin-left: @pad/2;
+  }
+
+  .oc-sticky {
+    & .price__heading {
+      display: none;
+    }
+
+    & .calculator__to-order {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  // HACK FOR BEAUTIFUL VIEW OF SWITCH BAR DEPEND ON LENGTH OF THE WORD "МЕСЯЦ"
+  &__price {
+    & .switch {
+      &__bar {
+        width: 95%;
+      }
+
+      &__input:last-of-type {
+        right: 6%;
+      }
+
+      &__label:nth-of-type(2) {
+        left: 47%;
+      }
+    }
+  }
+
+  &-preview {
+    &__wrap {
+      background: @calculator-gray;
+      padding: @pad*2;
+
+      @media @view-desktop {
+        padding: @pad*4 @pad*6;
+      }
+    }
+
+    &__field + &__field {
+      margin-top: @pad*3;
+    }
+
+    &__item {
+      display: table;
+      width: 100%;
+      border: 1px solid @calculator-gray-border;
+      border-radius: 5px;
+
+      & > * {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      & .form-control {
+        border: 0;
+        border-left: 1px solid @calculator-gray-border;
+        border-right: 1px solid @calculator-gray-border;
+        color: @color-base;
+        height: 45px;
+
+        &[type="number"]::-webkit-inner-spin-button,
+        &[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        &[type="number"] {
+          -moz-appearance: textfield;
+        }
+      }
+    }
+
+    &__label {
+      & small {
+        color: @color-gray;
+      }
+    }
+
+    &__group {
+      width: @pad*3;
+      text-align: center;
+      background: #f7f8f9;
+      position: relative;
+
+      &--increase {
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      &--decrease {
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      & button {
+        background: none;
+        border: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+
+        & span {
+          position: relative;
+          top: 3px;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+        }
+
+        &:focus, &:active {
+          outline: 0;
+        }
+      }
+    }
+
+    &__config {
+      display: flex;
+      justify-content: center;
+      padding: 0 @pad;
+
+      &-item {
+        margin: 0 @pad/2;
+        padding: @pad/2 @pad/2 @pad/4;
+        background: #e4e3e3;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 15px;
+      }
+    }
+
+    &__title {
+      font-weight: bold;
+      margin-bottom: @pad;
+      font-size: @fz*1.5;
+
+      @media @view-desktop {
+        margin-top: 0;
+      }
+    }
+  }
+}
+@media @view-mobile-only {
+  .calculator {
+    &__chars {
+      & .form-group {
+        font-size: 0;
+        & > * {
+          display: inline-block;
+          vertical-align: middle;
+          font-size: @fz*0.875;
+          padding-left: @pad;
+          padding-right: @pad;
+        }
+      }
+    }
+    &__chars &__label {
+      width: 25%;
+      padding-left: 0;
+      text-align: right;
+      margin-bottom: 0;
+      padding-top: 0;
+    }
+    &__chars &__option {
+      width: 75%;
+      text-align: left;
+    }
+  }
+}
+
+@media @view-tablets {
+  .calculator {
+    &__block {
+      padding: 0 @pad;
+      & .form-group {
+        font-size: 0;
+        & > * {
+          display: inline-block;
+          vertical-align: top;
+          font-size: @fz*0.875;
+          padding-left: @pad;
+          padding-right: @pad;
+        }
+      }
+    }
+    &__base-params,
+    &__chars {
+      & .form-group {
+        margin-bottom: @pad*2;
+      }
+    }
+    &__label {
+      width: 41.6667%;
+      text-align: right;
+      margin-bottom: 0;
+      padding-top: 18px;
+      font-weight: 400;
+      .form-slider &,
+      .form-options-select & {
+        width: 25%;
+        padding-left: 0;
+      }
+      .form-slider &{
+        padding-top: @pad/2;
+      }
+    }
+    &__text {
+      text-align: left;
+      padding-top: @pad;
+    }
+    &__option {
+      width: 58.3333%;
+      text-align: left;
+      .form-slider &,
+      .form-options-select & {
+        width: 75%;
+      }
+      & .switch{
+        margin-top: 13px;
+      }
+    }
+  }
+}
+@media @view-desktop {
+  .calculator {
+    &__form {
+      & > .row {
+        position: relative;
+        &::before {
+          display: block;
+          content: "";
+          width: 1px;
+          height: 100%;
+          background-color: @color-border;
+          position: absolute;
+          left: 58.333%;
+          top: 0;
+          margin-left: -0.5px;
+        }
+      }
+    }
+
+    &__label{
+      padding-left: 0;
+
+      .form-options-select &{
+        position: relative;
+        padding-top: 17px;
+      }
+    }
+    &__tooltip{
+      &--label{
+        display: none;
+      }
+    }
+    &__text {
+      &--performance{
+        display: block;
+      }
+    }
+  }
+}
+@media @view-desktop-only {
+  .form-options-select .calculator__tooltip {
+    position: absolute;
+    left: -5px;
+    top: 17px;
+  }
+}
+@media @view-large{
+  .calculator{
+    &__block{
+      padding: 0 @pad*3;
+    }
+    &__slider{
+      &-value{
+        padding-left: 0;
+        text-align: center;
+      }
+    }
+  }
+}

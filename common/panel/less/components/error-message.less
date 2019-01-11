@@ -1,0 +1,72 @@
+.error-message {
+  width: 100%;
+  height: 100%;
+
+  & .content {
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 50px;
+    text-align: center;
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .title {
+      text-transform: uppercase;
+      font-size: 29px;
+      border-top: 3px double @color-primary;
+      border-bottom: 3px double @color-primary;
+      display: inline-block;
+      position: relative;
+      min-width: 120px;
+      width: 400px;
+      margin-bottom: 40px;
+    }
+
+    .description {
+      width: 600px;
+      margin: 0 auto;
+    }
+
+    .title .page-code {
+      font-size: @fz*1.125;
+      font-style: italic;
+      text-transform: capitalize;
+      position: absolute;
+      left: 50%;
+      top: -12px;
+      background: @color-inverse;
+      width: 40px;
+      text-align: center;
+      margin-left: -20px;
+    }
+
+    .blue-button {
+      text-align: center;
+      margin-top: 70px;
+
+      & a {
+        padding: 10px 40px;
+        background: @color-primary;
+        color: @btn-primary-text-color;
+        text-decoration: none;
+        font-size: @fz*1.125;
+
+        &:hover {
+          background: @color-primary-hover;
+        }
+      }
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      text-decoration: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}

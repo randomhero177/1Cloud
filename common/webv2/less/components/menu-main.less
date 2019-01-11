@@ -1,0 +1,109 @@
+// main: ../main.less
+@menu-height: 60px;
+@menu-fz: @fz*0.875;
+@menu-top-height: 83px;
+@menu-top-fz: @fz + 1;
+
+.menu-main {
+  & ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+  }
+
+  & li {
+    display: inline-block;
+    vertical-align: top;
+    line-height: @menu-height;
+    font-size: @menu-fz;
+    position: relative;
+  }
+
+  & a {
+    display: inline-block;
+    color: @color-base;
+    padding-left: @pad*2;
+    padding-right: @pad*2;
+    .hov-foc-act(@color-extra-light, @color-blue, none);
+
+    &.dropdown-toggle::before {
+      top: -2px;
+    }
+  }
+
+  & .open > a {
+    background-color: @color-light-back;
+    background-color: @color-extra-light;
+    color: @color-blue;
+  }
+
+  & .active > a {
+    background-color: @color-blue-light;
+    color: @color-inverse;
+
+    &::before {
+      color: @color-inverse;
+    }
+  }
+
+  & .dropdown-menu {
+    width: 250px;
+    border: 0;
+    background-color: @color-extra-light;
+
+    & > li {
+      display: block;
+
+      & > a {
+        display: block;
+        padding: @pad/1.5 (@pad*2 - 5);
+        font-size: @menu-fz*0.875;
+        white-space: normal;
+
+        &:focus {
+          color: @color-base;
+          background-color: transparent;
+        }
+
+        &:focus:hover,
+        &:hover {
+          background-color: fade(@color-blue-light, 80);
+          color: @color-inverse;
+        }
+      }
+
+      &.active > a,
+      &.active > a:hover {
+        background-color: @color-blue-light;
+      }
+    }
+  }
+
+  &.menu-top {
+    text-align: right;
+
+    & ul > li {
+      font-size: @menu-top-fz;
+      line-height: @menu-top-height;
+      //text-transform: uppercase;
+
+      .header__top--small & {
+        line-height: @menu-height;
+      }
+    }
+
+    & a {
+      padding-left: @pad;
+    }
+  }
+}
+@media @view-desktop-only {
+    .menu-main {
+        &.menu-top {
+            &   ul > li{
+                font-size: 16px;
+            }
+        }
+    }
+}

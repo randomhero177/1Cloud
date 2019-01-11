@@ -1,0 +1,459 @@
+﻿#storage {
+  &-settings {
+    padding: 0 0 @pad;
+  }
+}
+
+.storage {
+  &__deactivate {
+
+    & .alert {
+
+      & > p {
+        margin-top: 0;
+        margin-bottom: @pad;
+      }
+
+      & input[type="checkbox"] + label {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.swift {
+  padding-bottom: @pad * 10;
+  min-height: 550px;
+
+  &__controls {
+    margin-bottom: @pad;
+    font-size: 0;
+
+    &-item {
+      display: inline-block;
+      vertical-align: top;
+      font-size: @fz;
+
+      & + & {
+        margin-left: @pad / 3;
+      }
+    }
+  }
+
+  &__container {
+    border: 1px solid @color-border;
+    border-radius: 4px;
+    position: relative;
+    min-height: 300px;
+
+    &-top {
+      padding: 10px;
+      border-bottom: 1px solid @color-border;
+      color: #aaa;
+      font-size: @fz * 0.875;
+      font-weight: 700;
+    }
+
+    &--active {
+      & * {
+        pointer-events: none;
+      }
+
+      &::before {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background-color: rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      &::after {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: inline-block;
+        color: @color-inverse;
+        font-size: @fz * 4;
+        font-family: "Glyphicons Halflings";
+        content: "\e166";
+        transform: translate(-50%, -50%);
+        z-index: 2;
+      }
+    }
+
+    &-type {
+      display: none;
+
+      &:first-of-type + label {
+        border-top-left-radius: @br-btn !important;
+        border-bottom-left-radius: @br-btn !important;
+        margin-right: -1px;
+      }
+
+      &:checked + label {
+        background-color: @color-primary;
+        color: @btn-primary-text-color;
+      }
+    }
+  }
+
+  &__mass-actions {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__breadcrumbs {
+    &-item {
+      display: inline-block;
+      vertical-align: baseline;
+      cursor: pointer;
+
+      &:last-of-type {
+        pointer-events: none;
+        color: @color-secondary;
+      }
+
+      &:hover {
+        color: @color-primary-hover;
+      }
+
+      &.active,
+      &.active:hover {
+        cursor: default;
+        color: @color-base;
+      }
+
+      &:first-of-type::before {
+        font-size: @fz;
+        font-family: "Glyphicons Halflings";
+        content: "\e021";
+        margin-right: @pad / 3;
+      }
+
+      & + &::before {
+        display: inline-block;
+        vertical-align: baseline;
+        margin-right: @pad / 3;
+        font-size: @fz * 0.75;
+        font-family: "Glyphicons Halflings";
+        content: "\e258";
+      }
+    }
+  }
+
+  &__empty,
+  &__empty-account {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: @pad*2;
+
+    & label {
+      cursor: pointer;
+      color: @color-primary;
+      text-decoration: underline;
+
+      &:hover {
+        color: @color-primary-hover;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__table {
+    table-layout: fixed;
+
+    &-item > *,
+    & .like-table__headers > * {
+      padding: @pad/3 @pad/1.5;
+      text-align: left;
+    }
+
+    & .like-table__headers > * {
+      border-bottom: 0;
+    }
+
+    &-item {
+      height: 41px; // computed value from browser
+    }
+
+      &-item > &-name {
+        opacity: 0.8;
+        padding-right: @pad * 2;
+      }
+
+        &-item > &-name:hover {
+          opacity: 1;
+        }
+
+    & .form-custom input[type="checkbox"] ~ label {
+      padding: 0;
+    }
+
+    &-checkbox {
+      width: 40px;
+    }
+
+    &-name {
+      position: relative;
+      width: 60%;
+    }
+
+    &-modified {
+      width: 145px;
+      font-size: 0.875em;
+    }
+
+    &-actions {
+      width: 55px;
+    }
+
+    & .dropdown-menu {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  &__name {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: @color-base;
+    cursor: auto;
+    pointer-events: none;
+
+    &::before {
+      vertical-align: middle;
+      font-size: @fz * 1.25;
+      font-family: "Glyphicons Halflings";
+      margin-right: @pad;
+    }
+
+    &:hover {
+      color: @color-base;
+    }
+
+    &-text {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    &--container,
+    &--folder {
+      cursor: pointer;
+      pointer-events: auto;
+
+      &:hover {
+        color: @color-primary;
+      }
+    }
+
+      &--container::before {
+        content: "\e139";
+      }
+
+      &--folder::before {
+        content: "\e118";
+      }
+
+    &--file::before {
+      content: "\e022";
+    }
+
+    &--image::before {
+      content: "\e060";
+    }
+
+    &--shared::after {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      display: block;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      line-height: 25px;
+      text-align: center;
+      background-color: @color-secondary;
+      color: @btn-secondary-text-color;
+      font-family: "Glyphicons Halflings";
+      content: "\e105";
+      transform: translateY(-50%);
+    }
+  }
+
+  &__btn {
+    &-actions {
+      padding: 4px 10px;
+      line-height: 1.3;
+      border-radius: @br-btn;
+
+      &::before {
+        font-family: "Glyphicons Halflings";
+        content: "\e235";
+      }
+    }
+  }
+
+  &__upload {
+    @upload-height: 34px;
+
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      display: table;
+      content: "";
+      clear: both;
+    }
+
+    & + & {
+      margin-top: @pad;
+    }
+
+    &-title {
+      position: relative;
+      display: block;
+      height: @upload-height;
+      border: 1px solid @color-border;
+      padding: @pad / 3;
+      line-height: @upload-height - 2px - @pad / 2;
+      border-right: 0;
+      overflow: hidden;
+    }
+
+    &-btn {
+      float: right;
+      width: @upload-height;
+      height: @upload-height;
+      line-height: @upload-height;
+      border: 1px solid @color-border;
+      background-color: @color-inverse;
+      text-align: center;
+      color: @color-base;
+      cursor: pointer;
+
+      &::before {
+        font-family: "Glyphicons Halflings";
+        content: "\e014";
+      }
+
+      &:hover {
+        color: @color-danger;
+      }
+    }
+
+    &--success &-btn {
+      color: @color-success;
+      cursor: auto;
+      pointer-events: none;
+
+      &:hover {
+        color: @color-success;
+      }
+
+      &::before {
+        content: "\e013";
+      }
+    }
+
+    &--error &-title,
+    &--error &-btn {
+      color: @color-danger;
+      border-color: @color-danger;
+      pointer-events: none;
+      cursor: auto;
+    }
+
+      &--error &-btn::before {
+        content: "\e101";
+      }
+
+    &-process {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: fadeout(@color-success, 80%);
+      max-width: calc(~"100% - @{upload-height}");
+      transition: width 0.2s;
+    }
+  }
+}
+
+.actions {
+  text-align: left;
+
+  &__item {
+    display: block;
+    padding: 3px 10px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+      color: @color-primary-hover;
+    }
+
+    &--delete {
+      color: red;
+      opacity: 0.7;
+
+      &:hover {
+        color: red;
+        opacity: 1;
+      }
+    }
+
+    &::before {
+      font-family: "Glyphicons Halflings";
+      margin-right: @pad / 2;
+      opacity: 0.5;
+    }
+
+    &--download::before {
+      content: "\e197";
+    }
+
+    &--rename::before {
+      content: "\270f";
+    }
+
+    &--move::before {
+      content: "\e226";
+    }
+
+    &--copy::before {
+      content: "\e224";
+    }
+
+    &--share::before {
+      content: "\e105";
+    }
+
+    &--unshare::before {
+      content: "\e106";
+    }
+
+    &--delete::before {
+      content: "\e020";
+    }
+
+    &--edit::before {
+      content: "\270f";
+    }
+
+    &--link::before {
+      content: "\e144";
+    }
+  }
+}

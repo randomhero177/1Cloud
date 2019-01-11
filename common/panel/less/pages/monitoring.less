@@ -1,0 +1,450 @@
+﻿.monitoring {
+
+  &__required {
+    color: @color-danger;
+  }
+
+  &__create-item {
+    width: 32%;
+    border: 1px solid @color-border;
+    -webkit-box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin-left: auto;
+
+    &--large {
+      width: 65%;
+      margin-left: 0;
+    }
+
+    &--full {
+      width: 100%;
+    }
+
+    & > div {
+      margin-bottom: @pad;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &--locations {
+      & > div {
+        margin-bottom: @pad/5;
+      }
+    }
+
+    &-connection {
+      margin-left: auto;
+      flex-shrink: 5;
+      flex-grow: 0;
+      width: 60px;
+
+      & .switch-button-label {
+        display: none !important;
+      }
+    }
+  }
+
+  &__form {
+    & .glyphicon-question-sign {
+      color: #5aa7cd
+    }
+
+    &-group {
+      margin-bottom: @pad*2;
+    }
+
+    &-label {
+      margin: 0 0 @pad/3 0;
+      display: inline-block;
+
+      & input[type="checkbox"] ~ label {
+        margin-bottom: 0;
+        font-weight: 400;
+      }
+
+      &-enable {
+        line-height: 1;
+        padding-top: 4px;
+      }
+    }
+
+    &-location-group {
+      padding: @pad/2;
+      border: 1px solid #f5f5f5;
+    }
+
+    &-extra {
+      padding: 15px;
+      margin-left: -15px;
+      margin-right: -15px;
+
+      &--bg {
+        background: #f5f5f59e;
+      }
+
+      &-title {
+        margin-bottom: 0;
+        margin-top: @pad;
+      }
+    }
+
+    &-disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    & .chosen-container-single .chosen-single {
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+      -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+
+    & .chosen-container .chosen-drop {
+      border: 1px solid #ccc;
+    }
+  }
+
+  &__list-item {
+
+
+    &--self {
+      align-self: center;
+      padding-left: 10px;
+    }
+  }
+
+  &__row {
+    display: flex;
+
+    &-extra {
+    }
+
+    &--end {
+      justify-content: flex-end;
+    }
+
+    &--nojustify {
+      justify-content: initial;
+    }
+
+    &--vcenter {
+      align-items: center;
+
+      & .monitoring__form-label {
+        margin: @pad/3 @pad @pad/3 0;
+      }
+    }
+  }
+
+  &__item {
+    padding: @pad;
+
+
+    &-header {
+      font-size: 24px;
+      padding: @pad 0;
+
+      &--disabled {
+        background-color: @color-border;
+        color: @color-base;
+      }
+    }
+
+    &-name {
+      width: 200px;
+    }
+
+    &-state {
+      width: 125px;
+    }
+
+    &-date {
+      width: 250px;
+    }
+
+    &-connection {
+      width: 80px;
+    }
+  }
+
+  &__icon {
+    &-state {
+      width: 18px;
+      height: 18px;
+      position: relative;
+      background-size: auto;
+      background-repeat: no-repeat;
+      background-repeat: no-repeat;
+      background-position: center center;
+      display: inline-block;
+
+      & + & {
+        margin-left: @pad/3;
+      }
+
+      &:before {
+        color: @color-inverse;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      &--Up {
+        background-image: url(/Content/img/monitoring-icons/up.png);
+      }
+
+      &--PartiallyUp {
+        background-image: url(/Content/img/monitoring-icons/partiallyUp.png);
+      }
+
+      &--Down {
+        background-image: url(/Content/img/monitoring-icons/down.png);
+      }
+
+      &--refresh {
+        cursor: pointer;
+        background-image: url(/Content/img/monitoring-icons/refresh.png);
+      }
+
+      &--remove {
+        cursor: pointer;
+        background-image: url(/Content/img/monitoring-icons/remove.png);
+      }
+
+      &--block {
+        display: block;
+      }
+    }
+  }
+
+  &__autofill {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    width: 100%;
+    top: 60px;
+    border: 1px solid @color-border;
+    background: #fff;
+    box-sizing: border-box;
+    max-height: 300px;
+    overflow-y: auto;
+
+    &-item {
+      padding: 3px 12px 4px;
+      cursor: pointer;
+
+      &:hover {
+        background: fade(@color-border, 50%);
+      }
+    }
+  }
+
+  &__locations {
+    &-item {
+      position: relative;
+      top: -4px;
+      padding-left: 3px;
+      font-weight: 400;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-image: url(/Content/img/flag-icons.jpg);
+        background-repeat: no-repeat;
+        position: relative;
+        left: -5px;
+        top: 4px;
+      }
+
+      &--empty {
+        &:before {
+          width: 0;
+        }
+      }
+
+      &--kzalmaty {
+        &:before {
+          background-position: 0px -80px;
+        }
+      }
+
+      &--russiaspb, &--russiamsk {
+        &:before {
+          background-position: 0px -60px;
+        }
+      }
+
+      &--defrankfurt {
+        &:before {
+          background-position: 0px -100px;
+        }
+      }
+
+      &--indiabangalore {
+        &:before {
+          background-position: 0px -120px;
+        }
+      }
+
+      &--uklondon {
+        &:before {
+          background-position: 0px -140px;
+        }
+      }
+
+      &--usasanfrancisco {
+        &:before {
+          background-position: 0px -160px;
+        }
+      }
+
+      &--byminsk {
+        &:before {
+          background-position: 0px -180px;
+        }
+      }
+    }
+  }
+
+  &__list {
+    &-type {
+      width: 200px;
+    }
+
+    &-date {
+      width: 200px;
+    }
+
+    &-locations {
+      width: 150px;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    justify-content: space-between;
+
+    &-item {
+      flex-grow: 1;
+      flex-basis: 0;
+      margin: 0 @pad/3px;
+      position: relative;
+
+      &:first-child, &:last-child {
+        margin: 0;
+      }
+    }
+  }
+
+  &__fake {
+    &-select {
+      position: relative;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      background-color: #fff;
+      height: 44px;
+      line-height: 44px;
+      padding: 0 0 0 8px;
+      font-size: 14px;
+
+      & > #fake-select-text {
+        overflow: hidden;
+        height: 44px;
+      }
+    }
+
+
+
+    &-caret {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      display: block;
+      width: 18px;
+      height: 30px;
+      background: url(/Content/img/chosen-sprite.png) no-repeat 0px 6px;
+    }
+
+    &-items {
+      position: absolute;
+      top: 100%;
+      background: @color-inverse;
+      left: 0;
+      width: 100%;
+      z-index: 3;
+      padding: @pad @pad/3 0;
+      border: 1px solid #ddd;
+      border-top: 0;
+      -webkit-border-bottom-right-radius: 5px;
+      -webkit-border-bottom-left-radius: 5px;
+      -moz-border-radius-bottomright: 5px;
+      -moz-border-radius-bottomleft: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+
+      input[type="checkbox"] ~ label.monitoring__fake-label {
+        margin-right: 0;
+      }
+    }
+  }
+
+  & &__metrics {
+    &-row {
+      cursor: pointer;
+
+      &--focus {
+        background: fadeout(@color-border, 50%);
+      }
+    }
+  }
+
+  &__command {
+
+    &-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    &-item {
+      width: 48%;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__inline-checkbox {
+
+    & > * {
+      display: inline-block;
+    }
+  }
+
+  &__actions {
+    & > span {
+      display: inline-block;
+    }
+  }
+
+  &__state-wrap {
+    width: 50px;
+  }
+
+  &__tab {
+    padding: @pad*3 0;
+  }
+}

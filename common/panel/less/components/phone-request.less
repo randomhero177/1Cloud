@@ -1,0 +1,31 @@
+/* PHONE 2-FACTOR AUTHENIFICATION */
+.phone-request {
+  &__row {
+    & + & {
+      margin-top: @pad;
+      margin-bottom: @pad;
+    }
+
+    & [name="VerificationCode"]{
+      width: 170px;
+    }
+  }
+
+  &__row--confirmed {
+    & .form-control:disabled {
+      background: none;
+      border: 0;
+      color: #000;
+      font-weight: 700;
+      box-shadow: none;
+      cursor: auto;
+    }
+  }
+}
+
+.alert {
+  &-span {
+    display: inline-block;
+    margin-top: @pad;
+  }
+}

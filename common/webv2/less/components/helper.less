@@ -1,0 +1,51 @@
+// main: ../main.less
+.helper{
+  display: none;
+  color: @color-inverse;
+  background-color: @color-green;
+  width: 100%;
+  max-width: 480px;
+  padding: @pad*2 @pad @pad @pad;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  @media @view-mobile{
+    width: auto;
+  }
+  @media @view-tablets{
+    padding: @pad*3 @pad*2 @pad*2 @pad*2;
+  }
+
+  &__title{
+    margin-top: 0;
+    margin-bottom: @pad;
+    font-size: @fz*1.25;
+    @media @view-tablets{
+      font-size: @fz*1.5;
+      margin-bottom: @pad*2;
+    }
+  }
+  &__btn{
+    background-color: transparent;
+  }
+  &__close{
+    font-size: @fz*2.5;
+    line-height: 1;
+    color: @color-inverse;
+    opacity: 0.5;
+    cursor: pointer;
+    position: absolute;
+    right: @pad/3;
+    top: 0;
+    @media @view-tablets{
+      right: @pad/1.5;
+      top: @pad/3;
+    }
+    &:hover{
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,273 @@
+// main: main.less
+* {
+  box-sizing: border-box;
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: @ff;
+  font-size: @fz;
+  color: @color-base;
+}
+.container{
+  min-width: 290px;
+}
+#maincontainer{
+  overflow: hidden;
+}
+.btn:active,
+.btn:focus,
+.btn:hover,
+a:active,
+a:focus,
+a:hover {
+  outline: 0;
+}
+.color-base{color: @color-base;}
+.color-primary{color: @color-primary;}
+.color-hover{color: @color-hover;}
+.color-inverse{color: @color-inverse;}
+.color-blue{color: @color-blue;}
+.color-blue-light{color: @color-blue-light;}
+.color-green{color: @color-green;}
+.color-border{color: @color-border;}
+
+.logo{
+  &__link{
+    display: inline-block;
+    vertical-align: middle;
+    width: 135px;
+  }
+}
+.root-block{
+  padding-top: @pad-root + 5;
+  padding-bottom: @pad-root + 5;
+  &--small{
+    padding-top: @pad + 5;
+    padding-bottom: @pad + 5;
+  }
+}
+h4{
+  font-size: @fz;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.icon-top{
+  &::before{
+    display: block;
+    text-align: center;
+    font-size: @fz*5;
+    margin-bottom: @pad;
+    color: @color-primary;
+  }
+}
+.fancybox-title > .child{
+  white-space: normal;
+}
+.no-marg{
+  margin: 0;
+}
+.faq{
+  &-question{
+    cursor: pointer;
+    color: @color-blue-light;
+    &:hover{
+      color: @color-primary;
+    }
+    &.active{
+      font-weight: bold;
+    }
+  }
+  &-ans{
+    font-size: 0.9225em;
+    background: #fafafa;
+    border: 1px solid @color-blue-light;
+    padding: @pad/3;
+  }
+}
+#video-schema{
+  text-align: center;
+  &-meta{
+    display: none;
+  }
+}
+.sign{
+  position: relative;
+  @media @view-mobile{
+    width: 450px;
+  }
+  &::before{
+    display: block;
+    content: "";
+    height: 1px;
+    background-color: @color-base;
+    position: absolute;
+    left: @pad*10;
+    right: 0;
+    bottom: @pad*2;
+  }
+  &__signature{
+    position: absolute;
+    right: @pad*2;
+    top: 0;
+    z-index: 1;
+  }
+  &__stamp{
+    position: relative;
+    z-index: 1;
+  }
+}
+.text{
+  &-big{
+    font-size: @fz*1.25;
+  }
+}
+
+.async-hide {
+  opacity: 0 !important
+}
+
+// ============ MIXINS ============
+.clear() {
+  &::after,
+  &::before {
+    display: table;
+    content: "";
+    clear: both;
+  }
+}
+.hov-foc-act(@bgcolor:transparent, @color: transparent, @td: none ) {
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: @bgcolor;
+    color: @color;
+    text-decoration: @td;
+  }
+}
+.rounded-icon(@icon-size){
+  &{
+    position: relative;
+    &::before,
+    &::after{
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+    }
+    &::before{
+      width: @icon-size;
+      height: @icon-size;
+      line-height: @icon-size;
+      font-size: @icon-size*0.6;
+      text-align: center;
+      color: @color-blue;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+
+      @media @view-xs{
+        width: @icon-size/1.5;
+        height: @icon-size/1.5;
+        line-height: @icon-size/1.5;
+        font-size: @icon-size*0.5;
+      }
+    }
+    &::after{
+      content: "";
+      width: @icon-size;
+      height: @icon-size;
+      background-color: @color-primary;
+      border-radius: @icon-size/2;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+
+      @media @view-xs{
+        width: @icon-size/1.5;
+        height: @icon-size/1.5;
+        border-radius: @icon-size/3;
+      }
+    }
+  }
+}
+.img-back(@img-url, @color-back: @color-blue, @opacity: 0.25) {
+  position: relative;
+  color: @color-inverse;
+  background-color: @color-back;
+  overflow: hidden;
+  &::before {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("@{img-url}");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: @opacity;
+  }
+}
+
+// ============ MAKE CUSTOM BLOCK ELEMENT ============
+.oc-block-item() {
+  &__item{
+    color: @color-base;
+    background-color: @color-inverse;
+    border: 1px solid @color-border;
+    margin-bottom: @pad*2;
+    padding-bottom: 100px + @pad;
+    position: relative;
+  }
+
+  &__header{
+    display: block;
+    text-align: center;
+    padding: @pad*2 @pad*2;
+    border-bottom: 1px solid @color-border;
+    a&{
+      color: @color-base;
+      &:hover{
+        color: @color-primary;
+      }
+    }
+  }
+  &__title{
+    margin: 0;
+    font-size: @fz*1.75;
+    line-height: 1em;
+    font-weight: 700;
+
+
+    & small{
+      display: block;
+      font-family: @ff-extra;
+      font-size: @fz*1.125;
+    }
+  }
+  &__body{
+    font-size: @fz*0.875;
+    line-height: 1.5em;
+    padding: @pad @pad*2;
+  }
+  &__footer{
+    width: 100%;
+    padding: @pad @pad*2;
+    position: absolute;
+    left: 0;
+    bottom: @pad;
+  }
+  &__btn{
+    color: @color-base;
+
+    @media @view-tablets-only{
+      padding-left: @pad;
+      padding-right: @pad;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+// main: ../main.less
+
+.rating {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: @fz*2;
+  margin-right: @pad*2;
+
+  &-block-width {
+    width: 159px !important;
+  }
+
+  &__text {
+    display: inline-block;
+    vertical-align: middle;
+
+    & strong {
+      color: @color-blue-light;
+    }
+  }
+}
+.rate{
+  &-base-layer{color: @color-border;}
+  &-select-layer{color: @color-blue-light;}
+  &-hover-layer{color: @color-primary;}
+}
+

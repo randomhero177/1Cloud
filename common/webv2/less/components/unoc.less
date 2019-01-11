@@ -1,0 +1,231 @@
+@import "../variables.less";
+
+.unoc {
+  &__title {
+    font-weight: 600;
+    font-size: @fz*1.5;
+    text-align: center;
+    margin-bottom: @pad*4;
+  }
+
+  &__item-title {
+    font-weight: 600;
+    font-size: @fz*1.25;
+    margin-bottom: @pad;
+  }
+
+  &__item-text {
+    margin-bottom: @pad;
+  }
+
+  &-topblock {
+    background: url("@{img-path}/unoc/header-bg.jpg")
+  }
+
+  &-config {
+    padding: @pad*8 0 @pad*2;
+
+    &__item {
+      padding: @pad*2 @pad*4;
+      border: 1px solid @color-border;
+      border-radius: 3px;
+      text-align: center;
+      cursor: pointer;
+      -moz-transition: all 0.35s ease-out;
+      -o-transition: all 0.35s ease-out;
+      -webkit-transition: all 0.35s ease-out;
+      margin-bottom: @pad*2;
+
+      &:hover {
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        -webkit-box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
+        box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
+      }
+
+      &-title {
+        padding-bottom: @pad*2;
+        border-bottom: 1px solid @color-border;
+        margin-bottom: @pad*2;
+      }
+
+      &-price {
+        color: @color-primary;
+        font-weight: bold;
+
+        &-num {
+          font-size: @fz*1.5;
+        }
+      }
+
+      &-desc {
+        margin: @pad*2 0;
+        padding: 0;
+        list-style: none;
+      }
+    }
+
+    &__btn {
+      color: @color-primary;
+      background-color: @color-inverse;
+      border: 1px solid @color-primary;
+      display: block;
+      margin: @pad*2 auto 0;
+      width: 75%;
+
+      &:hover, &:focus, &:active {
+        color: @color-inverse;
+        background-color: @color-primary;
+      }
+    }
+  }
+
+  &-params {
+    background-color: @color-primary;
+    padding: @pad*4 0;
+    color: @color-inverse;
+
+    &__wrap {
+      width: 75%;
+      margin: 0 auto;
+    }
+
+    &__title {
+      margin-top: @pad/2.5;
+    }
+
+    &__btn {
+      display: block;
+      margin-bottom: @pad*2;
+
+      @media @view-tablets {
+        float: right;
+      }
+    }
+  }
+
+  &-reasons {
+    padding: @pad*4 0 @pad*10;
+
+    &__item {
+      display: flex;
+      align-items: center;
+
+      &-wrap {
+        display: inline-block;
+        width: 45%;
+        margin-bottom: @pad*2;
+
+        @media @view-desktop {
+          width: 30%;
+        }
+      }
+    }
+
+    &__list {
+      text-align: center;
+    }
+
+    &__text {
+      padding: 0 @pad*1.5;
+      text-align: left;
+    }
+  }
+
+  &-test {
+    padding: @pad*4 0;
+
+    &__title {
+      text-align: left;
+      margin-bottom: @pad*2;
+    }
+
+    &__text {
+      margin-bottom: @pad*2;
+    }
+
+    &__img {
+      position: absolute;
+      right: 0;
+      bottom: -50px;
+
+      @media @view-desktop {
+        bottom: -100px;
+      }
+
+      &-wrap {
+        display: none;
+        position: relative;
+
+        @media @view-tablets {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &-economy {
+    background: url("@{img-path}/unoc/economy-bg.png") center center;
+    padding: @pad*4 0;
+    color: @color-inverse;
+
+    &__title {
+      text-align: left;
+      margin-bottom: @pad;
+    }
+
+    &__item {
+      background-color: @color-inverse;
+      color: @color-base;
+      padding: @pad*2;
+      font-weight: 600;
+      margin-bottom: @pad;
+
+      @media @view-desktop {
+        margin-bottom: 0;
+      }
+
+      &-icon {
+        margin-bottom: @pad;
+        display: block;
+      }
+    }
+  }
+
+  &-interview {
+    padding-bottom: @pad*8;
+
+    &__wrap {
+      @media @view-desktop {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+
+    &__item {
+      background-color: @color-inverse;
+      padding: @pad*2;
+      position: relative;
+      margin-bottom: @pad*4;
+
+      @media @view-tablets{
+        margin-bottom: 0;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 40px 40px 0;
+        border-color: transparent #ffffff transparent transparent;
+      }
+    }
+  }
+}

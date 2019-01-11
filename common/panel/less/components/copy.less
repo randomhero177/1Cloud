@@ -1,0 +1,36 @@
+/*===================== COPY TO CLIPBOARD DECORATION  =====================*/
+
+.copy {
+  &-content {
+    display: block;
+    position: relative;
+
+    &--hovered .copy-btn {
+      visibility: visible;
+      right: 0;
+      opacity: 1;
+    }
+
+    &--large {
+      .copy-btn {
+        padding: @pad/3;
+        font-size: @fz;
+      }
+    }
+  }
+
+  &-btn {
+    display: block;
+    visibility: hidden;
+    font-size: @fz/1.375;
+    color: @color-primary-hover;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: -80px;
+    opacity: 0;
+    transition: right 0.2s, opacity 0.3s;
+  }
+}
+
+

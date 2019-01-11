@@ -1,0 +1,152 @@
+// main: ../main.less
+.btn {
+  text-decoration: none;
+  border-radius: 4px;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  &--neighbor {
+    & + & {
+      margin-top: @pad;
+
+      @media @view-tablets {
+        margin-top: 0;
+        margin-left: @pad;
+      }
+    }
+  }
+
+  &--img {
+    & > img {
+      display: inline-block;
+      position: relative;
+      margin-bottom: @pad*2;
+      opacity: 0.7;
+      box-shadow: 0 0 10px rgba(0,0,0, 0.5);
+      transition: all 0.2s;
+
+      &:hover {
+        opacity: 1;
+        box-shadow: 0 0 3px rgba(0,0,0, 0.5);
+        bottom: -1px;
+      }
+
+      @media @view-desktop {
+        margin-bottom: @pad;
+      }
+    }
+  }
+
+  &-primary {
+    line-height: 1;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: @color-hover;
+      background-color: @color-hover;
+    }
+  }
+
+  &-sm {
+    padding: @pad @pad*2;
+  }
+
+  &-default {
+    background-color: @color-light-back;
+    color: @color-base;
+
+    &:hover,
+    .form-select &:hover {
+      background-color: lighten(@color-primary, 10%);
+      color: @color-inverse;
+    }
+
+    &:focus,
+    &:active,
+    .form-select &:focus,
+    .form-select &:active {
+      background-color: @color-primary;
+      color: @color-inverse;
+    }
+
+    .open > .dropdown-toggle&,
+    &:active:focus {
+      background-color: @color-primary;
+      color: @color-inverse;
+    }
+
+    .open > .dropdown-toggle&:hover,
+    .open > .dropdown-toggle&:focus,
+    .open > .dropdown-toggle&:active {
+      background-color: @color-hover;
+    }
+  }
+
+  &-green {
+    line-height: 1;
+    background-color: @color-green;
+    color: @color-inverse;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: lighten(@color-green, 10%);
+      color: @color-inverse;
+    }
+  }
+
+  &-blue {
+    background-color: @color-inverse;
+    border-color: @color-blue;
+    color: @color-blue;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: @color-blue;
+      border-color: @color-blue;
+      color: @color-inverse;
+    }
+  }
+
+  &-dblue {
+    background-color: @color-blue-light;
+    color: @color-inverse;
+    line-height: 1;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: @color-blue;
+    }
+  }
+
+  &-bordered {
+    font-size: @fz*1.25;
+    box-shadow: 0 2px darken(@color-primary, 15%);
+    position: relative;
+
+    &:active,
+    &:focus,
+    &:hover {
+      top: 2px;
+      box-shadow: none;
+    }
+  }
+}
+
+.more-btn{
+  text-align: center;
+  margin-top: @pad*2;
+  &--left{
+      text-align: left;
+  }
+}

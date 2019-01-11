@@ -1,0 +1,36 @@
+/****** CONTENT STYLES *****/
+.content {
+  &-block {
+    position: relative;
+
+    &--small {
+      padding-right: calc(~"8.333% + @{pad}");
+    }
+
+    & + & {
+      padding-top: @pad*3;
+      margin-top: @pad*3;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: -@pad*1.333;
+        right: -@pad*1.333;
+        display: block;
+        content: "";
+        height: 0;
+        border-bottom: 1px solid @color-border;
+      }
+    }
+
+    &-title {
+      margin-top: 0;
+      margin-bottom: @pad*2;
+    }
+  }
+
+  & img {
+    max-width: 100%;
+    height: auto;
+  }
+}

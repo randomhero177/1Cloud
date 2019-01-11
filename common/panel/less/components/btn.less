@@ -1,0 +1,133 @@
+/****** BUTTON STYLES *****/
+
+.btn {
+  padding: @pad/1.5 @pad*2;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:hover:active,
+  &:focus:active {
+    outline: none;
+  }
+
+  &-primary {
+    color: @btn-primary-text-color;
+    background-color: @color-primary;
+    border-color: @color-primary;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: @color-primary-hover;
+      color: @btn-primary-text-color;
+    }
+  }
+
+  &-delete {
+    display: inline-block;
+    vertical-align: middle;
+    color: @color-base-light;
+    font-size: 1.125em;
+    line-height: 1.125;
+    cursor: pointer;
+
+    &:before {
+      display: inline-block;
+      font-family: 'Glyphicons Halflings';
+      content: "\e088";
+    }
+
+    &:hover {
+      color: @color-primary;
+    }
+  }
+
+  &-spacer {
+    margin-left: @pad/3;
+  }
+
+  &-secondary {
+    color: @btn-secondary-text-color;
+    background-color: @color-secondary;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: @btn-secondary-text-color;
+      background-color: @color-secondary-hover;
+    }
+  }
+
+  &-inverse {
+    background-color: @color-inverse;
+    border: 1px solid @color-primary;
+    color: @color-primary;
+
+    &:hover {
+      background-color: fadeout(@color-primary, 90%);
+      border: 1px solid @color-primary;
+      color: @color-primary;
+    }
+  }
+
+  &-disabled {
+    pointer-events: none;
+    opacity: .65;
+  }
+
+  &-inprogress,
+  &-succeded {
+    position: relative;
+    padding-right: 45px;
+    opacity: 0.6;
+    background-color: @color-primary-hover;
+    cursor: default;
+    pointer-events: none;
+
+    &::after {
+      display: block;
+      font-family: 'Glyphicons Halflings';
+      width: 45px;
+      height: 26px;
+      line-height: 27px;
+      text-align: center;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      margin-top: -13px;
+    }
+  }
+
+    &-inprogress::after {
+      content: "\e031";
+      -webkit-animation: spin 1s infinite linear;
+      animation: spin 1s infinite linear;
+    }
+
+  &-succeded {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: @color-success;
+      opacity: 1;
+    }
+
+      &::after {
+        content: "\e013";
+      }
+  }
+
+  &-lg {
+    font-size: @fz*1.25;
+    padding-left: @pad*4;
+    padding-right: @pad*4;
+    border-radius: @br-btn;
+  }
+
+  &-thin {
+    padding-left: @pad;
+    padding-right: @pad;
+  }
+}

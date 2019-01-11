@@ -1,0 +1,52 @@
+/* INLINE EDITING TEXT FIELD */
+.instead {
+  @instead-height: 30px;
+
+  &__input {
+    border: 0;
+    background-color: transparent;
+    width: calc(~"100% - 55px"); // Minus 2 lenghs of controls and margin-right
+    height: @instead-height;
+    padding: 5px 12px;
+    margin-right: @pad / 1.5;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-shadow: inset 0 0 2px rgba(100,100,100,.6);
+
+    &:focus {
+      outline: none;
+      box-shadow: inset 0 0 3px fadeout(@color-primary, 10%);
+    }
+  }
+
+  &__control {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: @instead-height;
+    line-height: @instead-height;
+    text-align: center;
+    opacity: 0.5;
+    cursor: pointer;
+    font-family: "Glyphicons Halflings";
+    font-size: @fz*1.25;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    & + & {
+      margin-left: @pad / 3;
+    }
+
+    &--ok::before {
+      content: "\e013";
+      color: @color-success;
+    }
+
+    &--cancel::before {
+      content: "\e014";
+      color: @color-danger;
+    }
+  }
+}

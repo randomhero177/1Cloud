@@ -1,0 +1,122 @@
+// main: ../main.less
+.infoblock {
+  background-color: @color-light-back;
+
+  & .container {
+      position: relative;
+  }
+  &__icon{
+      &--large:before{
+          font-size: @fz*20;
+      }
+      &--medium:before{
+          font-size: @fz*15;
+      }
+      &--small:before{
+          font-size: @fz*5;
+      }
+  }
+  &__img {
+    float: none;
+    & img{
+      margin: 0 auto;
+
+      @media @view-mobile-only{
+        max-width: 80%;
+      }
+    }
+  }
+  &__text {
+    float: none;
+    padding-bottom: @pad;
+  }
+
+  &__row{
+    margin-right: -@pad;
+    margin-left: -@pad;
+    .clear;
+  }
+
+  &__img{
+    float: left;
+  }
+  &__text{
+    float: right;
+  }
+
+  &--testperiod {
+    .img-back("@{img-path}/testperiod-back.jpg", @color-blue, 0.1);
+    & a:not(.btn){
+        color: @color-primary;
+    }
+  }
+  &--ssl{
+    .img-back("@{img-path}/ssl/ssl_who-back.jpg", @color-blue, 0.2);
+  }
+  &--white {
+    background-color: @color-inverse;
+  }
+  &--blue {
+    background-color: @color-blue;
+    color: @color-inverse;
+    & a:not([class*="btn"]){
+        color: @color-primary;
+    }
+  }
+  &--seo{
+    @media @view-xs, @view-mobile-only{
+      display: none;
+    }
+  }
+}
+
+@media @view-xs, @view-mobile-only {
+  .infoblock{
+    &__btn{
+      display: block;
+      padding-left: @pad;
+      padding-right: @pad;
+    }
+  }
+}
+
+@media @view-tablets {
+  .infoblock {
+    &__row{
+      &--reverse .infoblock__text{
+        float: left;
+      }
+    }
+    &__text{
+      padding-bottom: 0;
+      &--bordered {
+        border-style: solid;
+        border-color: @color-light-back;
+        border-width: 0 0 0 5px;
+        padding-left: @pad*2;
+        .infoblock__row--reverse & {
+          border-width: 0 5px 0 0;
+          padding-right: @pad*2;
+        }
+      }
+    }
+  }
+}
+@media @view-desktop{
+    .infoblock {
+        &__text{
+            &--big{
+                font-size: 1.125em;
+            }
+        }
+    }
+}
+@media @view-large{
+  .infoblock{
+    &__img{
+      &--mtop img{
+        margin-top: -55px;
+      }
+    }
+  }
+}

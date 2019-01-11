@@ -1,0 +1,71 @@
+/*
+  Each like-list__item must have additional class(block by itself(BEM)), for example, "elem"
+  All elements in like-list__row must have derivative classes of "elem", for example, "elem__name" or "elem__desc"
+  These classes are supposed to set each cell width and unique decoration if required.
+  html structure: .like-list>.like-list__item.elem>((.like-list__row>div.elem__feature*4)+.like-list__extra)
+*/
+.like-list {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    &:nth-child(2n) {
+      background-color: @color-even;
+    }
+
+    &--headers {
+      font-size: @fz*0.875;
+      font-weight: 700;
+      border-bottom: 1px solid lighten(@color-inverse, 10%);
+    }
+
+    .like-list__item&--transperent {
+      background: rgba(255,255,255, 0);
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    position: relative;
+
+    & > * {
+      position: relative;
+      padding: @pad/1.5;
+    }
+
+    &--equal-width > * {
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+
+    &--nojustify {
+      justify-content: initial;
+    }
+  }
+
+  &--vamiddle &__row {
+    align-items: center;
+  }
+
+  &--hacenter &__row {
+    text-align: center;
+  }
+
+  &__extra {
+    position: relative;
+    padding: @pad/3 @pad/1.5 @pad/1.5;
+  }
+
+  &--small &__row {
+    & > * {
+      padding: @pad/3;
+    }
+  }
+
+  &--bordered {
+    border: 1x solid @color-border;
+  }
+}

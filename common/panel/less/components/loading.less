@@ -1,0 +1,57 @@
+/****** LOADING SPINNER STYLES *****/
+.loading {
+  &::after {
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    content: "\e031";
+    width: 45px;
+    height: 20px;
+    line-height: 27px;
+    text-align: center;
+    color: @color-primary-hover;
+    -webkit-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+  }
+
+  &--full {
+    position: relative;
+
+    &::before {
+      display: block;
+      content: "";
+      background: fadeout(@color-inverse, 20%);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 150;
+    }
+
+    &::after {
+      font-size: 20px;
+      line-height: 20px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -13px;
+      margin-left: -22.5px;
+      z-index: 151;
+    }
+  }
+
+  &--nontransparent::before {
+    background: @color-inverse;
+  }
+
+  &--top::after {
+    top: 60px;
+  }
+
+  &--big::after {
+    font-size: 30px;
+    line-height: 30px;
+    height: 30px;
+  }
+}
+

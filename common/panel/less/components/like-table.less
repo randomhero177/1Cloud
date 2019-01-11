@@ -1,0 +1,31 @@
+/****** DIVS LIKE TABLE STYLES *****/
+.like-table {
+  display: table;
+  width: 100%;
+
+  &__row {
+    display: table-row;
+    position: relative;
+
+    &:nth-child(2n) {
+      background-color: @color-even;
+    }
+
+    & > * {
+      display: table-cell;
+      vertical-align: middle;
+      padding: @pad/1.5;
+      text-align: center;
+    }
+  }
+
+  &__headers {
+    font-weight: 700;
+
+    & > * {
+      border-bottom: 1px solid lighten(@color-border, 10%);
+      padding-top: 0;
+      padding-bottom: @pad/3;
+    }
+  }
+}

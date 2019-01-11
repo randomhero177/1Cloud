@@ -1,0 +1,81 @@
+// main: ../main.less
+
+.get{
+  &__list{
+    font-size: 0;
+    text-align: center;
+  }
+  &__item{
+    margin-bottom: @pad;
+    padding: @pad;
+    text-align: left;
+  }
+  &__header{
+    padding-bottom: @pad;
+    border-bottom: 1px solid @color-border;
+    line-height: @fz*2.25;
+  }
+  &__title{
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 600;
+    font-size: @fz;
+    line-height: 1.125em;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: @fz*2;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: @fz*2;
+
+    &::before{
+      font-size: @fz*1.5;
+      color: @color-primary;
+      margin-right: @pad;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-60%);
+    }
+    &-2x{
+      font-weight: 700;
+      padding-left: @pad*4;
+      &::before{
+        font-size: @fz*2.5;
+      }
+    }
+  }
+  &__text{
+    font-size: @fz/1.2;
+    opacity: 0.9;
+    padding-top: @pad;
+  }
+}
+
+@media @view-tablets{
+  .get{
+    &__item{
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+    }
+    &__title{
+      max-width: 80%;
+      &-2x{
+        max-width: 100%;
+      }
+    }
+  }
+}
+@media @view-desktop {
+  .get{
+    &__item{
+      width: 33.333%;
+    }
+    &__item-4{
+      width: 25%;
+    }
+  }
+}

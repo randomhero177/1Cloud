@@ -1,0 +1,118 @@
+// main: ../main.less
+
+.help{
+    & h2{
+        font-family: @ff-extra;
+        font-size: @fz*1.375;
+        @media @view-desktop{
+            font-size: @fz*1.625;
+        }
+    }
+    & h3{
+        font-size: @fz*1.125;
+        @media @view-desktop{
+            font-size: @fz*1.25;
+        }
+    }
+    &__onecloudweb{
+        display: block !important;
+    }
+    &__conversion{
+      display: block;
+        border: 1px solid @color-border;
+        text-align: left;
+        max-width: 300px;
+        margin: 0 auto @pad;
+        box-shadow: 0 0 10px rgba(80,102,171, 0.8);
+        &:hover{
+          text-decoration: none;
+        }
+        &-header{
+            padding: @pad/1.5;
+            background-color: @color-green;
+            color: @color-inverse;
+            font-weight: 700;
+        }
+        &-title{
+            color: @color-base;
+            text-transform: none;
+            padding: 0 @pad/1.5;
+            & > a{
+                color: @color-base;
+                &:hover{
+                    color: @color-primary;
+                }
+            }
+        }
+        &-text{
+            padding: 0 @pad/1.5 @pad/1.5;
+            color: @color-base;
+            & ul{
+                list-style:none;
+                margin: 0;
+                & > li{
+                    margin: 0;
+                    &::before{
+                        display: none;
+                    }
+                    &::after{
+                        display: block;
+                        content: ">";
+                        position: absolute;
+                        left: 5px;
+                        top: -1px;
+                    }
+                    & + li{
+                        margin-top: @pad/5;
+                    }
+                }
+            }
+        }
+        &:hover &-text{
+          color: @color-base;
+        }
+        &-footer{
+            padding: 0 @pad/1.5 @pad/1.5;
+            text-align: right;
+        }
+
+        @media @view-tablets{
+            &:not(&--horizontal){
+                float: right;
+                margin-left: @pad;
+            }
+            &--horizontal{
+                display: table;
+                width: 100%;
+                max-width: 100%;
+            }
+            &--horizontal &{
+                &-header{
+                    display: none;
+                }
+                &-title,
+                &-text,
+                &-footer{
+                    display: table-cell;
+                    padding: @pad/1.5;
+                    vertical-align: middle;
+                }
+                &-title{
+                    width: 30%;
+                    background-color: @color-green;
+                    color: @color-inverse;
+                    & > a{
+                        color: @color-inverse;
+                    }
+                }
+                &-text{
+                    width: 50%;
+                    vertical-align: top;
+                }
+                &-footer{
+                    width: 20%;
+                }
+            }
+        }
+    }
+}

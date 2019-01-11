@@ -1,0 +1,61 @@
+.registr-block {
+  background-color: @color-primary;
+  color: @color-inverse;
+  text-align: right;
+  padding: @pad*4 0;
+
+  &__row {
+    font-size: 0;
+
+    @media @view-desktop {
+      & > * {
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__legend {
+    font-size: @fz*1.5;
+    font-weight: 600;
+    border: 0;
+    color: @color-inverse;
+    margin-bottom: @pad;
+    float: left;
+
+
+    @media @view-desktop {
+      margin-bottom: 0;
+      margin-right: @pad;
+      padding-top: 3px;
+      width: auto;
+      max-width: 300px;
+      text-align: left;
+    }
+  }
+
+  &__input {
+    border-radius: @pad/3;
+
+    @media @view-desktop {
+      width: 380px;
+      height: 47px;
+      margin-right: @pad;
+    }
+  }
+
+  @media @view-desktop {
+    & .btn {
+      width: auto;
+
+      &.loading::after {
+        right: -@pad * 3;
+      }
+    }
+  }
+
+  & .error__message {
+    font-size: @fz;
+  }
+}

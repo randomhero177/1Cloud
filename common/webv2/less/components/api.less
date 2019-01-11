@@ -1,0 +1,99 @@
+// main: ../main.less
+
+.api {
+  & p {
+    margin-top: 0;
+    margin-bottom: @pad-root;
+  }
+
+  &__table {
+    text-align: center;
+
+    & p {
+      margin: 0;
+
+      & + p {
+        margin-top: @pad/1.5;
+      }
+    }
+  }
+
+  &__row {
+
+    &:nth-child(2n) {
+      background-color: @color-light-back;
+    }
+
+    & > * {
+      padding: @pad/1.5 @pad*1.33;
+    }
+  }
+
+  &__name {
+    font-size: @fz;
+    font-weight: 700;
+
+    &--mobile {
+      display: block;
+      font-weight: 700;
+      margin-bottom: @pad/3;
+    }
+  }
+
+  &__type {
+    padding: 0;
+    color: @color-blue-light;
+  }
+
+  &__headings {
+    display: none;
+  }
+}
+
+@media @view-mobile-only {
+  .api {
+    &__table {
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media @view-xs, @view-mobile-only {
+  /*========== FOR TABLES IN HELP =============*/
+  .help .api {
+    &__row {
+      & > div + div {
+        border-top: 1px solid @color-gray;
+      }
+    }
+  }
+}
+
+@media @view-tablets {
+  .api {
+    &__table {
+      display: table;
+      text-align: left;
+    }
+
+    &__row {
+      display: table-row;
+
+      & > * {
+        display: table-cell;
+        vertical-align: top;
+      }
+    }
+
+    &__name {
+      font-size: @fz*0.875;
+    }
+
+    &__headings {
+      background-color: @color-blue-light;
+      color: @color-inverse;
+      font-weight: 600;
+    }
+  }
+}

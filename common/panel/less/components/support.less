@@ -1,0 +1,36 @@
+.support {
+  position: relative;
+
+  & .panel-notification {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  & .tickets {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.ticket {
+  &:hover {
+    background-color: @color-even;
+  }
+
+  & + & {
+    border-top: 1px solid @color-border;
+  }
+
+  &__body {
+    padding: @pad @pad/3 @pad @pad;
+  }
+
+  &__info {
+    color: @color-base-light;
+    font-size: @fz-s;
+    margin: 0;
+    padding-top: @pad/3;
+  }
+}

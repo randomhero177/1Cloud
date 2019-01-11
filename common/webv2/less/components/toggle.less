@@ -1,0 +1,75 @@
+// main: ../main.less
+@toggle-size: 40px;
+@toggle-bar-size: 4px;
+
+// =============== MIXINS ===============
+.toggle-bar() {
+  display: inline-block;
+  width: 100%;
+  height: @toggle-bar-size;
+  border-radius: @toggle-bar-size/2;
+}
+.toggle-bar-color (@color:@color-blue) {
+  &,
+  &::after,
+  &::before {
+    background-color: @color;
+  }
+}
+
+// =============== MAIN STYLES ===============
+.toggle {
+  display: inline-block;
+  vertical-align: middle;
+  width: @toggle-size;
+  height: @toggle-size;
+  line-height: @toggle-size - 4;
+  padding: 0 5px;
+  cursor: pointer;
+
+  background: @color-inverse;
+  border-radius: 4px;
+  &__btn {
+    .toggle-bar;
+    .toggle-bar-color;
+    position: relative;
+    &::after,
+    &::before {
+      content: "";
+      .toggle-bar;
+      position: absolute;
+      left: 0;
+      transition: transform 0.2s, top 0.2s;
+      -webkit-transition: transform 0.2s, top 0.2s;
+    }
+    &::before {
+      top: -10px;
+    }
+    &::after {
+      bottom: -10px;
+    }
+  }
+  &:active &__btn,
+  &:focus &__btn,
+  &:hover &__btn {
+    .toggle-bar-color(@color-primary);
+  }
+
+  &--active &__btn {
+    .toggle-bar-color(@color-primary);
+
+    visibility: hidden;
+    &::before {
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      top: 0;
+      visibility: visible;
+    }
+    &::after {
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      top: 0;
+      visibility: visible;
+    }
+  }
+}

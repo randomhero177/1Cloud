@@ -1,0 +1,105 @@
+// main: ../main.less
+
+.digits {
+  background-color: @color-blue;
+  color: @color-inverse;
+  padding-top: @pad-root*1.5;
+  padding-bottom: @pad-root*1.5;
+
+  &__container {
+    font-size: 0;
+    text-align: center;
+  }
+
+  &__item {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    text-align: center;
+    font-size: @fz;
+    margin-bottom: @pad;
+
+    &-wrap {
+      display: inline-block;
+      text-align: right;
+    }
+    &::before {
+      content: '';
+      display: block;
+      font-size: @fz*5;
+      color: @color-primary;
+      margin: 0 auto @pad;
+      width: 85px;
+      height: 98px;
+    }
+
+    &--users {
+      &::before {
+        background: url("@{img-path}/digits/users.png") center center no-repeat;
+      }
+    }
+
+    &--servers {
+      &::before {
+        background: url("@{img-path}/digits/servers.png") center center no-repeat;
+      }
+    }
+
+    &--connection {
+      &::before {
+        background: url("@{img-path}/digits/connection.png") center center no-repeat;
+      }
+    }
+  }
+
+  &__number {
+    display: block;
+    font-family: @ff-extra;
+    font-size: @fz*2.5;
+    line-height: 1.125em;
+    padding-top: @pad;
+  }
+}
+
+@media @view-mobile, print{
+  .digits{
+    &__item{
+      width: 33.33%;
+      margin-bottom: 0;
+    }
+  }
+}
+@media @view-desktop, print{
+  .digits{
+    &__item{
+      text-align: left;
+      margin-bottom: 0;
+      &:before{
+        float: left;
+        margin-right: @pad;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.mainpage {
+  &-digits {
+    padding: @pad*7 0;
+
+    & .digits {
+      background-color: @color-inverse;
+      color: @color-base;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &__title {
+      margin-top: 0;
+      margin-bottom: @pad*4;
+      text-align: center;
+      font-size: @fz*1.5;
+      font-weight: 600;
+    }
+  }
+}

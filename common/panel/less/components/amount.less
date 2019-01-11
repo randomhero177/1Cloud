@@ -1,0 +1,25 @@
+/* AMOUNT CONTROLLER (INPUT + PLUS + MINUS) */
+.amount {
+  &__increase,
+  &__decrease {
+    padding-left: @pad;
+    padding-right: @pad;
+
+    &:focus:not(:active) {
+      background-color: @color-inverse;
+    }
+
+    &:hover,
+    &:hover:active,
+    &:hover:focus {
+      color: @btn-primary-text-color;
+      background-color: lighten(@color-primary-hover, 15%);
+    }
+
+    &:focus:active {
+      outline: none !important;
+      color: @btn-primary-text-color;
+      background-color: @color-primary-hover;
+    }
+  }
+}

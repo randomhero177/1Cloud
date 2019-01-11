@@ -1,0 +1,44 @@
+// main: ../main.less
+
+@partners-carousel-width: 90%;
+
+.partners {
+  overflow: hidden;
+  padding: @pad*7 0;
+  &__item {
+    & > div {
+      margin-bottom: @pad;
+    }
+  }
+
+  &__carousel{
+    text-align: center;
+    width: @partners-carousel-width;
+    margin: 0 auto;
+  }
+
+  &__carousel &__item img{ // HACK FOR OWL CAROUSEL
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+  }
+  &__arrows .oc-arrows{
+    &__left,
+    &__right{
+      display: block;
+    }
+    &__left{
+      left: -@arrow-width;
+    }
+    &__right{
+      right: -@arrow-width;
+    }
+  }
+}
+
+// HACK FOR IE 11
+@media all and (-ms-high-contrast:none) {
+  .partners .owl-item.cloned:last-child{
+    display: none;
+  }
+}

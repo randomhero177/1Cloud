@@ -1,0 +1,35 @@
+// main: ../../pages/ssl.less
+
+@trust-item-height: 19px;
+@trust-item-gap: 2px;
+
+.trust {
+  &__rating {
+      display: inline-block;
+      width: 87px;
+      height: 19px;
+      background-image: url("@{img-path}/ssl/ssl_trust1.png");
+      background-repeat: no-repeat;
+      background-position: 0 0;
+
+    &--1 {
+      background-position-y: -(@trust-item-height + @trust-item-gap);
+    }
+
+    &--2 {
+      background-position-y: -(@trust-item-height + @trust-item-gap) * 2;
+    }
+
+    &--3 {
+      background-position-y: -(@trust-item-height + @trust-item-gap) * 3;
+    }
+
+    &--4 {
+      background-position-y: -(@trust-item-height + @trust-item-gap) * 4;
+    }
+
+    &--5 {
+      background-position-y: -(@trust-item-height + @trust-item-gap) * 5;
+    }
+  }
+}

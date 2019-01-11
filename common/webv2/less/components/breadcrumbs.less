@@ -1,0 +1,45 @@
+// main: ../main.less
+
+.breadcrumb{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background: none;
+
+  & li{
+    font-size: 13.4px;
+    line-height: 1;
+    vertical-align: baseline;;
+
+    & + li{
+      &::before{
+        display: inline-block;
+        content: "\e902";
+        font-family: @ff-icons;
+        font-size: @fz/1.375;
+        padding: 0 @pad/1.5;
+      }
+    }
+    & a{
+      .hov-foc-act(transparent, @color-primary, none);
+    }
+  }
+  & .home{
+
+    & a{
+      &::before{
+        font-family: @ff-icons;
+        font-size: @fz/1.25;
+        content: "\e937";
+      }
+    }
+    & span{
+      display: none;
+    }
+  }
+  & .active a,
+  & .active span{
+    color: @color-base;
+    .hov-foc-act(none, @color-base, none);
+  }
+}

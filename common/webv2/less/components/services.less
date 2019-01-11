@@ -1,0 +1,169 @@
+// main: ../main.less
+
+.serv-icon-to-header-bottom(@cat-icon){
+  & {
+    margin-bottom: @cat-icon;
+    &::before{
+      width: @cat-icon;
+      height: @cat-icon;
+      font-size: @cat-icon*0.75;
+      line-height: @cat-icon;
+      margin-left: -@cat-icon/2;
+      bottom: -@cat-icon;
+    }
+  }
+}
+
+.services{
+  background-color: @color-light-back;
+
+  &--imaged{
+    .img-back("@{img-path}/testperiod-back.jpg", @color-light-back, 0.1);
+    color: @color-base;
+  }
+
+  &__list{
+    font-size: 0;
+    text-align: center;
+  }
+
+  .oc-block-item;
+
+  &__item{
+    &--inactive{
+      background-color: @color-light-back;
+      @media @view-xs, @view-mobile-only{
+        display: none;
+      }
+    }
+
+    @media @view-tablets-only{
+      width: 48.5%;
+
+      &:nth-child(2n){
+        margin-right: 0;
+      }
+    }
+    @media @view-tablets{
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 3%;
+    }
+    @media @view-desktop{
+      width: 31.333%;
+
+      &:nth-child(3n), &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__header{
+    padding: @pad @pad*3;
+    position: relative;
+
+    &::before{
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      margin-right: @pad/1.5;
+      font-size: 40px;
+      text-align: center;
+      vertical-align: middle;
+      color: @color-primary;
+
+      @media @view-xs{
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        margin-top: -20px;
+      }
+    }
+
+    @media @view-tablets{
+      height: 100px;
+      line-height: 100px - @pad*2;
+      padding-left: @pad*2;
+      padding-right: @pad*2;
+      &::before{
+        margin-right: 0;
+        position: absolute;
+        left: 50%;
+        top: auto;
+      }
+      .serv-icon-to-header-bottom(100px);
+    }
+    @media @view-desktop{
+      .serv-icon-to-header-bottom(165px);
+    }
+  }
+  &__title{
+    font-size: @fz*1.125;
+    line-height: 1.125em;
+    display: inline-block;
+    vertical-align: middle;
+    @media @view-desktop-only{
+      font-size: @fz;
+    }
+  }
+  &__body{
+    position: relative;
+    padding: @pad @pad*2;
+    text-align: left;
+    & p:last-child{
+      margin-bottom: 0;
+    }
+
+    @media @view-tablets{
+      padding-left: @pad*2;
+      padding-right: @pad*2;
+
+      &::before{
+        display: block;
+        content: "";
+        height: 5px;
+        background-color: @color-primary;
+        position: absolute;
+        top: -5px;
+        left: @pad*2;
+        right: @pad*2;
+      }
+    }
+  }
+
+  // ============ SMALL VARIATION OF SERVICES BLOCK ============
+  &__item--small &__header{
+    padding: @pad*2 + @fz*3 @pad*3 0 @pad*3;
+    position: relative;
+    margin-bottom: 0;
+    border-bottom: 0;
+
+    &::before{
+      width: 100%;
+      height: @fz*3;
+      line-height: @fz*3;
+      font-size: @fz*3;
+      text-align: center;
+      vertical-align: middle;
+      color: @color-primary;
+      margin-left: 0;
+      margin-right: 0;
+      position: absolute;
+      top: @pad;
+      left: 0;
+      margin-top: 0;
+    }
+    @media @view-tablets{
+      padding-top: @pad;
+      padding-bottom: @pad;
+
+      &::before{
+        width: @fz*3;
+        left: @pad*2;
+        top: 50%;
+        margin-top: -@fz*1.5;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,66 @@
+.reasons-why {
+    background: @color-blue;
+    color: #fff;
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    &__item {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        &:before{
+            padding: @pad*0.75;
+            font-size: 70px;
+            color: @color-primary
+        }
+    }
+    &__txt-block {
+        font-size: @fz;
+        padding: @pad*0.75;
+    }
+}
+
+@media @view-xs {
+    .reasons-why {
+        &__item {
+            width: 100%;
+            &:before {
+                font-size: 50px;
+            }
+        }
+    }
+}
+
+@media @view-mobile-only {
+    .reasons-why {
+        &__item {
+            flex-direction: column;
+            &:before {
+                font-size: 50px;
+            }
+        }
+        &__txt-block {
+            text-align: center;
+        }
+    }
+}
+
+@media @view-large {
+    .reasons-why {
+        &__list {
+            width: 75%;
+            margin: 0 auto;
+        }
+        &__txt-block {
+            font-size: @fz*1.5;
+            padding: @pad*0.5;
+        }
+        &__item{
+            &:before {
+                font-size: 85px;
+            }
+        }
+    }
+}

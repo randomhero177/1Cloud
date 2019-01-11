@@ -1,0 +1,92 @@
+.heading {
+  position: relative;
+  padding-bottom: @pad;
+  margin-bottom: @pad;
+
+  &::after {
+    display: table;
+    content: "";
+    clear: both;
+  }
+
+  &__title {
+    margin: 0px;
+    color: @color-base;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    overflow: hidden;
+
+    &::before {
+      //display: inline-block; // hidden for new design
+      display: none;
+      vertical-align: middle;
+      content: "";
+      width: 43px;
+      height: 36px;
+      margin-right: 10px;
+      position: relative;
+      top: -2px;
+      background-image: url('/Content/img/icons.png');
+      background-repeat: no-repeat;
+      background-position: 0 -941px;
+    }
+
+    &--billing::before {
+      background-position: 0 -810px;
+    }
+
+    &--profilesetting::before {
+      background-position: 0 -1005px;
+    }
+
+    &--support::before {
+      background-position: 0 -1070px;
+    }
+
+    &--faq::before {
+      background-position: 0 -1130px;
+    }
+
+    &--referral_program::before {
+      background-position: 0 -1355px;
+    }
+
+    &--ssl::before {
+      background-position: 0 -1600px;
+    }
+
+    &--unoc::before {
+      background-position: 0 -1726px;
+    }
+
+    &--unoc-users::before {
+      background-position: 0 -1005px;
+    }
+
+    &--storage::before {
+      background-position: 0 -1766px;
+    }
+
+    &--monitoring::before {
+      background-position: 0 -1805px;
+    }
+  }
+
+  &__link {
+    float: right;
+    padding-top: @pad/2;
+  }
+
+  & ~ .attributes {
+    margin-top: -@pad*2;
+    text-align: left;
+    margin-bottom: @pad*2.5;
+    position: relative;
+    z-index: 2;
+
+    & > li {
+      font-size: @fz*0.875;
+    }
+  }
+}

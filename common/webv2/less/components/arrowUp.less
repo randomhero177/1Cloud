@@ -1,0 +1,48 @@
+// main: ../main.less
+
+@arrow-up-size: 50px;
+
+.arrowUp{
+	display: none;
+	position: fixed;
+	bottom: 2%;
+	right: 2%;
+	z-index: 2;
+
+	& a{
+		text-align: center;
+		display: block;
+		width: @arrow-up-size;
+		height: @arrow-up-size;
+		line-height: @arrow-up-size;
+		border-radius: 50%;
+		text-align: center;
+		background-color: @color-primary;
+		color: @color-inverse;
+
+		.hov-foc-act(@color-hover, @color-inverse, none);
+	}
+	&__arrow {
+    &::before{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: @fz*2;
+      line-height: 1;
+      transform: rotate(-90deg);
+      -webkit-transform: rotate(-90deg);
+    }
+	}
+}
+@media @view-xs, @view-mobile-only{
+	.arrowUp{
+		bottom: 10%;
+		& a{
+			width: @arrow-up-size/1.25;
+			height: @arrow-up-size/1.25;
+			line-height: @arrow-up-size/1.25;
+		}
+		&__arrow::before{
+			font-size: (@fz*2)/1.25;
+		}
+	}
+}

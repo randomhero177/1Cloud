@@ -1,0 +1,215 @@
+// main: ../pages/index.less
+@ben-icon-size: 100px;
+@ben-icon-mobile-width: 30%;
+@ben-trigger-width: 30px;
+.benefits {
+  .img-back( "@{img-path}/benefits-back.jpg", #959aaa);
+  &__carousel {
+    width: 80%;
+    margin: -@pad auto @pad;
+    font-size: 0;
+    &-item {
+      font-size: @fz*1.25;
+      line-height: 1.125em;
+      font-weight: 700;
+      text-align: center;
+    }
+    & .oc-arrows {
+      &__left {
+        display: block;
+        left: -@arrow-width/2;
+      }
+      &__right {
+        display: block;
+        right: -@arrow-width/2;
+      }
+    }
+    &--nonav .oc-arrows {
+      display: none;
+    }
+  }
+  // ============ HACK FOR CAROUSEL ============
+  .owl {
+    &-carousel .owl-stage-outer {
+      overflow: visible;
+    }
+    &-item {
+      opacity: 0.5;
+      transition: opacity 0.3s;
+      &.not-active-close {
+        opacity: 0;
+      }
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+  // ============ SMALL BLOCKS ============
+  &__info {
+    margin-right: -@pad;
+    margin-left: -@pad;
+    &-item {
+      display: none;
+      &--active {
+        display: block;
+        text-align: center;
+      }
+    }
+    &-section {
+      padding: @pad+5 @ben-trigger-width+@pad @pad+5 @ben-icon-mobile-width;
+      position: relative;
+      color: @color-inverse;
+      cursor: pointer;
+      .rounded-icon(@ben-icon-size);
+      &::after,
+      &::before {
+        left: 15%;
+        top: @ben-icon-size/2 + @pad+5;
+      }
+      &--active {
+        background-color: @color-blue;
+      }
+    }
+    &-title {
+      font-weight: 700;
+      line-height: @ben-icon-size;
+      text-transform: uppercase;
+      margin-top: 0;
+      margin-bottom: 0;
+      & > span {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: @fz;
+        line-height: 1.5em;
+      }
+    }
+    &-text {
+      font-size: 0;
+      margin-bottom: 0;
+    }
+    &-btn {
+      display: none;
+      padding-left: @pad/2;
+      padding-right: @pad/2;
+    }
+    &-trigger {
+      position: absolute;
+      right: @pad/2;
+      top: @pad*4;
+      bottom: auto;
+      width: @ben-trigger-width;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+      -webkit-transition: transform 0.2s;
+      &::before {
+        display: inline-block;
+        font-family: @ff-icons;
+        content: "\e902";
+        font-size: @fz*1.5;
+        line-height: 1;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: @color-primary;
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+      }
+      &:hover::before {
+        color: @color-hover;
+      }
+    }
+    // ============ ACTIVE STATE ============
+    &-section--active &-text {
+      font-size: @fz*0.875;
+      padding-bottom: 30px;
+    }
+    &-section--active &-btn {
+      display: block;
+    }
+    &-section--active &-title {
+      display: none;
+    }
+    &-section--active &-trigger {
+      top: auto;
+      bottom: @pad*2;
+      transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+    }
+  }
+}
+// ============ MEDIA QUERIES ============
+@media @view-mobile {
+  .benefits {
+    &__carousel {
+      width: 50%;
+    }
+    &__info {
+      &-section--active &-btn {
+        display: inline-block;
+      }
+    }
+  }
+}
+@media @view-tablets {
+  .benefits {
+    &__carousel {
+      margin: -@pad-root auto @pad-root;
+    }
+  }
+}
+@media @view-desktop {
+  .benefits {
+    &__carousel {
+      width: 30%;
+    }
+    &__info {
+      &-item--active {
+        display: block;
+        font-size: 0;
+      }
+      &-section {
+        width: 20%;
+        padding: @ben-icon-size+@pad*1.3 @pad @pad*7;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        &::after,
+        &::before {
+          left: 50%;
+        }
+      }
+      &-section--active &-title {
+        display: block;
+      }
+      &-section--active &-text {
+        visibility: visible;
+        padding-bottom: 0;
+      }
+      &-section--active &-btn {
+        visibility: visible;
+      }
+      &-title {
+        margin-bottom: @pad/2;
+      }
+      &-text {
+        font-size: @fz*0.875;
+      }
+      &-btn,
+      &-text {
+        display: block;
+        visibility: hidden;
+      }
+      &-btn {
+        position: absolute;
+        left: @pad;
+        right: @pad;
+        bottom: @pad;
+      }
+      &-trigger {
+        display: none;
+      }
+    }
+  }
+}

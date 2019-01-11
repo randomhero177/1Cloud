@@ -1,0 +1,373 @@
+// main: ../main.less
+
+.tariff{
+  background-color: @color-light-back;
+
+  &__choose{
+    text-align: center;
+    font-size: @fz*0.875;
+    margin-bottom: @pad;
+    & > *{
+      display: block;
+      margin: 5px auto;
+    }
+    & .dropdown-menu{
+      font-size: @fz*0.875;
+    }
+  }
+  &-list{
+    font-size: 0;
+  }
+
+  .oc-block-item;
+
+  &__body{
+    font-size: @fz*0.875;
+    line-height: 1.5em;
+    padding: @pad*0.75 @pad*2;
+  }
+  &__header{
+    display: block;
+    text-align: center;
+    padding: @pad*1.5 @pad*2;
+    border-bottom: 1px solid @color-border;
+    a&{
+      color: @color-base;
+      &:hover{
+        color: @color-primary;
+      }
+    }
+  }
+  &__btn{
+    background-color: transparent;
+    @media @view-desktop-only{
+      padding-left: @pad/3;
+      padding-right: @pad/3;
+    }
+  }
+  &__price{
+    padding-bottom: @pad;
+    border-bottom: 5px solid @color-primary;
+  }
+  &__per{
+    font-size: @fz*1.125;
+  }
+  &__content{
+    padding-top: @pad;
+    & img {
+      display: none;
+      margin-bottom: @pad;
+    }
+  }
+  &__title{
+    &-name{
+      text-transform: capitalize;
+    }
+  }
+  .oc-modal &__footer{
+    position: relative;
+    padding-left: @pad;
+    padding-right: @pad;
+    @media @view-tablets{
+      padding-left: @pad*2;
+      padding-right: @pad*2;
+    }
+  }
+
+  // ============ TABLE IN TARIFF BLOCK ============
+  &__table{
+    display: table;
+    width: 100%;
+    padding-top: @pad*0.75;
+    font-size: @fz*0.9225;
+
+    &-row{
+      display: table-row;
+      & > *{
+        display: table-cell;
+        width: 50%;
+        vertical-align: middle;
+        border-bottom: 1px solid @color-border;
+      }
+    }
+    &-char{
+      text-align: right;
+      padding: @pad*0.6 @pad @pad*0.6 @pad*1.5;
+    }
+    &-value{
+      font-weight: 700;
+      padding: @pad*0.6 @pad*1.5 @pad*0.6 @pad;
+    }
+  }
+}
+
+@media @view-tablets{
+  .tariff{
+    &__item{
+      width: 31.333%;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 3%;
+
+      &:nth-child(3n){
+        margin-right: 0;
+      }
+    }
+    &__choose{
+      margin-bottom: @pad*2;
+      display: table;
+      width: 100%;
+      & > *{
+        display: table-cell;
+        vertical-align: middle;
+        width: 33.33%;
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 0;
+      }
+      &-text{
+        text-align: right;
+        padding-top: @pad;
+        padding-right: @pad;
+      }
+      &-bonus{
+        text-align: left;
+        line-height: 1.125em;
+        padding-top: @pad;
+        padding-left: @pad;
+      }
+
+      & .dropdown-menu{
+        font-size: @fz*0.875;
+      }
+    }
+    &__content{
+      text-align: center;
+      & img {
+        display: block;
+        margin: 0 auto @pad;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+@media @view-tablets-only{
+  .tariff{
+    &__table{
+      &-char{
+        padding-left: 0;
+      }
+      &-value{
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.tariff2 {
+
+  &__choose {
+    font-size: 0;
+    text-align: center;
+    margin-bottom: @pad*3 - @pad/3;
+
+    &-item {
+      display: block;
+
+      & + & {
+        margin-top: @pad*2;
+      }
+
+      @media @view-tablets {
+        display: inline-block;
+        vertical-align: top;
+
+        & + & {
+          margin-left: @pad*2;
+          margin-top: 0;
+        }
+      }
+
+      & .form-select{
+        height: 45px;
+
+        & .dropdown-toggle{
+          height: 45px;
+        }
+      }
+    }
+  }
+
+  &__btn-group {
+    font-size: 0;
+
+    & input[type="radio"] {
+      display: none;
+    }
+
+    & .btn {
+      font-size: @fz;
+      line-height: 1.125;
+      color: @color-gray;
+      background-color: @color-inverse;
+      padding: @pad @pad*2 @pad/1.5 @pad*2;
+      border: 1px solid @color-border;
+      border-radius: 0;
+      margin-left: -1px;
+
+      &:hover {
+        color: @color-blue-light;
+      }
+
+      &:first-of-type {
+        border-radius: @br 0 0 @br;
+        margin-left: 0;
+      }
+
+      &:last-of-type {
+        border-radius: 0 @br @br 0;
+      }
+    }
+
+    & input[type="radio"]:checked + .btn,
+    & .active {
+      border-color: @color-blue;
+      background-color: @color-blue;
+      color: @color-inverse;
+    }
+  }
+
+  &__list {
+    @media @view-tablets {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    @media @view-large {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__item {
+    border: 1px solid @color-border;
+    border-radius: @br;
+    padding: @pad*2;
+    margin-bottom: @pad*2;
+    text-align: center;
+    transition: all 0.2s;
+
+    @media @view-tablets {
+      width: 48%;
+    }
+
+    @media @view-desktop {
+      width: 31%;
+    }
+
+    @media @view-large {
+      width: 23%;
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      border-color: transparent;
+      box-shadow: 0 5px 15px fadeout(@color-border, 40%);
+    }
+  }
+
+  &__header {
+    padding-bottom: @pad*2 - @pad/3;
+    margin-bottom: @pad*2;
+    border-bottom: 1px solid @color-border;
+  }
+
+  &__title {
+    font-size: @fz;
+    font-weight: 600;
+    color: @color-gray;
+    margin: 0 0 @pad/1.5;
+    text-transform: capitalize;
+  }
+
+  &__price {
+    display: block;
+    font-size: @fz*1.25;
+    color: @color-primary;
+    font-weight: 700;
+
+    &-number {
+      font-size: @fz*2;
+    }
+  }
+
+  &__table {
+    margin-bottom: @pad*2;
+
+    &-row {
+      & + & {
+        margin-top: @pad/2;
+      }
+    }
+  }
+
+  &__dclocation,
+  &__hddtype {
+    margin-bottom: @pad*2;
+  }
+
+  &__footer {
+    align-self: center;
+    margin-top: auto;
+  }
+
+  &__tail {
+    display: flex;
+    flex-direction: column;
+    padding: @pad*2;
+    background-color: @color-primary;
+    color: @color-inverse;
+    font-size: @fz*1.25;
+    border-radius: @br;
+
+    @media @view-tablets {
+      width: 48%;
+      margin-bottom: @pad*2;
+    }
+
+    @media @view-desktop {
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    @media @view-large {
+      width: 23%;
+    }
+
+    &-title {
+      font-size: @fz*2.5;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: @pad*2;
+      text-transform: none;
+
+      @media @view-large {
+        font-size: @fz*2;
+      }
+    }
+  }
+
+  &__btn {
+    background-color: transparent;
+    border: 1px solid @color-blue;
+    color: @color-blue;
+    line-height: 1;
+
+    &:hover {
+      background-color: @color-blue;
+      color: @color-inverse;
+    }
+  }
+}

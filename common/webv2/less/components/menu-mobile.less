@@ -1,0 +1,224 @@
+// main: ../main.less
+
+// ============ REWRITE OF THE BASE PLUGIN CSS-FILE ============
+@mm-color-extra: spin(darken(@color-blue, 17%), 1);
+.mm{
+  position: fixed;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+
+  & .fa,
+  & [class*="oc-icon-"]{
+    width: 1.28571429em;
+    text-align: center;
+  }
+  & [class*="oc-icon-"]::before{
+    font-size: 22px;
+  }
+
+  &__toggle{
+    position: fixed;
+    left: 5px;
+    top: 25px;
+    z-index: 11;
+    &--sticky{
+      top: 10px;
+    }
+  }
+  &--opened{
+    overflow: hidden;
+    & .mm{
+      visibility: visible;
+    }
+    & #maincontainer{
+      opacity: 0.5;
+      position: relative;
+      &::before{
+        display: block;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0,0,0,0.7);
+        box-shadow: inset 5px -5px 10px #000;
+        z-index: 2;
+      }
+    }
+    & .header--sticky{
+      z-index: 1;
+      background-color: #aaa;
+    }
+  }
+}
+.multilevelpushmenu_wrapper {
+  position: absolute;
+  overflow: hidden;
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+
+  & ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  & li {
+    cursor: pointer;
+    border-top: 1px solid @color-blue-light;
+    padding: 0.4em;
+
+    &:last-child {
+      border-bottom: 1px solid @color-blue-light;
+    }
+
+    &:hover {
+      background-color: @color-blue-light;
+    }
+  }
+
+  & a {
+    display: block;
+    outline: none;
+    overflow: hidden;
+    font-size: @fz;
+    line-height: 1.125em;
+    padding: 0.2em;
+    text-decoration: none;
+    color: #fff;
+
+    & > span {
+      display: block;
+      overflow: hidden;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  & .active a {
+    pointer-events: none;
+  }
+
+  & .backItemClass {
+    display: block;
+    padding: 0.4em;
+    background: @color-primary;
+
+    & a {
+      color: @color-base;
+      font-family: @ff;
+      font-weight: 600;
+    }
+
+    &:hover {
+      background: @color-hover;
+    }
+  }
+
+  & .floatRight {
+    float: right;
+  }
+
+  & .floatLeft {
+    float: left;
+  }
+
+  & .cursorPointer {
+    cursor: pointer;
+  }
+
+  & .iconSpacing_ltr {
+    padding: 0 0.4em 0 0;
+    margin-top: -2px;
+  }
+
+  & .iconSpacing_rtl {
+    padding: 0 0 0 0.4em;
+    margin-top: -2px;
+  }
+  // ============ HEADINGS ============
+  & .levelHolderClass {
+    &:first-of-type {
+      box-shadow: 0 0 10px @color-base;
+    }
+
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    background: @color-blue;
+    width: auto;
+    min-height: 100%;
+    font-size: 1em;
+    zoom: 1;
+    font-family: @ff-extra;
+
+    &.multilevelpushmenu_inactive {
+      background: @color-primary;
+    }
+
+    & h6 {
+      font-size: @fz*1.125;
+      line-height: 1.125em;
+      font-weight: bold;
+      color: @color-inverse;
+      padding: 0 0.4em;
+      opacity: 0.7;
+
+      & > span {
+        display: block;
+        overflow: hidden;
+      }
+    }
+  }
+  // ============ DIRECTIONS ============
+  & .ltr {
+    margin-left: -100%;
+    left: 0;
+    -moz-box-shadow: 5px 0 5px -5px @mm-color-extra;
+    -webkit-box-shadow: 5px 0 5px -5px @mm-color-extra;
+    box-shadow: 5px 0 5px -5px @mm-color-extra;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=@mm-color-extra,direction=90,strength=2);
+
+    & h6 {
+      text-align: right;
+
+      & i {
+        margin-left: @pad;
+      }
+    }
+  }
+
+  .rtl {
+    margin-right: -100%;
+    right: 0;
+    -moz-box-shadow: 5px 0 5px 5px @mm-color-extra;
+    -webkit-box-shadow: 5px 0 5px 5px @mm-color-extra;
+    box-shadow: 5px 0 5px 5px @mm-color-extra;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=@mm-color-extra,direction=270,strength=2);
+
+    & h6 {
+      text-align: left;
+
+      & i {
+        margin-right: @pad;
+      }
+    }
+  }
+}
+
+.oc-icon-onecloud::before{
+  font-size: @fz*1.625;
+  margin-top: -@pad/3;
+}
+
+@media @view-desktop{
+  .mm{
+    display: none;
+  }
+}

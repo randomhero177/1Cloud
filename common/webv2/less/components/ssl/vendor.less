@@ -1,0 +1,62 @@
+// main: ../../pages/ssl.less
+
+.vendor {
+  &,
+  &--pseudo::before {
+    height: 50px;
+    background-image: url("@{img-path}/ssl/vendors.png");
+    background-repeat: no-repeat;
+  }
+
+  &--comodo {
+    background-position: 0 0;
+  }
+
+  &--rapidssl {
+    background-position: 0 -60px;
+  }
+
+  &--geotrust {
+    background-position: 0 -120px;
+  }
+
+  &--symantec {
+    background-position: 0 -180px;
+  }
+
+  &--thawte {
+    background-position: 0 -240px;
+  }
+
+  &--pseudo {
+    background-image: none;
+
+    &::before {
+      display: block;
+      content: "";
+      width: 165px;
+    }
+  }
+
+  &--pseudo& {
+    &--comodo::before {
+      background-position: 0 0;
+    }
+
+    &--rapidssl::before {
+      background-position: 0 -60px;
+    }
+
+    &--geotrust::before {
+      background-position: 0 -120px;
+    }
+
+    &--symantec::before {
+      background-position: 0 -180px;
+    }
+
+    &--thawte::before {
+      background-position: 0 -240px;
+    }
+  }
+}

@@ -1,0 +1,263 @@
+﻿@color-money-grey: #f5f5f5;
+
+.add-money {
+  &__title {
+    padding-top: @pad*2;
+    margin-bottom: @pad*2;
+  }
+
+  &__autoinvoice {
+    margin-bottom: @pad*4;
+  }
+
+  &__tabs {
+    margin-bottom: @pad*5;
+
+    &-panel [role="tabpanel"] {
+      padding: 0;
+    }
+
+    &-icon {
+      max-width: @pad*5;
+    }
+
+    &.tabs-buttons {
+      &:after {
+        display: none;
+      }
+
+      & > li {
+        display: block;
+        padding-left: @pad/2;
+
+        & a {
+          text-align: left;
+        }
+
+        &.ui-state-active {
+          background: @color-money-grey;
+
+          &:after {
+            display: none;
+          }
+        }
+      }
+
+      & li + li {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__sub-title {
+    font-weight: bold;
+    margin-bottom: @pad*2;
+  }
+
+  &__bonus {
+    padding: @pad;
+    font-size: 0.875em;
+  }
+
+  &__cloudform {
+    background: @color-money-grey;
+    padding: @pad*2;
+
+    &--nobg {
+      background: none;
+    }
+
+    &-label {
+      color: @color-base;
+      font-weight: bold;
+      display: block;
+
+      &--cvc {
+        font-weight: 400;
+        display: inline-block;
+        font-size: 11px;
+        line-height: 1.1;
+        vertical-align: middle;
+      }
+    }
+
+    &-row + &-row {
+      margin-top: @pad;
+    }
+
+    &-control {
+      display: inline-block;
+      width: 65px;
+    }
+
+    & .field-validation-error{
+      line-height: 1.25;
+    }
+  }
+
+  &__saved {
+    &-icon {
+      display: inline-block;
+      width: 48px;
+      height: 33px;
+
+      &--Visa {
+        background: url("/Content/img/payment/card-logo/visa.png")
+      }
+
+      &--MasterCard {
+        background: url("/Content/img/payment/card-logo/master-card.png")
+      }
+
+      &--Mir {
+        background: url("/Content/img/payment/card-logo/mir.png")
+      }
+    }
+
+    &-label {
+      top: 7px;
+      left: 10px;
+    }
+
+    &-table {
+
+      & .like-table__row {
+        & > div {
+          text-align: left;
+        }
+
+        &:nth-child(2n) {
+          background-color: initial;
+
+          &.add-money__saved-row--active {
+            background-color: @color-money-grey;
+          }
+        }
+      }
+    }
+
+    &-card {
+      &--nouse {
+        padding: 20px 10px;
+
+        & .add-money__saved-label {
+          top: 0;
+        }
+      }
+    }
+
+    &-row {
+      &--active {
+        background: @color-money-grey;
+      }
+    }
+  }
+
+  &__fake-control {
+    position: absolute;
+    cursor: text;
+    z-index: 3;
+    left: 0;
+    top: 0;
+
+    &-elem {
+      position: relative;
+      padding-top: 3px;
+      display: inline-block;
+      min-width: 3px;
+      height: 25px;
+
+      &.active {
+        animation: blink-empty 1s infinite;
+        border-right: transparent solid 1px;
+      }
+    }
+
+    &-wrap {
+      position: relative;
+    }
+  }
+
+  &__real-control {
+    opacity: 0;
+    position: relative;
+    z-index: 4;
+  }
+
+  &__methods {
+    @point-size: 16px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      padding: @pad @pad @pad @pad*2;
+      margin-bottom: @pad*2;
+      border: 1px solid @color-border;
+      background-color: @color-inverse;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: @br-btn;
+      position: relative;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: @color-money-grey;
+        text-decoration: none;
+        outline: none;
+      }
+
+      &::before {
+        position: absolute;
+        left: @pad/2;
+        top: 50%;
+        display: block;
+        content: "";
+        width: @point-size;
+        height: @point-size;
+        border: 1px solid @color-border;
+        background-color: @color-inverse;
+        border-radius: 50%;
+        transform: translateY(-50%);
+      }
+
+      &.active {
+        background-color: @color-money-grey;
+      }
+
+        &.active::after {
+          position: absolute;
+          left: @pad/2 + 4px;
+          top: 50%;
+          display: block;
+          content: "";
+          width: @point-size - 8px;
+          height: @point-size - 8px;
+          background-color: @color-secondary;
+          border-radius: 50%;
+          transform: translateY(-50%);
+          z-index: 1;
+        }
+    }
+
+    &-title {
+      font-weight: 600;
+      color: @color-base;
+      font-size: 0.875em;
+      line-height: 1.25em;
+    }
+
+    &-details {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+}
+@keyframes blink-empty {
+  50% {
+    border-right: 1px solid #333;
+  }
+}

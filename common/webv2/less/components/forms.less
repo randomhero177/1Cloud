@@ -1,0 +1,81 @@
+// main: ../main.less
+.form{
+  &-control{
+    padding: @pad-input;
+    textarea&{
+        resize: vertical;
+    }
+  }
+  &-select{
+    height: 54px;
+    padding: @pad-input;
+    font-size: @fz*0.875;
+    border-color: @color-hover;
+    cursor: pointer;
+    background-image: url("@{img-path}/select-arrow.png");
+    background-position: 100% center;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: "";
+
+    &::-ms-expand{
+      display: none;
+    }
+
+    &.bootstrap-select{
+      max-width: 100%;
+    }
+    & .btn-default{
+      background-color: @color-inverse;
+    }
+    & .dropdown{
+      &-toggle{
+        height: 54px;
+        padding: @pad-input;
+      }
+      &-menu{
+        background-color: @color-inverse;
+        border-color: @color-primary;
+        border-top: 0;
+        margin-top: 0;
+        max-height: 250px !important;
+        z-index: 5;
+
+        & > li > a{
+          padding-top: @pad/3;
+          padding-bottom: @pad/3;
+          &:hover{
+            background-color: @color-light-back;
+            color: @color-base;
+          }
+        }
+        & > .selected > a{
+          background-color: @color-blue-light;
+          color: @color-inverse;
+        }
+      }
+    }
+  }
+  &-message{
+    font-size: @fz*0.75;
+    padding: @pad/1.5;
+  }
+
+  &-group{
+      &--required{
+          position: relative;
+          &::before{
+              display: inline-block;
+              content: "*";
+              font-size: @fz*1.5;
+              color: red;
+              position: absolute;
+              left: -@pad - @pad/3;
+              top: @pad/3;
+          }
+      }
+  }
+}

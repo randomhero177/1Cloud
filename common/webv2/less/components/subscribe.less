@@ -1,0 +1,56 @@
+﻿.subscribe {
+  margin: @pad -(@pad * 2);
+  padding: @pad @pad * 2;
+  background-color: @sidebar-back-color;
+
+  @media @view-desktop {
+    margin: @pad 0;
+    padding: @pad;
+  }
+
+  &--success {
+    background-color: @color-green;
+    color: @color-inverse;
+    text-align: center;
+  }
+
+  &__popup &__form {
+    & [class*="col-"] {
+      width: 100% !important;
+      margin-left: 0 !important;
+    }
+  }
+
+  &__popup {
+    & .close {
+      position: absolute;
+      right: -20px;
+      top: -25px;
+      font-size: @fz * 2.5;
+      color: @color-base;
+      opacity: 1;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    & .error__summary {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__input {
+    height: 59px;
+  }
+
+  &__checkbox {
+    & + label {
+      font-size: @fz * 0.8235;
+    }
+  }
+}

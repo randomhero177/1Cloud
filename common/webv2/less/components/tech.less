@@ -1,0 +1,79 @@
+@import "../variables.less";
+
+.tech {
+  &-icons {
+    &-list {
+      list-style: none;
+      padding: 0;
+
+      & li {
+        height: 115px;
+        padding: 10px;
+        font-size: 10px;
+        line-height: 1.4;
+        text-align: center;
+        background-color: #f9f9f9;
+        border: 1px solid #fff;
+      }
+    }
+
+    &-view {
+      margin-top: 5px;
+      margin-bottom: 10px;
+
+      &:before {
+        font-size: @fz*2.5;
+      }
+    }
+
+    &-class {
+      font-size: @fz;
+      display: block;
+      text-align: center;
+      word-wrap: break-word;
+    }
+  }
+
+  &-example {
+    background: fadeout(@color-light-back, 85%);
+    padding: @pad;
+    border: 1px solid @color-light-back;
+    margin: @pad 0 0;
+    border-radius: 4px 4px 0 0;
+
+    &__high {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: @fz;
+    }
+  }
+
+  &__nav {
+    & .active {
+      font-weight: bold;
+    }
+
+    & li {
+      & a {
+        font-size: 15px;
+        padding: 7.5px 10px;
+      }
+    }
+  }
+
+  & pre {
+    padding: @pad;
+  }
+
+  & .na {
+    color: #4f9fcf;
+  }
+
+  & .s {
+    color: #d44950;
+  }
+
+  & .nt {
+    color: #2f6f9f;
+  }
+}

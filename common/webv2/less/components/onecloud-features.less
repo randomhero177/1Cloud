@@ -1,0 +1,526 @@
+// main: ../main.less
+
+.oc {
+  // BUTTON ON A DARK BACKGROUND
+  &-btn {
+    border: 2px solid @color-primary;
+    color: @color-inverse;
+
+    &--inverse {
+      color: @color-base;
+      background-color: @color-inverse;
+    }
+
+    .hov-foc-act(@color-primary, @color-inverse);
+
+    &--disabled {
+      border-color: @color-base;
+      cursor: default;
+      opacity: 0.5;
+      .hov-foc-act(transparent, @color-base);
+    }
+
+    &--wide {
+      padding-left: @pad;
+      padding-right: @pad;
+    }
+  }
+  // ============ CHECKBOXES AND RADIO ============
+  @chk-width: @pad*2;
+
+  &-checkbox {
+    display: none;
+
+    & + label {
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      font-size: @fz;
+      font-weight: 400;
+      line-height: @chk-width;
+      margin-bottom: 0;
+      padding-top: @pad/5;
+      padding-left: @chk-width + @pad/2;
+      cursor: pointer;
+
+      &::before {
+        display: block;
+        content: "";
+        width: @chk-width;
+        height: @chk-width;
+        border: 2px solid @color-blue-light;
+        font-size: @fz*1.25;
+        line-height: @chk-width - 4;
+        text-align: center;
+        font-family: "FontAwesome";
+        color: @color-blue-light;
+        background-color: @color-inverse;
+        border-radius: 4px;
+        opacity: 0.7;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      &:hover::before {
+        opacity: 1;
+      }
+    }
+
+    &--after + label {
+      padding-left: 0;
+      padding-right: @chk-width + @pad/2;
+
+      &::before {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    &:checked + label::before {
+      content: "\f00c";
+    }
+  }
+  // ============ BLOCKS TO APPEAR IN HEADER ============
+  &-appear {
+    &__block {
+      visibility: hidden;
+      width: 100%;
+      font-size: 0;
+      padding: @pad/1.5;
+      background-color: @color-inverse;
+      z-index: 2;
+      text-align: left;
+      position: absolute;
+      left: 0;
+      top: -300px;
+      border-top: 1px solid spin(desaturate(lighten(@color-base, 37%), 2%), 2);
+      transition: right 0.3s, visibility 0.3s, top 0.3s;
+      .clear;
+
+      &-inner {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: @fz;
+        width: calc(~'100% - @{header-icon-size}' - @pad);
+        margin-right: @pad;
+      }
+    }
+
+    &__trigger {
+    }
+
+    &__trigger--active ~ &__block {
+      visibility: visible;
+      top: 100%;
+    }
+
+    &__close {
+      .hov-foc-act(lighten(@color-blue,15%),@color-inverse);
+    }
+  }
+  // ============ CUSTOM CAROUSEL DEROCATION ============
+  &-carousel {
+    position: relative;
+  }
+
+  &-dots {
+    margin: 0;
+    padding: @pad 0;
+    list-style: none;
+    font-size: 0;
+    text-align: center;
+
+    & > * {
+      display: inline-block;
+      vertical-align: middle;
+
+      & + * {
+        margin-left: @pad*2;
+
+        @media @view-xs, @view-mobile-only {
+          margin-left: @pad/1.5;
+        }
+      }
+
+      & > * {
+        display: block;
+        width: @dots-size;
+        height: @dots-size;
+        border-radius: @dots-size/2;
+        border: 2px solid @color-primary;
+        background-color: transparent;
+      }
+
+        & > *:hover,
+        &.active > * {
+          background-color: @color-inverse;
+          border-color: @color-inverse;
+        }
+    }
+
+    &--primary {
+      & > * {
+        & > *:hover,
+        &.active > * {
+          background-color: @color-primary;
+          border-color: @color-primary;
+        }
+      }
+    }
+  }
+
+  &-arrows {
+    &__left,
+    &__right {
+      display: none;
+      width: @arrow-width;
+      text-align: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      cursor: pointer;
+      color: @color-primary;
+
+      &::before {
+        display: block;
+        width: @arrow-size;
+        height: @arrow-size;
+        line-height: @arrow-size;
+        font-size: @arrow-size/2;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -@arrow-size/2;
+        margin-top: -@arrow-size/2;
+      }
+
+      .hov-foc-act(transparent,@color-inverse,none);
+
+      .oc-arrows--primary & {
+        .hov-foc-act(transparent,@color-hover,none);
+      }
+    }
+
+    &__left {
+      &::before {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+      }
+    }
+
+    &__right {
+      left: auto;
+      right: 0;
+    }
+  }
+  // ============ MODAL WINDOW ============
+  &-modal {
+
+    & .modal {
+      &-header {
+        padding-top: 0;
+
+        & .close {
+          position: absolute;
+          right: @pad;
+          top: @pad;
+          font-size: @fz*2.5;
+          color: @color-base;
+          opacity: 1;
+
+          &:hover,
+          &:focus,
+          &:active {
+            opacity: 0.8;
+          }
+        }
+      }
+
+      &-content {
+        background-color: @color-inverse;
+        padding: @pad;
+
+        @media @view-tablets {
+          padding: @pad*3 @pad*4;
+        }
+      }
+    }
+  }
+  // ============ CUSTOM UI SLIDER ============
+  @ui-slider-handler-size: 26px;
+  @ui-slider-border: 2px;
+
+  &-slider-container {
+    background-color: #dee0e2;
+    padding-left: @pad;
+    padding-right: @pad;
+    border-radius: 4px;
+  }
+
+  &-slider-ui {
+    width: 100%;
+    height: @ui-slider-handler-size + @ui-slider-border*2;
+    background: #dee0e2;
+    padding: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    & .ui-slider-handle {
+      width: @ui-slider-handler-size;
+      height: @ui-slider-handler-size;
+      left: @ui-slider-border;
+      top: @ui-slider-border/2;
+      background-color: @color-inverse;
+      cursor: pointer;
+      margin-left: -@ui-slider-handler-size/2;
+      outline: 0;
+      z-index: 1;
+
+      &::before {
+        display: block;
+        width: @ui-slider-handler-size;
+        height: @ui-slider-handler-size;
+        line-height: @ui-slider-handler-size;
+        text-align: center;
+        font-family: FontAwesome;
+        content: "\f0c9";
+        color: #dee0e2;
+        opacity: 0.4;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+      }
+
+      &.ui-state-active,
+      &.ui-state-hover {
+        border-color: #c5c5c5;
+      }
+
+      & + .tooltip {
+        width: 260px;
+
+        &-inner {
+          font-size: @fz*0.8235;
+          text-align: left;
+        }
+      }
+    }
+
+    & .ui-widget-header {
+      box-sizing: content-box;
+      padding-left: @ui-slider-handler-size + @ui-slider-border*2;
+      background-color: @color-hover;
+      left: -@pad;
+    }
+  }
+  // ============ CUSTOM TOOLTIP ELEMENT ============
+  &-tooltip {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+    padding-top: 3px;
+    border: 1px solid @color-primary;
+    border-radius: 50%;
+    margin-right: @pad/3;
+    margin-top: -@pad/5;
+    color: @color-primary;
+    text-align: center;
+
+    @media @view-tablets {
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      font-size: @fz;
+    }
+
+    &::before {
+      display: inline-block;
+      content: "?";
+    }
+
+    &--after {
+      margin-right: 0;
+      margin-left: @pad/3;
+    }
+
+    & + .tooltip {
+      z-index: 2;
+      opacity: 1;
+
+      & .tooltip-inner {
+        font-size: @fz*0.8125;
+        padding: @pad/1.5;
+      }
+    }
+  }
+  // ============ TABS ============
+  &-tabs,
+  .content &-tabs {
+    margin-top: @pad*2;
+    margin-bottom: @pad*2;
+
+    & > ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0;
+
+      @media @view-xs, @view-mobile-only {
+        margin-bottom: @pad;
+        text-align: center;
+      }
+
+      & > li {
+        text-align: center;
+        padding: 0;
+        font-size: @fz*0.8235;
+
+        @media @view-xs, @view-mobile-only {
+          display: inline-block;
+          vertical-align: top;
+          margin: 1px;
+        }
+
+        @media @view-tablets {
+          margin: 0;
+        }
+
+        &::before {
+          display: none;
+        }
+      }
+
+      & a {
+        color: @color-base;
+        text-transform: uppercase;
+        font-weight: 700;
+        border: 1px solid #ebeced;
+        padding: 10px @pad;
+        margin: 0;
+
+        @media @view-tablets {
+          padding: 25px @pad;
+          border-right: 0;
+        }
+      }
+
+      & li:last-child a {
+        border-right: 1px solid #ebeced;
+      }
+
+      & .active a,
+      & .active a:hover,
+      & .active a:focus,
+      & .active a:active {
+        @media @view-tablets {
+          border-bottom-color: @color-light-back;
+        }
+      }
+    }
+
+    & .tab-content {
+      background-color: @color-light-back;
+      border: 1px solid #ebeced;
+      border-top: 0;
+      padding: 25px @pad;
+    }
+
+    & .tab-pane p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  // ============ FIXED BOTTOM BLOCK ============
+  &-sticky {
+    z-index: 5;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: @color-inverse;
+    padding: @pad;
+    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  }
+
+  &-share {
+    margin-top: @pad;
+    text-align: right;
+
+    & .ya-share2 {
+      display: inline-block;
+      vertical-align: middle;
+
+      &__list {
+        margin-top: 0;
+
+        & > li {
+          padding-left: @pad / 3;
+
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media @view-tablets {
+  .oc {
+    &-appear {
+      &__block {
+        width: 60%;
+        right: -1000px;
+        left: auto;
+        top: 0;
+        border-top: 0;
+      }
+      &__trigger--active ~ &__block {
+        visibility: visible;
+        right: 0;
+        top: 0;
+      }
+    }
+    &-dots{
+      & > li+li{
+        margin-left: @pad;
+      }
+    }
+  }
+}
+@media @view-large {
+  .oc {
+    &-arrows {
+      &__left,
+      &__right{
+        display: block;
+      }
+      &__left{
+        left: -(@arrow-width/2 + @pad);
+      }
+      &__right{
+        right: -(@arrow-width/2 + @pad);
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1480px){ // 1200 + arrow-width*4
+  .oc {
+    &-arrows {
+      &__left{
+        left: -@arrow-width*2;
+      }
+      &__right{
+        right: -@arrow-width*2;
+      }
+    }
+  }
+}

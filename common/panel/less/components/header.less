@@ -1,0 +1,151 @@
+/****** HEADER STYLES *****/
+.header__menu {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0;
+
+  & > li {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: @fz;
+
+    & + li {
+      margin-left: @pad * 2;
+    }
+
+    & > a {
+      color: @color-inverse;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+  }
+
+  & .caret {
+    border-top-width: 6px;
+    border-right-width: 5px;
+    border-left-width: 5px;
+    transition: transform 0.2s;
+  }
+
+  & .dropdown-menu {
+    min-width: 170px;
+    max-width: 250px;
+    top: calc(~"100% + 12px");
+    border-radius: 0;
+    box-shadow: 0 6px 12px rgba(0,0,0,.4);
+
+    &-right {
+      right: -1px;
+    }
+  }
+
+  & .open .dropdown-menu::before {
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid @color-inverse;
+    position: absolute;
+    top: -10px;
+    right: 30px;
+  }
+
+  &-user {
+    background-color: transparent;
+    border: 0;
+    padding: 0 6px;
+    box-shadow: none;
+    color: @btn-primary-text-color;
+    font-weight: 700;
+
+    & .glyphicon {
+      width: 34px;
+      height: 34px;
+      color: @btn-primary-text-color;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 34px;
+      background-color: @color-primary;
+      border-radius: 50%;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    &:hover .glyphicon,
+    &[aria-expanded="true"] .glyphicon {
+      background-color: @color-primary-hover;
+    }
+
+    & .badge {
+      background-color: red;
+      font-size: @fz-s;
+      position: absolute;
+      bottom: -5px;
+      left: 30px;
+    }
+  }
+
+  & [data-toggle="dropdown"][aria-expanded="true"] .caret {
+    transform: rotate(180deg);
+  }
+
+  &-username,
+  &-usermail {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-username {
+    font-size: @fz;
+    color: @color-base;
+  }
+
+  &-logout {
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &-as {
+      position: relative;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      color: lighten(#ff0000, 15%) !important;
+
+      &:hover {
+        color: red !important;
+      }
+    }
+  }
+}
+
+.header__userinfo {
+  display: none;
+  max-width: 250px;
+
+  .dropdown-menu & {
+    display: block;
+  }
+
+  &-logonas {
+    display: inline-block;
+    vertical-align: middle;
+
+    & .header__menu-username {
+      color: darken(@color-inverse, 30%);
+    }
+  }
+
+  .header__menu + & {
+    margin-left: @pad *2;
+  }
+}

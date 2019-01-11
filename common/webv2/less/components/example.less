@@ -1,0 +1,48 @@
+// main: ../main.less
+
+.example {
+  padding: @pad*7 0 0;
+
+  &__item {
+    display: block;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+    padding: @pad*3 15% @pad*2;
+    color: @color-base;
+    margin-bottom: @pad*2;
+
+    &-title {
+      display: block;
+      font-weight: 600;
+      font-size: @fz*1.25;
+      text-transform: none;
+      margin-top: 0;
+      margin-bottom: @pad;
+    }
+
+    &-text {
+      margin-bottom: @pad*2;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: @color-base;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.25);
+      -moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.25);
+      box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.25);
+    }
+
+    &--inverse {
+      background-color: @color-primary;
+      color: @color-inverse;
+      border: 1px solid @color-primary;
+
+      &:hover {
+        color: @color-inverse;
+      }
+    }
+  }
+}

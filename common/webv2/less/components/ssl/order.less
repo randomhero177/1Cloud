@@ -1,0 +1,240 @@
+// main: ../../pages/ssl.less
+
+.ssl {
+  &__col {
+    position: relative;
+  }
+
+  &__order {
+    position: relative;
+    @media @view-tablets {
+      &::after {
+        display: block;
+        content: "";
+        width: 1px;
+        height: 100%;
+        background: @color-border;
+        position: absolute;
+        top: 0;
+        left: 50%;
+      }
+    }
+    @media @view-desktop {
+      padding-left: 8.3333%;
+      padding-right: 8.3333%;
+    }
+
+    &-block {
+      position: relative;
+      font-size: @fz*0.875;
+
+      &:not([class*="hidden"]) + & {
+        padding-top: @pad;
+        margin-top: @pad;
+        border-top: 1px solid @color-border;
+        @media @view-tablets {
+          padding-top: @pad*2;
+          margin-top: @pad*2;
+        }
+      }
+
+      & .price {
+        padding-top: @pad/3;
+        // HACK FOR PRICE ON MD
+        @media @view-desktop-only {
+          font-size: @fz*1.75;
+        }
+        @media @view-large {
+          font-size: @fz*2.125;
+        }
+      }
+    }
+
+    &-title {
+      text-align: center;
+      text-transform: none;
+      margin-top: 0;
+      @media @view-tablets {
+        text-align: left;
+        margin-bottom: @pad*2;
+
+        &--spaced {
+          margin-bottom: @pad*3 + @pad/3;
+        }
+      }
+    }
+  }
+
+  &__generate-csr {
+    margin-bottom: 0;
+    font-size: @fz*0.875;
+    @media @view-tablets {
+      text-align: right;
+    }
+  }
+
+  &__cert {
+    &-info {
+      @media @view-tablets {
+        float: right;
+        padding-left: 8.33333333%;
+      }
+    }
+
+    &-fields {
+      @media @view-xs, @view-mobile-only {
+        padding-top: @pad;
+        margin-top: @pad;
+        border-top: 1px solid @color-border;
+      }
+      @media @view-tablets {
+        padding-right: 8.33333333%;
+      }
+    }
+
+    &-name {
+      margin: @pad/1.5 0;
+      font-size: @fz;
+      font-weight: 700;
+      @media @view-tablets {
+        font-size: @fz*1.5;
+      }
+    }
+  }
+
+  &__bonus {
+    &-text {
+      display: none;
+      font-size: 0;
+
+      > * {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 0;
+        font-size: @fz*0.875;
+      }
+
+      & .bonus__text,
+      & .price__sum {
+        display: inline-block;
+        padding-top: 20px;
+      }
+
+      & .price__sum {
+        padding-left: @pad/2;
+      }
+    }
+
+    &-pretext {
+      font-style: italic;
+      line-height: 23.5px;
+    }
+  }
+
+  &__domain {
+    width: 100%;
+    color: @color-blue-light;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+  &__san {
+    font-size: 0.875em;
+
+    &-text {
+      margin-top: 0;
+    }
+
+    & .form-group {
+      position: relative;
+
+      &-control {
+        display: block;
+        width: 34px;
+      }
+    }
+
+    &-domain {
+      &-remove {
+        cursor: pointer;
+        pointer-events: auto;
+        top: 0;
+
+        &:hover {
+          color: #dc3400;
+        }
+      }
+    }
+
+    &-add-domain {
+      display: inline-block;
+      color: @color-blue-light;
+      cursor: pointer;
+
+      &:hover {
+        color: @color-hover;
+      }
+
+      & span {
+        margin-right: @pad/2;
+      }
+    }
+
+    & .error__message {
+      position: static;
+      margin-top: @pad/2;
+      margin-bottom: @pad/2;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &__send-email {
+    & .oc-checkbox + label {
+      font-size: @fz*0.875;
+      line-height: 1.25;
+    }
+  }
+
+  &__mobile {
+    font-size: @fz*0.875;
+    padding: @pad 0;
+    margin-top: @pad;
+    border-top: 1px solid @color-border;
+    text-align: center;
+
+    &.oc-sticky {
+      border-color: transparent;
+      padding-left: @pad;
+      padding-right: @pad;
+    }
+
+    &-price {
+      font-size: @fz*1.5;
+      font-weight: 700;
+    }
+  }
+
+  &__csr{
+      &-result{
+          margin-top: @pad;
+          padding-top: @pad;
+          @media @view-tablets{
+              margin-top: 0;
+              padding-top: 0;
+          }
+          & .form-group + .form-group{
+              margin-top: @pad*2;
+          }
+      }
+      textarea&-textarea{
+          height: 195px;
+          font-size: @fz*0.875;
+      }
+  }
+}

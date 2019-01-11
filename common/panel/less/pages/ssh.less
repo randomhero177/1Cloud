@@ -1,0 +1,74 @@
+.ssh {
+  &__item {
+    display: block;
+    position: relative;
+    padding: @pad/2 @pad*2 @pad/2 @pad/3;
+    border-bottom: 1px solid @color-border;
+
+    &-title {
+      cursor: pointer;
+
+      &:hover,
+      &--active {
+        color: @color-primary;
+      }
+    }
+
+    &-delete {
+      position: absolute;
+      right: @pad/3;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+  }
+
+  &__publickey {
+    visibility: hidden;
+    resize: vertical;
+    width: 100%;
+
+    &--active {
+      visibility: visible;
+    }
+  }
+
+  &__list {
+    & .input-group .btn {
+      border-radius: 0;
+      font-size: 13px;
+      height: 44px;
+    }
+
+    & .chosen-container-multi .chosen-choices li.search-choice{
+      height: auto;
+      white-space: normal;
+    }
+  }
+
+  &__server-key {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    margin: 2px;
+    border: 1px solid @color-border;
+    border-radius: 4px;
+
+    &::before {
+      display: inline-block;
+      vertical-align: top;
+      font-family: 'Glyphicons Halflings';
+      margin-right: 3px;
+    }
+
+    &--active:before {
+      content: "\e013";
+      color: @color-success;
+    }
+
+    &--inactive:before {
+      content: "\e101";
+      color: @color-danger;
+    }
+  }
+}

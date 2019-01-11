@@ -1,0 +1,81 @@
+// main: ../pages/vds.less
+
+.bonus {
+  &__item {
+    margin-top: @pad/1.5;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: @fz*0.875;
+  }
+
+  &__present {
+    float: right;
+    margin-left: @pad/2;
+    width: 55px;
+    height: 47px;
+    padding-top: 17px;
+    line-height: 30px;
+    text-align: center;
+    background: url("@{img-path}/present.gif") no-repeat 0 0;
+    color: @color-inverse;
+    font-size: @fz*1.25;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  &__text {
+    overflow: hidden;
+    font-size: @fz*0.8235;
+    padding-top: 7px;
+    text-align: left;
+
+    & .price__sum::after {
+      font-size: 0.875em;
+    }
+  }
+
+  &-alt {
+    padding: @pad*4 0;
+
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    &__img-wrap {
+      margin-right: @pad;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin-bottom: @pad*2;
+
+      @media @view-tablets {
+        margin-bottom: 0;
+      }
+
+      &-head {
+        color: @color-primary;
+        font-weight: bold;
+        font-size: @fz*2;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 640px) and (max-width: 767px){
+  .bonus{
+    &__item{
+      margin: 0;
+      padding: 0 @pad*2;
+      width: 33%;
+      &:first-child{
+        margin-left: 17%;
+      }
+    }
+  }
+}

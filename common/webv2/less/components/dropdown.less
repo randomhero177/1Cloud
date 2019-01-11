@@ -1,0 +1,64 @@
+// main: ../main.less
+.dropdown {
+  &-menu{
+    z-index: 2;
+  }
+  & &-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    & > li {
+      display: block;
+      & > a {
+        display: block;
+        font-size: @menu-fz*0.875;
+        white-space: normal;
+      }
+    }
+    &--relative{
+      display: none;
+      float: none;
+      position: static;
+      width: 100%;
+      box-shadow: none;
+      background: none;
+      border: 0;
+      padding-top: @pad/3;
+      padding-bottom: @pad/3;
+      .active &{
+        display: block;
+      }
+    }
+  }
+  & &-toggle {
+    display: block;
+    position: relative;
+    padding-right: 30px;
+
+    &::before{
+      display: block;
+      font-family: @ff-icons;
+      font-size: @fz*0.625;
+      content: "\e902";
+      color: @color-base;
+      position: absolute;
+      top: 2px;
+      right: @pad/1.5;
+      transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      transition: transform 0.2s;
+      -webkit-transition: transform 0.2s;
+    }
+    &.active::before{
+      transform: rotate(270deg);
+      -webkit-transform: rotate(270deg);
+    }
+  }
+  &-backdrop{
+    .form-select &, 
+    .ssl__select &{
+        z-index: 1;
+        cursor: default;
+    }
+  }
+}

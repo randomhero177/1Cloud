@@ -1,0 +1,41 @@
+/* ONECLOUD FILE FALLBACK INPUTS */
+.onecloud-file {
+  position: relative;
+  padding-right: @pad*2;
+  padding-left: 140px;
+  text-align: right;
+  cursor: pointer;
+  min-height: 46px;
+  height: auto;
+
+  &::after {
+    display: inline-block;
+    content: "\e167";
+    font-family: "Glyphicons Halflings";
+    color: @color-border;
+    font-size: @fz;
+    width: @pad*2;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  &-input {
+    display: none !important;
+  }
+
+  &-text {
+    font-size: @fz;
+  }
+
+  &-btn {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}

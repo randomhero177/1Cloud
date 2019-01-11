@@ -1,0 +1,80 @@
+// main: ../../pages/ssl.less
+
+.ssl {
+  &__slider {
+    padding-top: 40px;
+    max-height: 451px;
+    overflow: hidden;
+    -webkit-animation: animate-opacity 1.25s;
+    -moz-animation: animate-opacity 1.25s;
+    -o-animation: animate-opacity 1.25s;
+    animation: animate-opacity 1.25s;
+
+    &-item {
+      position: relative;
+    }
+
+    &-high {
+      font-size: 0;
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+  }
+}
+
+@-webkit-keyframes animate-opacity {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes animate-opacity {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes animate-opacity {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-opacity {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

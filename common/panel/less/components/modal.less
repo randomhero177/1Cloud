@@ -1,0 +1,89 @@
+/****** ONECLOUD MODAL STYLES *****/
+.onecloud__modal {
+  &.in .modal-dialog {
+    -moz-transform: translateY(25%);
+    -ms-transform: translateY(25%);
+    -o-transform: translateY(25%);
+    -webkit-transform: translateY(25%);
+    transform: translateY(25%);
+  }
+
+  & .form-group {
+    position: relative;
+
+    & .control-label {
+      display: block;
+      margin-bottom: @pad/3;
+    }
+  }
+
+  &--error .modal {
+    &-content {
+      border: 2px solid @color-danger;
+    }
+
+    &-title {
+      color: @color-danger;
+    }
+  }
+}
+
+.modal {
+  &--custom {
+
+    &.in .modal-dialog {
+      transform: translateY(25%);
+    }
+
+    & .modal {
+      &-dialog {
+        max-width: 500px;
+      }
+
+      &-content {
+        border-radius: @br-input;
+      }
+
+      &-header {
+        border: 0;
+        padding: @pad*3 @pad*5 @pad*2;
+
+        & .close {
+          position: absolute;
+          right: @pad;
+          top: @pad;
+          font-size: 40px;
+          color: @color-base;
+          opacity: 1;
+
+          &:hover {
+            opacity: 1;
+            color: @color-base-light;
+          }
+        }
+      }
+
+
+      &-body {
+        padding: 0 @pad*5 @pad*3;
+
+        &--wide {
+          padding: 0 @pad @pad;
+        }
+      }
+
+      &-title {
+        text-align: center;
+        font-size: @fz-lg;
+        margin: 0;
+      }
+    }
+  }
+
+  &--wide {
+    & .modal-dialog {
+      max-width: 880px;
+      width: 880px;
+    }
+  }
+}

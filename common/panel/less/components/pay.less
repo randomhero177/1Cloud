@@ -1,0 +1,65 @@
+/****** PAYMENT STYLES *****/
+.pay {
+  &__list {
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+
+    &-extra {
+      display: inline;
+    }
+  }
+
+  &__item {
+    & .disabled {
+      opacity: 0.5;
+      background-color: @color-border;
+    }
+  }
+
+  &__form-block {
+    & .btn-primary {
+      margin-top: @pad*1.5;
+    }
+  }
+}
+
+.js-payForm, .js-payPallForm {
+  cursor: pointer;
+}
+
+#pay-sum-input {
+  background-repeat: no-repeat;
+  background-position: right 0;
+  background-size: contain;
+  padding-right: 80px;
+}
+
+.bonus__sum {
+  color: @color-success;
+  font-weight: bold;
+  font-size: @fz*0.875;
+
+  .no-label-bonus &{
+    display: block;
+    padding-top: 32px;
+  }
+}
+
+.bitcoin__sum {
+  &::before {
+    display: inline-block;
+    vertical-align: middle;
+    content: "~";
+    margin-right: @pad/3;
+  }
+
+  &::after {
+    content: "\e227";
+    display: inline-block;
+    vertical-align: middle;
+    font-family: "Glyphicons Halflings";
+    font-weight: normal;
+    margin-left: @pad/3;
+  }
+}

@@ -1,0 +1,46 @@
+// main: ../../pages/ssl.less
+
+.ssl{
+  &__helper{
+    &-item{
+      vertical-align: middle;
+      margin-bottom: 0;
+      @media @view-xs, @view-mobile-only {
+        margin-bottom: @pad;
+        & .services{
+          &__header,
+          &__body,
+          &__footer{
+            padding:  @pad;
+          }
+        }
+      }
+    }
+    &-item:nth-of-type(2):not(:last-of-type) &-header{
+      @media @view-desktop{
+        height: 140px;
+        line-height: 110px;
+      }
+    }
+    &-header.vendor--pseudo {
+
+      &::before{
+        display: none;
+      }
+      @media @view-tablets {
+        margin-bottom: 90px;
+        &::before {
+          display: block;
+          bottom: -65px;
+          left: 50%;
+          margin-left: 0;
+          -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+        }
+      }
+    }
+    &-price{
+      font-size: @fz*2.375;
+    }
+  }
+}

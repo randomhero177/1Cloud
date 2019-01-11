@@ -1,0 +1,136 @@
+// main: ../main.less
+
+.cat-icon-to-header-bottom(@cat-icon){
+  & {
+    margin-bottom: @cat-icon;
+    &::before{
+      width: @cat-icon;
+      height: @cat-icon;
+      font-size: @cat-icon*0.75;
+      line-height: @cat-icon;
+      margin-left: -@cat-icon/2;
+      bottom: -@cat-icon;
+    }
+  }
+}
+
+.category{
+  background-color: @color-light-back;
+
+  &__list{
+    font-size: 0;
+    text-align: center;
+  }
+
+  .oc-block-item;
+
+  &__item{
+    &--inactive{
+      background-color: @color-light-back;
+      @media @view-xs, @view-mobile-only{
+        display: none;
+      }
+    }
+  }
+
+  &__header{
+    padding: @pad @pad*3;
+    position: relative;
+
+    &::before{
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      margin-right: @pad/1.5;
+      font-size: 40px;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 40px;
+      color: @color-primary;
+
+      @media @view-xs{
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        margin-top: -20px;
+      }
+    }
+  }
+  &__title{
+    font-size: @fz*1.125;
+    line-height: 1.125em;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &__body{
+    position: relative;
+    padding: @pad;
+    text-align: left;
+    & p:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+@media @view-tablets-only{
+  .category {
+    &__item{
+      width: 48.5%;
+      margin-right: 3%;
+
+      &:nth-child(2n){
+        margin-right: 0;
+      }
+    }
+  }
+}
+@media @view-tablets{
+  .category {
+    &__item{
+      display: inline-block;
+      vertical-align: top;
+    }
+    &__header{
+      height: 100px;
+      line-height: 100px - @pad*2;
+      padding-left: @pad*2;
+      padding-right: @pad*2;
+      &::before{
+        margin-right: 0;
+        position: absolute;
+        left: 50%;
+        top: auto;
+      }
+      .cat-icon-to-header-bottom(100px);
+    }
+    &__body{
+      padding-left: @pad*2;
+      padding-right: @pad*2;
+      &::before{
+        display: block;
+        content: "";
+        height: 5px;
+        background-color: @color-primary;
+        position: absolute;
+        top: -5px;
+        left: @pad*2;
+        right: @pad*2;
+      }
+    }
+  }
+}
+
+@media @view-desktop{
+  .category {
+    &__item{
+      width: 31.333%;
+      margin-right: 3%;
+
+      &:nth-child(3n){
+        margin-right: 0;
+      }
+    }
+    &__header{
+      .cat-icon-to-header-bottom(165px);
+    }
+  }
+}

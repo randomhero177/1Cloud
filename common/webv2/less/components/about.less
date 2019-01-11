@@ -1,0 +1,54 @@
+// main: ../main.less
+
+.about{
+  padding-top: @pad-root;
+  border-top: 1px solid @color-border;
+    &--inverse{
+        background-color: @color-blue;
+        color: @color-inverse;
+        
+    }
+  &__item{
+    position: relative;
+
+    &::before,
+    &::after{
+      display: none;
+    }
+    & + &{
+      margin-top: @pad-root;
+    }
+    @media @view-tablets{
+      padding-left: 140px;
+      min-height: @fz*6;
+      
+      &::before{
+        display: block;
+        font-size: @fz*6;
+        color: @color-primary;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+      }
+      &::after{
+        display: block;
+        content: "";
+        width: 5px;
+        height: 100%;
+        background-color: @color-light-back;
+        position: absolute;
+        left: 120px;
+        top: 0;
+      }
+    }
+  }
+  &__title{
+    font-size: @fz;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: @pad/1.5;
+  }
+}

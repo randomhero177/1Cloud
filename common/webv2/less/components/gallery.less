@@ -1,0 +1,51 @@
+// main: ../main.less
+.gallery {
+  font-size: 0;
+  margin: @pad-root 0;
+  &--center {
+    text-align: center;
+  }
+  &--nm {
+    margin: 0;
+  }
+  &__item {
+    display: inline-block;
+    vertical-align: top;
+    background-color: @color-blue;
+    color: @color-inverse;
+    font-size: @fz*0.8235;
+    width: 50%;
+
+    @media @view-mobile {
+      width: 33.33%;
+    }
+
+    @media @view-tablets {
+      width: 25%;
+      margin: 0.5%;
+
+      .article & {
+        width: 33%;
+      }
+    }
+
+    & img {
+      max-width: 100%;
+      height: auto;
+      opacity: 0.7;
+    }
+
+    &:hover {
+      text-decoration: none;
+
+      & img {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__caption {
+    display: block;
+    padding: @pad/1.5;
+  }
+}

@@ -1,0 +1,118 @@
+// main: ../main.less
+.contacts {
+  &__form {
+    &-btn {
+      margin-top: @pad;
+    }
+  }
+  &__textarea,
+  textarea&__textarea {
+    height: 192px;
+    @media @view-xs, @view-mobile-only{
+      margin-top: @pad;
+    }
+  }
+  &__list {
+    font-size: 0;
+  }
+  &__block {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    font-size: @fz*0.875;
+    text-align: center;
+    margin-bottom: @pad;
+    &::before{
+      display: none;
+    }
+  }
+  &__text{
+    &-big{
+      font-size: @fz + 1;
+    }
+  }
+  &__map{
+    margin-top: @pad-root;
+    height: 450px;
+  }
+}
+.requisites{
+  &__name{
+    line-height: 1.125em;
+    margin-bottom: @pad/2;
+  }
+  &__value{
+    font-weight: 700;
+    margin-bottom: @pad;
+  }
+  &__legal{
+    font-size: 0;
+    &-item{
+      font-size: @fz*0.875;
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+      text-align: center;
+      padding-left: @pad/1.5;
+      padding-right: @pad/1.5;
+      margin-bottom: @pad;
+    }
+  }
+}
+@media @view-mobile {
+  .contacts {
+    &__block {
+      width: 50%;
+    }
+  }
+}
+@media @view-tablets {
+  .contacts {
+    &__block {
+      width: 25%;
+      margin-bottom: 0;
+      &::before{
+        display: block;
+        text-align: center;
+        font-size: @fz*4;
+        color: @color-primary;
+        margin-bottom: @pad;
+      }
+    }
+    &__form {
+      &-btn {
+        width: 290px;
+        float: right;
+      }
+    }
+  }
+  .requisites{
+    &__legal{
+      &-item{
+        width: auto;
+        text-align: left;
+        font-size: @fz*0.875;
+        display: inline-block;
+        vertical-align: top;
+        padding-right: 0;
+        margin-bottom: 0;
+        margin-right: @pad*2;
+        padding-left: 0;
+        &:last-of-type{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+@media @view-desktop{
+  .requisites{
+    &__legal{
+      padding-left: 33.3333%;
+      &-item{
+        padding-left: @pad/1.5;
+        margin-right: @pad/1.5;
+      }
+    }
+  }
+}

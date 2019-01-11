@@ -1,0 +1,22 @@
+.carousel-arrows {
+  background: url("@{img-path}/icons/carousel-arrows.png") no-repeat;
+  width: 16px;
+  height: 74px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -37px;
+
+  &__left {
+    left: -70px;
+  }
+
+  &__right {
+    right: -70px;
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}

@@ -1,0 +1,323 @@
+// main: ../main.less
+@import "../variables.less";
+
+.vds {
+  &-block {
+    padding: @pad*2 0;
+
+    @media @view-tablets {
+      padding: @pad*4 0;
+    }
+
+    &--inverse {
+      color: @color-inverse;
+    }
+
+    &__heading {
+      margin-bottom: @pad*2;
+
+      @media @view-tablets {
+        margin-bottom: @pad*4;
+      }
+
+      &-title {
+        margin: 0;
+        font-size: @fz*1.75;
+
+        &--mg {
+          margin-bottom: @pad;
+        }
+      }
+
+      &-txt {
+        margin-bottom: 0;
+      }
+    }
+
+    & .get__header {
+      border-bottom: 0;
+    }
+  }
+
+  &-main {
+    background: @color-extra-light;
+
+    &__row {
+      text-align: center;
+
+      @media @view-tablets {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        text-align: left;
+      }
+    }
+
+
+    &__img {
+      & img {
+        margin: 0 auto;
+      }
+
+      @media @view-tablets {
+        width: 40%;
+      }
+    }
+
+    &__article {
+      margin-bottom: @pad*2;
+
+      @media @view-tablets {
+        width: 60%;
+        margin-bottom: 0;
+      }
+    }
+
+
+
+    &__title {
+      font-size: @fz*2;
+      font-weight: bold;
+      margin-bottom: @pad/3;
+    }
+
+    &__link {
+      border-bottom: 1px dashed @color-blue-light;
+      margin-left: @pad;
+    }
+  }
+
+  &-test {
+    background: url("@{img-path}/vds/test-bg.jpg");
+
+    &__wrap {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    &__link {
+      color: @color-primary;
+    }
+
+    &__list {
+      list-style: none;
+      position: relative;
+      padding: @pad/2 0;
+      margin: 0;
+      counter-reset: section;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 2px;
+        height: 100%;
+        background: @color-primary;
+        top: 0;
+        position: absolute;
+        left: -@pad*2;
+
+        @media @view-tablets {
+          left: -@pad*4;
+        }
+      }
+    }
+
+    &__item + &__item {
+      margin-top: @pad*3.5;
+    }
+
+    &__item {
+      &:before {
+        counter-increment: section;
+        content: counter(section);
+        width: @pad*1.75;
+        height: @pad*1.75;
+        background: @color-inverse;
+        border-radius: 100%;
+        border: 2px solid @color-primary;
+        display: block;
+        color: @color-base;
+        position: absolute;
+        text-align: center;
+        padding-top: @pad/10;
+        left: -@pad*2.8;
+
+        @media @view-tablets {
+          left: -@pad*4.8;
+        }
+      }
+
+      &-title {
+        font-weight: bold;
+        margin-bottom: @pad/2;
+      }
+
+      &-txt {
+        color: @color-gray;
+        margin-bottom: @pad/2;
+      }
+    }
+
+    &__form {
+      &-control {
+        height: 47px;
+        border-radius: 5px;
+        border: 1px solid @color-gray;
+      }
+
+      &-btn {
+        margin-top: @pad;
+        float: right;
+
+        @media @view-tablets {
+          margin-top: 0;
+          float: none;
+        }
+      }
+    }
+  }
+
+  &-love {
+    padding-bottom: @pad*4;
+
+    @media @view-tablets {
+      padding-bottom: @pad*6;
+    }
+
+    &.content &__list {
+      & > li {
+        margin-bottom: @pad;
+
+        &:before {
+          background-color: @color-primary;
+        }
+      }
+    }
+
+    &__row {
+      @media @view-desktop {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+
+    &__item {
+      padding: @pad @pad*2;
+      border-radius: 5px;
+      color: @color-inverse;
+      margin-bottom: @pad;
+
+      @media @view-desktop {
+        width: 30%;
+        padding: @pad*3 @pad*4;
+        margin-bottom: 0;
+      }
+
+      &:nth-child(1) {
+        background: url("@{img-path}/vds/love-1.png") center center / cover no-repeat;
+      }
+
+      &:nth-child(2) {
+        background: url("@{img-path}/vds/love-2.png") center center / cover no-repeat;
+      }
+
+      &:nth-child(3) {
+        background: url("@{img-path}/vds/love-3.png") center center / cover no-repeat;
+      }
+
+      &-title {
+        font-weight: bold;
+        margin-bottom: @pad*2;
+        font-size: @fz*1.25;
+      }
+    }
+  }
+
+  &-icon {
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 15px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 25px;
+      height: 30px;
+    }
+
+    &--reserv {
+      &:before {
+        background-image: url("@{img-path}/vds/icons/reserv.png")
+      }
+    }
+
+    &--shot {
+      &:before {
+        background-image: url("@{img-path}/vds/icons/shot.png")
+      }
+    }
+
+    &--template {
+      &:before {
+        background-image: url("@{img-path}/vds/icons/template.png")
+      }
+    }
+
+    &--network {
+      &:before {
+        background-image: url("@{img-path}/vds/icons/network.png")
+      }
+    }
+
+    &--monitoring {
+      &:before {
+        background-image: url("@{img-path}/vds/icons/monitoring.png")
+      }
+    }
+
+    &--license {
+      &:before {
+        background-image: url("@{img-path}/vds/icons/license.png")
+      }
+    }
+  }
+
+  &-feedback {
+
+    &__container {
+      position: relative;
+    }
+
+    &__link {
+      text-align: center;
+      display: block;
+
+      @media @view-tablets {
+        position: absolute;
+        right: 0;
+        z-index: 5;
+        top: -70px;
+      }
+
+      &:after {
+        display: inline-block;
+        vertical-align: middle;
+        font-family: onecloudIcons;
+        font-size: 0.875em;
+        content: "\e902";
+        margin-left: 7.5px;
+        position: relative;
+        transition: all 0.2s;
+      }
+
+      &:hover {
+        text-decoration: underline;
+
+        &:after {
+          left: @pad;
+        }
+      }
+    }
+  }
+} 

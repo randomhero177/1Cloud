@@ -1,0 +1,163 @@
+// main: ../pages/index.less
+@why-icon-size: @fz*3.5;
+@why-icon-width: 30%;
+@why-trigger-width: 30px;
+@border-color: saturate(lighten(@color-base, 36%), 9%);
+
+.why-we {
+    &--inverse{
+        background-color: @color-blue;
+        color: @color-inverse;
+    }
+  &__item {
+    font-size: @fz;
+    padding: @pad/1.5 @why-trigger-width @pad/1.5 @why-icon-width;
+    border-bottom: 1px solid @border-color;
+    position: relative;
+    &:first-child {
+      border-top: 1px solid @border-color;
+    }
+    &--triggered{
+      cursor: pointer;
+    }
+    &::before {
+      width: @why-icon-width;
+      text-align: center;
+      font-size: @why-icon-size;
+      color: @color-primary;
+      position: absolute;
+      left: 0;
+      top: @pad/1.5;
+      z-index: 1;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    /*line-height: @why-icon-size;*/
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: @color-base;
+    min-height: 70px;
+    letter-spacing: 1.2px;
+    & > span {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: @fz - 2;
+      line-height: 1.5em;
+    }
+  }
+  &--inverse &__title{
+      color: @color-inverse;
+  }
+  &__text {
+    font-size: 0;
+
+    margin-bottom: 0;
+    opacity: 0.7;
+    transition: all 0.2s;
+  }
+  &__trigger {
+    position: absolute;
+    right: 0;
+    bottom: @pad;
+    width: @why-trigger-width;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &::before {
+      display: inline-block;
+      font-family: @ff-icons;
+      content: "\e902";
+      font-size: @fz*1.5;
+      line-height: 1;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: @color-primary;
+      transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+    }
+    &:hover::before {
+      color: @color-hover;
+    }
+  }
+  &__item--active &__trigger{
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+  }
+  &__item--active &__text {
+    font-size: @fz*0.875;
+    padding-top: 20px;
+    padding-bottom: 50px;
+  }
+}
+
+@media @view-tablets{
+  .why-we{
+    &__container{
+      display: block;
+      font-size: 0;
+      text-align: center;
+    }
+    &__item{
+      display: inline-block;
+      vertical-align: top;
+      padding: @why-icon-size+@pad*3.5 @pad/1.5 @pad-root @pad/1.5;
+      border: 0;
+      text-align: center;
+      width: 33%;
+      &:first-child{
+        border: 0;
+      }
+      &--triggered{
+        cursor: auto;
+      }
+      @why-icon-size-tablet: @why-icon-size+@pad*3;
+      &::before{
+        top: 0;
+        left: 50%;
+        width: @why-icon-size-tablet;
+        height: @why-icon-size-tablet;
+        line-height: @why-icon-size-tablet;
+        margin-left: -@why-icon-size-tablet/2;
+        border: 2px solid @color-base;
+        border-radius: @why-icon-size-tablet/2;
+        .why-we--inverse &{
+              border-color: @color-inverse;
+          }
+      }
+    }
+    &__text{
+      padding: 0;
+      font-size: @fz*0.875;
+    }
+    &__title{
+      padding-top: @pad/1.5;
+      padding-bottom: @pad;
+      position: relative;
+      &::after{
+        //display: block;
+        display: none;
+        content: "";
+        width: 60%;
+        height: 1px;
+        background: @color-base;
+        margin: 0 auto;
+      }
+    }
+    &__trigger{
+      display: none;
+    }
+
+  }
+}
+@media @view-desktop{
+  .why-we{
+    &__item{
+      width: 25%;
+    }
+  }
+}

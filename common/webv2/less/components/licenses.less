@@ -1,0 +1,92 @@
+@import "../variables.less";
+
+.licenses {
+  font-size: @fz;
+
+  &__content {
+    @media @view-tablets {
+      width: 80%;
+      margin: 0 auto @pad*3;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+
+    @media @view-desktop {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    &-item {
+      position: relative;
+      width: 100%;
+      font-size: @fz;
+      text-align: left;
+      padding: @pad*2;
+      margin-bottom: @pad;
+      background-color: @color-light-back;
+
+      @media @view-tablets {
+        padding: @pad*3;
+        margin-bottom: 0;
+        margin-top: @pad*5;
+
+        &::before {
+          position: absolute;
+          right: @pad*3;
+          top: 0;
+          display: block;
+          content: "";
+          width: @pad*6;
+          height: @pad*6;
+          background-color: @color-primary;
+          background-repeat: no-repeat;
+          background-position: center center;
+          transform: translateY(-50%);
+        }
+      }
+
+      @media @view-desktop {
+        width: calc(~"50% - @{pad}");
+        padding: @pad*3;
+
+        &:nth-child(2n) {
+          margin-left: @pad*2;
+        }
+      }
+
+      &--copy::before {
+        background-image: url("/img/hosting/icons/li_5-1.png");
+      }
+
+      &--snapshot::before {
+        background-image: url("/img/hosting/icons/li_5-2.png");
+      }
+
+      &--load::before {
+        background-image: url("/img/hosting/icons/li_5-3.png");
+      }
+
+      &--db::before {
+        background-image: url("/img/unoc/icons/license_db.png");
+      }
+
+      &--server::before {
+        background-image: url("/img/unoc/icons/license_server.png");
+      }
+
+      &--os::before {
+        background-image: url("/img/unoc/icons/license_os.png");
+      }
+    }
+
+
+    &-title {
+      font-size: @fz*1.5;
+      margin: 0 0 @pad;
+    }
+  }
+}

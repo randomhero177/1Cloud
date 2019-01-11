@@ -1,0 +1,164 @@
+// main: ../main.less
+
+.guide{
+  & .modal{
+    &-dialog{
+        width: 90%;
+        @media @view-desktop{
+            width: 940px;
+        }
+    }
+    &-content{
+        background-color: @color-light-back;
+        padding: @pad*1.5 @pad;
+        @media @view-tablets {
+          padding: @pad*3 @pad*2;
+        }
+        & .close{
+            position: absolute;
+            right: @pad/1.5;
+            top: @pad/3;
+            font-size: @fz*2.5;
+            line-height: 1;
+            color: @color-base;
+            opacity: 0.7;
+            &:hover,
+            &:focus,
+            &:active {
+                opacity: 1;
+            }
+        }
+    }
+    &-header{
+        padding: 0;
+        border-bottom: 0;
+    }
+    &-footer{
+        padding: 0;
+    }
+  }
+
+  &__item,
+  &__result{
+    display: none;
+    &--active{
+      display: block;
+    }
+  }
+  &__item{
+    &-header{
+      @media @view-tablets{
+        width: 90%;
+      }
+      margin: 0 auto @pad*2;
+      text-align: center;
+      &--with-controls{
+        position: relative;
+        @media @view-tablets {
+          padding-left: 8.333%;
+          padding-right: 8.333%;
+        }
+      }
+    }
+  }
+  &__title{
+    @media @view-tablets{
+      font-size: @fz*1.5;
+    }
+    line-height: 1.125em;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: @pad/3;
+  }
+  &__hint{
+    display: block;
+    font-size: @fz*0.875;
+  }
+  &__choose{
+    padding: @pad;
+    border: 2px solid @color-border;
+    background-color: @color-inverse;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: @pad;
+    @media @view-tablets{
+      padding: @pad*2;
+      margin-bottom: 0;
+    }
+    &:hover{
+      border-color: @color-primary;
+    }
+    &-title{
+      display: block;
+      font-size: @fz*1.125;
+      line-height: 1.125em;
+      padding-top: @pad;
+      padding-bottom: @pad;
+      position: relative;
+      @media @view-tablets{
+        padding-top: @pad*3;
+        border-top: 5px solid @color-primary;
+      }
+      &--imaged{
+        @media @view-tablets{
+          margin-top: 135px;
+          &::before{
+            display: block;
+            content: "";
+            width: 90px;
+            height: 90px;
+            background-image: url("@{img-path}/guide-icons.png");
+            background-repeat: no-repeat;
+            position: absolute;
+            left: 50%;
+            top: -135px;
+            margin-left: -45px;
+          }
+        }
+      }
+      &--blog::before{background-position: 0 0;}
+      &--basket::before{background-position: 0 -90px;}
+      &--bank::before{background-position: 0 -180px;}
+      &--ssldomain::before{background-position: 0 -270px;}
+      &--sslsan::before{background-position: 0 -360px;}
+      &--sslwild::before{background-position: 0 -450px;}
+      &--sslov::before{background-position: 0 -540px;}
+      &--sslev::before{background-position: 0 -630px;}
+    }
+    &.selected &-title::after{
+      display: block;
+      font-family: "FontAwesome";
+      content: "\f00c";
+      width: 50px;
+      background-color: @color-inverse;
+      color: @color-green;
+      font-size: @fz*1.5;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      z-index: 1;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    &-subtext{
+      display: block;
+      margin-top: @pad/2;
+      font-size: @fz*0.875;
+      color: @color-gray;
+    }
+  }
+  &__control{
+    @media @view-tablets{
+      display: block;
+    }
+    &:hover::before{
+      color: @color-hover;
+    }
+    &&--prev{
+      left: 0;
+    }
+    &&--next{
+      right: 0;
+    }
+  }
+}

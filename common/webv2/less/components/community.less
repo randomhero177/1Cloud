@@ -1,0 +1,74 @@
+// main: ../main.less
+
+.community{
+  font-size: 0;
+
+  &__item{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    margin-bottom: @pad;
+    padding: @pad;
+    padding-bottom: 70px + @pad;
+    font-size: @fz*0.8235;
+    border-top: 1px solid @color-gray;
+    position: relative;
+    &:last-child{
+      border-bottom: 1px solid @color-gray;
+    }
+    &::before{
+      display: none;
+    }
+
+    @media @view-tablets{
+      width: 48.5%;
+      margin-right: 3%;
+      margin-bottom: 0;
+      border: 1px solid @color-gray;
+
+      &:nth-child(2n){
+        margin-right: 0;
+      }
+    }
+
+    @media @view-desktop{
+      padding-left: 180px;
+      padding-top: @pad*2;
+      padding-right: @pad*2;
+      padding-bottom: 70px + @pad*2;
+      &::before{
+        display: block;
+        color: @color-primary;
+        font-size: @fz*7;
+        position: absolute;
+        left: @pad;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+      }
+      &::after{
+        display: block;
+        content: "";
+        width: 5px;
+        background-color: @color-light-back;
+        position: absolute;
+        left: 150px;
+        top: @pad*2;
+        bottom: @pad*2;
+      }
+    }
+  }
+  &__title{
+    margin-top: 0;
+  }
+  &__btn{
+    position: absolute;
+    left: @pad;
+    bottom: @pad;
+
+    @media @view-desktop{
+      left: 180px;
+      bottom: @pad*2
+    }
+  }
+}

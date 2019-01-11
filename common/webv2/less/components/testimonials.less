@@ -1,0 +1,236 @@
+// main: ../main.less
+
+@t-avatar-size: 80px;
+@t-carousel-width: 90%;
+
+.testimonials {
+    overflow: hidden;
+
+    &__carousel {
+        width: @t-carousel-width;
+        margin: 0 auto;
+    }
+
+    &__header {
+        margin-bottom: @pad;
+        font-size: 0;
+        text-align: center;
+
+        & > * {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+
+    &__avatar {
+        display: none;
+        width: @t-avatar-size;
+        height: @t-avatar-size;
+        border-radius: @t-avatar-size/2;
+        overflow: hidden;
+        color: @color-blue;
+        text-align: center;
+        margin-right: @pad;
+        margin-bottom: @pad;
+        position: relative;
+
+        & img {
+            max-width: 100%;
+            border-radius: 50%;
+        }
+
+        &::before {
+            width: @t-avatar-size;
+            height: @t-avatar-size;
+            font-size: @t-avatar-size;
+            line-height: @t-avatar-size;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    &__author {
+        font-size: @fz;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0;
+        padding-top: 5px;
+        width: 100%;
+        color: @color-blue;
+    }
+
+    &__position {
+        color: @color-base;
+        display: block;
+        margin-top: 10px;
+        font-size: @fz*0.875;
+        text-transform: initial;
+        line-height: 1.25;
+        font-style: italic;
+    }
+
+    &__company {
+        display: block;
+        color: @color-blue-light;
+        margin-top: @pad/3;
+    }
+
+    &__text {
+        font-size: @fz*0.8125;
+        line-height: 1.5;
+        text-align: center;
+        letter-spacing: 0.25px;
+    }
+
+    &__trigger {
+        color: @color-blue-light;
+        &:hover{
+            color: @color-primary;
+        }
+        &::after {
+            display: inline-block;
+            vertical-align: middle;
+            font-family: onecloudIcons;
+            content: "\e902";
+            margin-left: @pad / 2;
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+        }
+
+        &--active::after {
+            transform: rotate(270deg);
+            -webkit-transform: rotate(270deg);
+        }
+    }
+
+    &__arrows .oc-arrows {
+        &__left,
+        &__right {
+            display: block;
+
+            &::before {
+                top: @t-avatar-size/2;
+            }
+        }
+
+        &__left {
+            left: 0;
+        }
+
+        &__right {
+            right: 0;
+        }
+    }
+
+    &__dots {
+        & li > a:hover,
+        & .active > a {
+            border-color: @color-primary;
+            background-color: @color-primary;
+        }
+    }
+}
+
+
+@media @view-xs{
+  .testimonials{
+    &__header{
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+@media @view-tablets{
+  .testimonials{
+    &__author{
+      text-align: left;
+      /*width: calc(~"100% - @{t-avatar-size} - @{pad}");*/
+      padding-left: @pad;
+      padding-right: @pad;
+    }
+    &__text{
+      text-align: left;
+      padding-left: @pad;
+      padding-right: @pad;
+    }
+    &__block{
+      .clear;
+      margin-bottom: @pad*3;
+    }
+    &__block &{
+      &__header{
+        width: 23%;
+        float: left;
+        text-align: left;
+        margin-right: 2%;
+        margin-bottom: 0;
+      }
+      &__avatar{
+        width: 105px;
+        height: 105px;
+        border-radius: 52.5px;
+        margin: 0;
+        text-align: left;
+
+        &::before{
+          width: 105px;
+          height: 105px;
+          font-size: @fz*6;
+          line-height: 1;
+          position: static;
+        }
+      }
+      &__author{
+        display: block;
+        width: 100%;
+        margin-top: @pad*2 - @pad/3;
+        padding: 0;
+      }
+      &__position{
+          font-size: @fz*0.8235;
+          line-height: 1.125em;
+      }
+      &__right{
+        width: 75%;
+        min-height: 180px;
+        float: right;
+        background-color: @color-light-back;
+        padding: (@pad*2 - @pad/3) @pad @pad @pad*1.5;
+        position: relative;
+        &::before{
+          display: block;
+          content: "";
+          width: 0;
+          border-top: @pad solid transparent;
+          border-bottom: @pad solid transparent;
+          border-right: @pad solid @color-light-back;
+          position: absolute;
+          left: -@pad;
+          top: @pad*2;
+        }
+      }
+      &__text{
+        text-align: left;
+        opacity: 1;
+      }
+    }
+
+
+    &__arrows .oc-arrows{
+      &__left,
+      &__right{
+        &::before{
+          top: 50%;
+        }
+      }
+      &__left{
+        left: -@arrow-width;
+      }
+      &__right{
+        right: -@arrow-width;
+      }
+    }
+  }
+}

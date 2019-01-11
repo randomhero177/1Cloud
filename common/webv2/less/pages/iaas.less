@@ -1,0 +1,127 @@
+// out: ../../css/pages/iaas.css, compress: true
+@import "../variables.less";
+
+.iaas{
+    margin-bottom: @pad*2;
+    @media @view-mobile-only{
+        font-size: 0;
+    }
+    
+    &__item{
+        @media @view-mobile-only{
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+            padding-left: @pad;
+            padding-right: @pad;
+        }
+    }
+  &__block, 
+  &__title {
+      background-color: @color-blue;
+      padding: @pad*3 @pad @pad @pad;
+      border-radius: @pad/2;
+      margin-bottom: @pad;
+      text-align: center;
+      position: relative;
+  }
+  &__ol{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: @fz;
+      & li{
+          background-color: @color-inverse;
+          padding: @pad/1.5;
+          border-radius: @pad/2;
+          color: #000;
+          margin-bottom: @pad;
+          &:last-child{
+              margin-bottom: 0;
+          }
+      }
+      &--ready li, 
+      & .iaas--ready{
+          background: @color-primary;
+      }
+  }
+  &__block--horizontal{
+      padding-top: @pad;
+      & li {
+        display: inline-block;
+        vertical-align: top;
+        margin: @pad/3;
+        font-size: 0.875em;
+        @media @view-xs{
+            width: 100%;
+        }
+        @media @view-tablets{
+            font-size: @fz - 1;
+        }
+        & + li{
+            margin-top: @pad/3;
+        }
+    }
+    @media @view-desktop{
+          & ol{
+              display: table;
+              border-spacing: 5px;
+          }
+          & li{
+              display: table-cell;
+              width: 14.25%;
+              vertical-align: middle;
+              margin: 0;
+              & + li{
+                  margin: 0;
+              }
+          }
+      }
+  }
+
+  &__title{
+      display: block;
+      padding-top: @pad;
+      margin-bottom: @pad*2;
+      color: @color-inverse;
+      font-size: @fz*1.25;
+      line-height: 1em;
+  }
+  &__heading{
+      display: block;
+      font-size: @fz*1.25;
+      font-weight: 700;
+      color: @color-inverse;
+      margin: 0;
+      text-transform: none;
+
+      position: absolute;
+      left: @pad;
+      right: @pad;
+      top: @pad;
+  }
+  &__admin{
+      display: inline-block;
+      vertical-align: middle;
+      padding: @pad/3 @pad @pad/3 @pad;
+      font-size: @fz;
+      position: relative;
+      @media @view-desktop{
+        font-size: @fz*1.25;
+          padding-top: @pad;
+      }
+      &::before{
+          display: inline-block;
+          vertical-align: middle;
+          content: "";
+          width: 20px;
+          height: 20px;
+          border: 2px solid @color-gray;
+          background-color: @color-inverse;
+          margin-right: @pad;
+      }
+      &--ready::before{
+          background-color: @color-primary;
+      }
+  }
+}

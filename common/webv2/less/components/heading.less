@@ -1,0 +1,36 @@
+// main: ../main.less
+.heading {
+  padding-bottom: @pad-root - @pad;
+  position: relative;
+  @media @view-tablets{
+    padding-bottom: @pad-root + 5;
+  }
+
+  &__text {
+    font-family: @ff-extra;
+    font-weight: normal;
+    font-size: @fz*1.5;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    @media @view-tablets{
+      font-size: @fz*1.9225;
+    }
+
+    &--strong{
+      font-family: @ff;
+      font-weight: 700;
+    }
+    &--left {
+        text-align: left;
+    }
+  }
+  &__small {
+    font-size: @fz;
+    font-weight: 600;
+    margin: 0;
+    padding: @pad 0;
+    color: @color-blue;
+  }
+}

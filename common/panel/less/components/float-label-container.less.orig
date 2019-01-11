@@ -1,0 +1,92 @@
+<<<<<<< Updated upstream
+=======
+/*=============== FORM MAIN STYLES =====================*/
+.float-label-container fieldset {
+  border: none;
+  position: relative;
+  margin-right: 30px;
+} 
+
+.float-label-container fieldset.width350 {
+  width: 350px;
+}
+
+.float-label-container fieldset.width440 {
+  width: 440px;
+}
+
+.float-label-container fieldset.width550 {
+  width: 550px; 
+}
+
+.float-label-container fieldset.float {
+  float: left;
+}
+
+.float-label-container fieldset.form-fieldset-normalize {
+  margin-right: 10px;
+}
+
+.float-label-container input[type="text"],
+.float-label-container input[type="number"],
+.float-label-container input[type="password"] {
+  padding: 17px 10px 10px 10px;
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid rgb(169, 169, 169);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.15);
+  border-radius: 2px;
+  margin: 0px;
+}
+
+.float-label-container input[type="text"]:focus,
+.float-label-container input[type="number"]:focus,
+.float-label-container input[type="password"]:focus,
+.float-label-container textarea:focus {
+  outline: none;
+}
+
+.float-label-container input[type="text"] + label,
+.float-label-container input[type="number"] + label,
+.float-label-container input[type="password"] + label,
+.float-label-container textarea + label {
+  display: block;
+  cursor: text;
+  color: #777;
+  transition: .15s ease-out all;
+  position: absolute;
+  top: 1.3em;
+  left: 2em;
+  font-size: 13px;
+}
+
+.float-label-container input[type="text"]:focus + label,
+.float-label-container input[type="text"] + label.stay,
+.float-label-container input[type="number"]:focus + label,
+.float-label-container input[type="number"] + label.stay,
+.float-label-container input[type="password"]:focus + label,
+.float-label-container input[type="password"] + label.stay,
+.float-label-container textarea:focus + label,
+.float-label-container textarea + label.stay {
+  top: 0.2em;
+  left: 2em;
+  font-size: .65em;
+  font-weight: bold;
+  color: #139dd7;
+  transition: .15s ease-out all;
+}
+
+.float-label-container .input-group input[type="text"]:focus + label,
+.float-label-container .input-group input[type="text"] + label.stay,
+.float-label-container .form-control.input-lg:focus + label,
+.float-label-container .form-control.input-lg + label.stay {
+  top: 0.2em;
+  left: 1.2em;
+  z-index: 3;
+}
+
+.float-label-container .input-group-btn > .btn {
+  height: 46px;
+}
+/*=============== END FORM MAIN STYLES =====================*/
+>>>>>>> Stashed changes

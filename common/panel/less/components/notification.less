@@ -1,0 +1,290 @@
+/****** NOTIFICATION STYLES *****/
+.notification {
+  .clear;
+
+  &__info {
+    overflow: hidden;
+  }
+
+  &__img {
+    float: left;
+    margin-right: @pad;
+  }
+
+  &-ny {
+    position: relative;
+
+    &__item {
+      position: initial;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+      }
+
+      &--right {
+        &:before {
+          background: url(/Content/img/new-year/decor.png) center center no-repeat /contain;
+          right: 4px;
+          width: 250px;
+          height: 190px;
+          top: -22px;
+        }
+      }
+
+      &--left {
+        &:before {
+          background: url(/Content/img/new-year/decor2.png) center center no-repeat /contain;
+          left: -6px;
+          width: 250px;
+          height: 190px;
+          top: -12px;
+        }
+      }
+    }
+
+    &__position {
+      position: absolute;
+      bottom: 0;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+
+      &--left {
+        animation-delay: 1s;
+        -webkit-animation-name: fadeInDown;
+        animation-name: fadeInDown;
+        left: @pad;
+      }
+
+      &--right {
+        animation-delay: 2s;
+        -webkit-animation-name: fadeInDown;
+        animation-name: fadeInDown;
+        right: @pad;
+      }
+    }
+
+    &__box {
+      position: absolute;
+      bottom: 0;
+      width: 150px;
+      height: 150px;
+      z-index: 3;
+      cursor: pointer;
+      -webkit-animation-name: swing;
+      animation-name: swing;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-iteration-count: 10;
+
+      &--red {
+        background: url(/Content/img/new-year/box-red.png) center center no-repeat /contain;
+        left: 0;
+        animation-delay: 4s;
+      }
+
+      &--yellow {
+        background: url(/Content/img/new-year/box-yellow.png) center center no-repeat /contain;
+        right: 0;
+        animation-delay: 4.5s;
+      }
+    }
+
+    &__box2 {
+      position: absolute;
+      bottom: 0;
+      width: 150px;
+      height: 150px;
+      z-index: 3;
+
+      &--red {
+        background: url(/Content/img/new-year/box-red2.png) center center no-repeat /contain;
+        left: 0;
+      }
+
+      &--yellow {
+        background: url(/Content/img/new-year/box-yellow2.png) center center no-repeat /contain;
+        right: 0;
+      }
+    }
+
+    &__modal {
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        background: url(/Content/img/new-year/decor2.png) center center no-repeat /contain;
+        left: -27px;
+        width: 250px;
+        height: 150px;
+        top: -23px;
+        -moz-transform: rotate(30deg);
+        -webkit-transform: rotate(30deg);
+        -o-transform: rotate(30deg);
+        -ms-transform: rotate(30deg);
+        transform: rotate(15deg);
+      }
+    }
+  }
+}
+
+.notices {
+  position: fixed;
+  right: 0;
+  top: 100px;
+  width: 300px;
+  padding: @pad/1.5 0 @pad/1.5 @pad/1.5;
+  overflow: hidden;
+  z-index: 1051;
+
+  &__item {
+    position: relative;
+    right: -400px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-right: @pad*1.5;
+    font-size: @fz;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 5;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: all 0.4s;
+
+    &--active {
+      right: 0;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &--hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &-close {
+      position: absolute;
+      top: @pad;
+      right: @pad/3;
+    }
+  }
+}
+
+
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
+@-webkit-keyframes swing {
+  20% {
+    -webkit-transform: rotate3d(0, 0, 1, 15deg);
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  40% {
+    -webkit-transform: rotate3d(0, 0, 1, -10deg);
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  60% {
+    -webkit-transform: rotate3d(0, 0, 1, 5deg);
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  80% {
+    -webkit-transform: rotate3d(0, 0, 1, -5deg);
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+@keyframes swing {
+  20% {
+    -webkit-transform: rotate3d(0, 0, 1, 15deg);
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  40% {
+    -webkit-transform: rotate3d(0, 0, 1, -10deg);
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  60% {
+    -webkit-transform: rotate3d(0, 0, 1, 5deg);
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  80% {
+    -webkit-transform: rotate3d(0, 0, 1, -5deg);
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}

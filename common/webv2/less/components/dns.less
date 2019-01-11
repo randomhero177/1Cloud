@@ -1,0 +1,80 @@
+// main: ../main.less
+
+.dns{
+  &__descr{
+    text-align: center;
+    padding-top: @pad*2;
+    padding-bottom: @pad*2;
+    border-top: 1px solid @color-border;
+    border-bottom: 1px solid @color-border;
+
+    @media @view-tablets{
+      display: table;
+      text-align: left;
+      &-text{
+        display: table-cell;
+        width: 70%;
+        padding-right: @pad;
+      }
+      &-order{
+        display: table-cell;
+        vertical-align: middle;
+        width: 30%;
+      }
+    }
+    @media @view-desktop{
+      &-text{
+        position: relative;
+        padding-left: 185px;
+        &::before{
+          display: block;
+          width: 150px;
+          text-align: center;
+          font-family: @ff-icons;
+          content: "\e92b";
+          color: @color-primary;
+          font-size: 110px;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+        }
+        &::after{
+          display: block;
+          content: "";
+          width: 5px;
+          height: 100%;
+          background-color: @color-light-back;
+          position: absolute;
+          left: 150px;
+          top: 0;
+        }
+        & .more-btn{
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  &__info{
+    .clear;
+    padding-top: @pad*2;
+    padding-bottom: @pad*2;
+    text-align: center;
+  }
+
+  &__why{
+    padding-top: @pad*2;
+    padding-bottom: @pad*2;
+    border-top: 1px solid @color-border;
+  }
+  &__why-item{
+    @media @view-tablets{
+      width: 50%;
+    }
+    @media @view-desktop{
+      width: 25%;
+    }
+  }
+}

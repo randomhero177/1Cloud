@@ -1,0 +1,149 @@
+﻿[class*="bd__"] {
+  box-sizing: border-box;
+}
+
+.bd {
+  &__block {
+    border: 1px solid @color-border;
+    padding: 7.5px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+  }
+
+  &__collapsed {
+    display: none;
+  }
+
+  &__row {
+    min-height: 8px;
+    line-height: 1em;
+
+    &:before, &:after {
+      display: table;
+      content: "";
+      clear: both;
+    }
+
+    & + & {
+      margin-top: 10px;
+    }
+
+    &--bordered {
+      border-bottom: 2px solid @color-border;
+    }
+  }
+
+  &__left {
+    padding-right: 15px;
+  }
+
+  &__left, &__right {
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  &__right {
+    width: 10000px;
+    overflow: hidden;
+  }
+
+  &__heading {
+    font-size: @fz;
+  }
+
+  &__hours-list .bd__heading {
+    color: @color-base;
+  }
+
+  &__title {
+    float: left;
+  }
+
+  &__usage {
+    float: right;
+  }
+
+  &__trigger {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid @color-primary;
+    background-color: @color-primary-hover;
+    text-decoration: none;
+    text-indent: -4000px;
+    position: relative;
+    transition: all 0.4s;
+
+    &:hover, &:focus, &:active {
+      outline: none;
+      background-color: @color-primary;
+    }
+
+    &:before, &:after {
+      display: block;
+      content: "";
+      width: 8px;
+      height: 2px;
+      background-color: @color-inverse;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transition: all 0.4s;
+      margin-left: -4px;
+      margin-top: -1px;
+    }
+
+    &:after {
+      transform: rotate(90deg);
+    }
+
+    &--active {
+      background-color: @color-primary;
+
+      &::before {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__status {
+    display: inline-block;
+    vertical-align: top;
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    margin-right: 5px;
+    background-color: #777;
+
+    &--Active,
+    &--Activated {
+      background-color: #5cb85c;
+    }
+
+    &--Deleting {
+      background-color: #d9534f;
+    }
+
+    &--Deleted {
+      background-color: #c9302c;
+    }
+
+    &--New {
+      background-color: #5bc0de;
+    }
+
+    &--NeedMoney {
+      background-color: #f0ad4e;
+    }
+  }
+
+  &__progress {
+    display: block;
+    margin: 15px auto;
+  }
+}

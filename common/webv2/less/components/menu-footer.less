@@ -1,0 +1,87 @@
+// main: ../main.less
+@menu-footer-height: 40px;
+@menu-footer-fz: @fz*0.875;
+@menu-footer-top-height: 50px;
+@menu-footer-top-fz: @fz*1.25;
+.menu-footer {
+  & ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    text-align: left;
+  }
+
+  & li {
+    display: table-cell;
+    width: 1%;
+    vertical-align: top;
+    line-height: @menu-footer-height;
+    font-size: @menu-footer-fz;
+
+    & + li {
+      //margin-left: @pad*3;
+    }
+  }
+
+  & a {
+    display: inline-block;
+    color: @color-inverse;
+    padding-right: @pad;
+    .hov-foc-act(transparent, @color-primary, none);
+  }
+
+  & .active > a {
+    color: @color-primary;
+  }
+
+  &__submenu {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    .menu-footer & {
+      @media @view-desktop {
+        padding-right: @pad/1.5;
+      }
+    }
+
+    & > li {
+      display: block;
+      line-height: 1.25em;
+      width: 100%;
+
+      & > a {
+        display: block;
+        padding: @pad/2 0;
+        font-size: @menu-footer-fz*0.9225;
+        line-height: 1.125em;
+        color: @color-inverse;
+
+        &:active,
+        &:focus,
+        &:hover {
+          color: @color-primary;
+        }
+      }
+
+      &.active > a {
+        color: @color-primary;
+        opacity: 1;
+      }
+    }
+  }
+
+  &.menu-top {
+    & ul {
+      padding-top: @pad/1.5;
+    }
+
+    & li {
+      font-size: @menu-footer-top-fz;
+      line-height: 1.125em;
+      white-space: nowrap;
+      ;
+    }
+  }
+}

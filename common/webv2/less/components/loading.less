@@ -1,0 +1,83 @@
+// main: ../main.less
+
+.loading{
+    position: relative;
+    &::after{
+        display: inline-block;
+        font-family: 'FontAwesome';
+        content: "\f021";
+        width: 45px;
+        height: 26px;
+        line-height: 27px;
+        text-align: center;
+        color: @color-blue-light;
+
+        position: absolute;
+        top: 50%;
+        margin-top: -13px;
+    
+        -webkit-animation: spin 1s infinite linear;
+        animation: spin 1s infinite linear;
+    }
+    &--full{
+        &::before{
+            display: block;
+            content: "";
+            background: rgba(255,255,255,0.8);
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        &::after{
+            font-size: 20px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -13px;
+            margin-left: -22.5px;
+            z-index: 2;
+        }
+    }
+    &.btn-primary{
+        opacity: 0.8;
+        cursor: auto;
+        &::after{
+            color: @color-inverse;
+            font-size: @fz*1.25;
+        }
+    }
+}
+
+/* LOADING SPINNER */
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+}
+
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+}
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,156 @@
+// main: ../main.less
+
+@err-angle-width: 10px;
+@err-angle-offset: floor(sqrt(2*pow(@err-angle-width,2))/2);
+
+.error {
+  position: relative;
+
+  & .form-control,
+  & .btn-default,
+  &__summary {
+    border-color: #dc3400;
+    background-color: #ffe7e7;
+    color: initial;
+  }
+
+  span&__message { // span declared coz of validate plugin :(
+    position: absolute;
+    left: 0;
+    bottom: 110%;
+    display: block;
+    width: 100%;
+    min-width: 250px;
+    text-align: left;
+    font-size: @fz*0.875;
+    color: @color-base;
+    padding: (@pad - 5) (@pad+5);
+    border: 1px solid @color-gray;
+    background-color: @color-light-back;
+    z-index: 1;
+
+    &::before {
+      display: block;
+      content: "";
+      width: @err-angle-width;
+      height: @err-angle-width;
+      background-color: @color-light-back;
+      border-left: 1px solid @color-gray;
+      border-bottom: 1px solid @color-gray;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      position: absolute;
+      left: @pad + 5;
+      bottom: -@err-angle-offset + 1;
+    }
+
+    .form--column & {
+      position: relative;
+      bottom: auto;
+      padding: @pad/3 @pad/2;
+      margin-top: @pad/3;
+      font-size: @fz*0.875;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &__page {
+    text-align: center;
+    position: relative;
+    height: 100%;
+
+    & body {
+      height: 100%;
+    }
+  }
+
+  &__section {
+    width: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    padding: @pad*2;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+
+    @media @view-mobile {
+      width: 450px;
+    }
+
+    @media @view-tablets {
+      width: auto;
+    }
+  }
+
+  &__logo {
+    width: 100%;
+
+    & > img {
+      max-width: 100%;
+    }
+  }
+
+  &__title {
+    font-size: @fz*2.75;
+    margin: @pad*2 0;
+  }
+
+  &__text {
+    font-size: @fz*1.125;
+  }
+
+  &__footer {
+    & a {
+      display: block;
+      padding: 20px 55px;
+      font-size: @fz;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none;
+      color: @color-inverse;
+      background-color: @color-primary;
+
+      &:hover {
+        color: @color-inverse;
+        background-color: @color-hover;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__summary {
+    display: block;
+    width: 80%;
+    margin: 0 auto @pad*2;
+    padding: @pad/1.5;
+    border-width: 1px;
+    border-style: solid;
+    position: relative;
+    color: #dc3400;
+    text-align: center;
+
+    & > p {
+      margin: 0;
+
+      & + p {
+        margin-top: @pad;
+      }
+    }
+
+    .form-group & {
+      width: 100%;
+    }
+
+    &-close {
+      font-size: 12px;
+      position: absolute;
+      right: @pad/3;
+      top: @pad/3;
+      cursor: pointer;
+    }
+  }
+}

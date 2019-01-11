@@ -1,0 +1,55 @@
+// main: main.less
+
+@sidebar-menu-hover-color: desaturate(darken(@sidebar-back-color, 6%), 25%);
+.sidebar{
+  background-color: @sidebar-back-color;
+  padding-top: @pad;
+  padding-right: 0;
+
+  &__block{
+    padding: @pad;
+  }
+  &__menu{
+    & ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    & li{}
+    & a{
+      display: block;
+      padding: @pad/1.5 @pad @pad/1.5 @pad;
+      font-size: @fz*0.875;
+      color: @color-base;
+      border-bottom: 1px solid @color-border;
+      .hov-foc-act(@sidebar-menu-hover-color, @color-base, none);
+    }
+    & .active > a{
+      background-color: @sidebar-menu-hover-color;
+    }
+  }
+  & .dropdown{
+    & > a::before{
+      top: @pad/1.5;
+    }
+    &-menu{
+      padding: @pad;
+      border-bottom: 1px solid @color-border;
+      & a{
+        padding-top: @pad/3;
+        padding-bottom: @pad/3;
+        padding-right: @pad;
+        border-bottom: 0;
+        .hov-foc-act(transparent, darken(@color-base, 20%), none);
+      }
+      & .active a{
+        background-color: transparent;
+        color: darken(@color-base, 20%);
+        font-weight: 600;
+      }
+    }
+    &.active .dropdown-menu{
+      display: block;
+    }
+  }
+}

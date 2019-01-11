@@ -1,0 +1,307 @@
+// main: ../pages/private-cloud.less
+
+@input-arrow-width: 30px;
+
+.private{
+  &__left{
+    padding-bottom: @pad*2;
+    margin-bottom: @pad*2;
+    border-bottom: 1px solid @color-border;
+  }
+  &__form{
+    @media @view-desktop{
+      position: relative;
+      &::after{
+        display: block;
+        content: "";
+        width: 1px;
+        height: 100%;
+        background-color: @color-gray;
+        position: absolute;
+        top: 0;
+        right: 33.33%;
+      }
+    }
+  }
+  &__block{
+    padding-bottom: @pad*2;
+    margin-bottom: @pad*2;
+    border-bottom: 1px solid @color-border;
+  }
+  &__title{
+    font-size: @fz;
+    font-weight: 700;
+    margin: 0 0 @pad*2;
+    padding-left: @pad*2.5;
+    position: relative;
+
+    & > small{
+      display: block;
+      margin-top: @pad/1.5;
+      font-size: @fz*0.8235;
+      font-weight: 400;
+      color: @color-base;
+    }
+
+    @media @view-tablets{
+      margin: @pad+2 0 0;
+      &--complex{
+        margin-top: @pad/1.5;
+      }
+    }
+  }
+  &__tooltip{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  &__group{
+    font-size: 0;
+    margin-bottom: @pad;
+    @media @view-xs{
+      width: 100%;
+    }
+    @media @view-tablets{
+      padding-left: 0;
+      .private__block &{
+        margin-bottom: 0;
+      }
+    }
+    @media @view-desktop-only{
+      .private__storage &{
+        margin-bottom: @pad;
+      }
+    }
+  }
+  &__input,
+  &__label{
+    display: inline-block;
+    vertical-align: middle;
+
+    .private__toggle &{
+      vertical-align: top;
+    }
+  }
+  &__label{
+    width: 45%;
+    font-size: @fz*0.8235;
+    font-weight: 400;
+    margin-bottom: 0;
+    padding-right: @pad;
+    padding-left: @pad*2 + 5;
+
+    @media @view-tablets{
+      text-align: right;
+      padding-left: 0;
+    }
+
+
+    &--tooltip{
+      position: relative;
+      padding-left: @pad*2;
+    }
+  }
+  &__input{
+    width: 55%;
+    font-size: @fz*0.8235;
+    position: relative;
+
+    & .form-control{
+      text-align: center;
+      padding-bottom: @pad/1.5;
+      padding-left: @pad;
+      padding-right: @input-arrow-width;
+
+      @media @view-xs, @view-mobile-only{
+        padding-left: @input-arrow-width;
+        padding-right: @input-arrow-width + @pad + @pad/3;
+      }
+    }
+
+    &--bytes .form-control{
+      @media @view-tablets{
+        text-align: right;
+        padding-left: @pad/1.5;
+        padding-right: @input-arrow-width + @pad + @pad/3;
+      }
+    }
+
+    & input[type="number"]{
+      -moz-appearance: textfield;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button{
+        -webkit-appearance: none;
+      }
+    }
+  }
+  &__control{
+    width: @input-arrow-width;
+    height: 50%;
+    text-align: center;
+    color: @color-base;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    @media @view-xs, @view-mobile-only{
+      height: 100%;
+    }
+    &::before{
+      font-family: @ff-icons;
+      content: "\e902";
+      font-size: @fz;
+      position: absolute;
+      left: 50%;
+    }
+    &:hover{
+      color: @color-primary;
+    }
+
+    &--asc{
+      top: 0;
+      &::before{
+        bottom: -@pad/5;
+        -webkit-transform: translateX(-50%) rotate(-90deg);
+        transform: translateX(-50%) rotate(-90deg);
+        @media @view-xs, @view-mobile-only{
+          top: 50%;
+          bottom: auto;
+          -webkit-transform: translate(-50%, -50%) rotate(0deg);
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+      }
+    }
+    &--desc{
+      bottom: 0;
+      @media @view-xs, @view-mobile-only{
+        bottom: auto;
+        right: auto;
+        top: 0;
+        left: 0;
+      }
+      &::before{
+        top: -@pad/5;
+        -webkit-transform: translateX(-50%) rotate(90deg);
+        transform: translateX(-50%) rotate(90deg);
+        @media @view-xs, @view-mobile-only{
+          bottom: auto;
+          top: 50%;
+          -webkit-transform: translate(-50%, -50%) rotate(-180deg);
+          transform: translate(-50%, -50%) rotate(-180deg);
+        }
+      }
+    }
+  }
+  &__bytes{
+    display: block;
+    width: @pad;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    right: @input-arrow-width;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  &__toggle{
+    &-trigger,
+    .dropdown &-trigger{
+      font-size: @fz*0.8235;
+      display: inline-block;
+    }
+  }
+  &__links {
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    list-style: none;
+    & li{
+      line-height: 1.15em;
+      & + li {
+        margin-top: @pad;
+      }
+    }
+    & a {
+      font-size: @fz*0.8235;
+      &::after {
+        display: inline-block;
+        content: "\00BB";
+        padding-left: @pad/3;
+      }
+    }
+  }
+  &__price{
+    & .price__sum{
+      letter-spacing: -2px;
+
+      @media @view-desktop{
+        font-size: @fz*3.75;
+      }
+    }
+  }
+  &__bonus{
+    text-align: center;
+    &-present{
+      display: block;
+      width: 80%;
+      margin: 0 auto @pad;
+      font-size: @fz*2.5;
+      text-align: center;
+      padding: @pad @pad @pad/1.625 @pad;
+      border: 2px solid @color-primary;
+      position: relative;
+      &::before{
+        font-size: @fz*3.5;
+        color: @color-primary;
+        position: absolute;
+        left: -1px;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    }
+    &-sum{
+      margin-bottom: @pad*2;
+      & small{
+        display: block;
+        font-size: 12px;
+        line-height: 1.25;
+      }
+    }
+  }
+  &__info{
+    padding-bottom: 0;
+    border-top: 1px solid @color-border;
+  }
+  &__order--small{
+    display: none;
+  }
+  .oc-sticky {
+      & .private__order--small{
+        display: inline-block;
+      }
+      & .price{
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: @pad/3;
+        &__sum{
+          font-size: @fz*2.25;
+        }
+        &__heading{
+          display: none;
+        }
+      }
+  }
+  @media @view-desktop{
+    &__left{
+      padding-right: @pad*2;
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+    &__right{
+      padding-left: @pad*2;
+    }
+  }
+}

@@ -1,0 +1,114 @@
+// main: ../main.less
+
+@media print{
+  ul, img {
+      page-break-inside: avoid;
+  }
+  body, article {
+      width: 100%;
+      margin: 0;
+      padding: 0 !important;
+      min-width: 768px;
+  }
+  .container {
+    width: auto;
+    min-width: 750px;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  ul, img, table {
+    page-break-inside: avoid;
+  }
+  @page {
+      margin-left: 1cm;
+      margin-right: 1cm;
+      size: portrait;
+  }
+
+  // HACK FOR CHROME VS BOOTSTRAP
+  [class*="col-"]{
+    float: left;
+  }
+
+  @grid-columns: 12;
+  .grid-item (@i:1) when (@i < @grid-columns + 1) {
+    .col-sm-@{i},
+    .col-md-@{i},
+    .col-lg-@{i} {
+      width: 100% * @i / @grid-columns !important;
+    }
+    .grid-item(@i + 1);
+  }
+  .grid-item();
+  // END HACK FOR CHROME VS BOOTSTRAP
+
+  #maincontainer{
+    padding: 0 !important;
+    width: 100%;
+  }
+  
+  .main-header,
+  .footer,
+  .sidebar,
+  .smallnav,
+  .main-content--sidebar::before,
+  .mm,
+  .toggle,
+  .content__footer,
+  #jivo-iframe-container,
+  #jivo_container,
+  [class^="jivo"],
+  [id^="jivo"],
+  jdiv,
+  bl, 
+  .arrowUp { 
+    position: absolute !important;
+    left: -99999px;
+    bottom: -99999px;
+    visibility: hidden !important; 
+    display: none !important;
+    opacity: 0 !important;
+    font-size: 0 !important;
+  }
+  
+  .content{
+    width: 100% !important;
+    float: none !important;
+    & table {
+      border-collapse: collapse;
+      font-size: 14px;
+      & td{
+        padding: @pad/2;
+        border: 1px solid @color-border;
+      }
+    }
+    &__block + &__block{
+      margin-top: @pad;
+      padding-top: @pad;
+    }
+    &__heading{
+      margin-bottom: @pad;
+      text-align: left;
+    }
+  }
+
+  .content a[href^=http]:after {
+    content:" <" attr(href) "> ";
+  }
+
+  .sign{
+    width: 450px;
+    &::before{
+      border: 1px solid @color-border
+    }
+  }
+  .print{
+    &__no-pagebreak{
+      page-break-before: always;
+    }
+    &-trigger{
+      display: none;
+    }
+  }
+}

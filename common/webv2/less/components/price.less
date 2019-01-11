@@ -1,0 +1,60 @@
+// main: ../main.less
+.price {
+  display: block;
+  text-align: center;
+  line-height: 1em;
+  font-size: @fz*2.625;
+  &__heading{
+    display: block;
+    padding-bottom: @pad/1.5;
+    font-size: @fz;
+    line-height: 1;
+  }
+  &__currency {
+    display: none;
+  }
+  &__sum {
+    
+    &::after {
+      display: inline-block;
+      vertical-align: baseline;
+      font-family: FontAwesome;
+      font-weight: normal;
+      font-size: 0.75em;
+      // padding-left: @pad/1.5;
+    }
+    &--rub::after {
+      font-family: @ff-icons;
+      content: "\e966";
+    }
+    &--usd::after {
+      content: "\f155";
+    }
+    &--euro::after {
+      content: "\f153";
+    }
+  }
+  &__extra {
+    display: block;
+    text-align: center;
+    font-family: @ff-extra;
+    font-size: @fz;
+    line-height: 1em;
+  }
+  &__old{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: @fz - 1;
+    font-weight: 400;
+    color: @color-primary;
+    text-decoration: line-through;
+    @media @view-mobile{
+        display: block;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 10%;
+    }
+  }
+}

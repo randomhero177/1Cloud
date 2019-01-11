@@ -1,0 +1,321 @@
+﻿.usersettings {
+  &__compact {
+    & .form-group {
+      display: inline-block;
+      vertical-align: top;
+      width: 46%;
+    }
+  }
+
+  &__row {
+    position: relative;
+
+    &--divided {
+      &::before {
+        content: "";
+        display: block;
+        width: 1px;
+        height: 100%;
+        background-color: @color-border;
+        position: absolute;
+        left: 50%;
+        top: 0;
+      }
+    }
+
+    & fieldset {
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+}
+
+.messengers {
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-left: @pad /1.5;
+    padding-right: @pad /1.5;
+
+    &-item {
+      background-color: @btn-primary-text-color;
+      border: 1px solid @color-primary-hover;
+      border-radius: @pad / 3;
+      padding: @pad / 2;
+      font-size: @fz - 4;
+      font-weight: 700;
+      color: @color-base;
+      transition: all 0.1s;
+
+      &:hover {
+        color: @btn-primary-text-color;
+        background-color: @color-primary-hover;
+      }
+
+      &::before {
+        margin-right: @pad / 3;
+      }
+    }
+  }
+
+  &__info {
+    padding-left: @pad /1.5;
+    padding-right: @pad /1.5;
+
+    &-connection {
+      position: relative;
+      padding-left: 50px;
+      margin: 0;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+
+  &__buttons-item,
+  &__info-connection {
+    &::before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      width: 40px;
+      height: 40px;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+
+    &--slack::before {
+      background-image: url("/Content/img/icons/icon-slack.png");
+    }
+
+    &--telegram::before {
+      background-image: url("/Content/img/icons/icon-telegram.png");
+    }
+  }
+
+  &__name,
+  &__channel {
+    font-weight: bold;
+  }
+}
+
+.autopayment {
+  @auto-btn-width: 52px;
+
+  &__group {
+    position: relative;
+    padding-right: @auto-btn-width;
+
+    &-btn {
+      position: absolute;
+      right: 1px;
+      top: 0;
+      width: @auto-btn-width;
+
+      & .btn {
+        border-radius: 0;
+        border-top-right-radius: @br-input;
+        border-bottom-right-radius: @br-input;
+      }
+    }
+  }
+}
+
+.login {
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    padding: 90px 0 0;
+
+    & .logo {
+        display: block;
+        margin: 0 auto 30px;
+        border: none;
+    }
+
+    & a, & a:visited {
+        color: inherit;
+        text-decoration: underline;
+    }
+    &-incorrect:empty{
+      display: none;
+    }
+}
+
+.vertical-form {
+    margin: 0 auto;
+    width: 500px;
+    max-width: 100%;
+    text-align: center;
+
+    & legend {
+        font-size: 24px;
+        font-weight: 500;
+        margin: 0 0 30px;
+        text-align: center;
+        width: 100%;
+    }
+
+    & input[type="text"], 
+    & input[type="password"] {
+        border: 1px solid #c1c1c1;
+        color: #c1c1c1;
+        font-size: 18px;
+        height: 50px;
+    }
+
+    & input[type="text"], 
+    & input[type="password"], 
+    & input[type="submit"] {
+        border-radius: 3px;
+        color: #2d2d2d;
+        display: block;
+        font-family: inherit;
+        margin: 0 auto 18px;
+        outline: medium none;
+        text-align: center;
+        width: 323px;
+        max-width: 100%;
+    }
+
+    & input[type="submit"] {
+        background: none repeat scroll 0 0 #3686bb;
+        border: medium none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 400;
+        height: 57px;
+        letter-spacing: 1.5px;
+        outline: 0 none;
+        width: 327px;
+
+        &:hover{
+          background-color: #2b6a93;
+            transition: all .3s ease 0s;
+        }
+    }
+
+    & .footer{
+      margin-bottom: 200px;
+        text-align: center;
+
+        & p {
+          text-align: center;
+          &:first-child {
+            color: #ccc;
+        }
+        }
+
+        & a:first-child {
+            border-bottom: 1px solid #ccc;
+            text-decoration: none;
+        }
+
+        p:nth-child(2) a {
+            border-bottom: 1px solid #000;
+        }
+    }
+}
+
+.company-data{
+  padding-top: @pad*3;
+
+  &__hint{
+    display: block;
+    padding-top: @pad*1.333;
+    font-size: @fz*0.875;
+  }
+
+  &__autoinvoice{
+    &--payment{
+      margin-bottom: @pad*4;
+    }
+
+    &-title{
+      margin-top: 0;
+      margin-bottom: @pad*2;
+    }
+  }
+}
+
+.suggestions {
+  position: relative;
+
+  &__block {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 100%;
+    padding: @pad*1.5 @pad/3 @pad/3 @pad/3;
+    background-color: @color-even;
+    border: 1px solid @color-primary;
+    z-index: 2;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: @pad/3;
+    cursor: pointer;
+    font-size: @fz-lg;
+    color: @color-base-light;
+
+    &:hover {
+      color: @color-base;
+    }
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & li {
+      cursor: pointer;
+      padding: @pad/3 @pad/2;
+
+      &:hover {
+        background-color: @color-primary;
+        color: @btn-primary-text-color;
+      }
+
+      & + li {
+        border-top: 1px dashed @color-base-light;
+      }
+    }
+  }
+
+  &.loading::after {
+    position: absolute;
+    bottom: @pad/3;
+    right: 0;
+  }
+}
+
+.autoinvoice{
+  padding: @pad*2;
+  border: 1px solid @color-border;
+
+  &__row{
+    display: flex;
+    align-items: center;
+  }
+
+  &__title{
+    font-size: @fz;
+    font-weight: 700;
+    margin: 0 0 @pad/3;
+  }
+
+  &__text{
+    margin: 0;
+    font-size: @fz*0.875;
+    color: @color-base-light;
+  }
+
+  &__btn{
+    margin-left: auto;
+  }
+}

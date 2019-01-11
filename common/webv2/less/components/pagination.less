@@ -1,0 +1,141 @@
+// main: ../main.less
+
+.pagination{
+  font-size: 0;
+
+  &--center{
+    display: block;
+    text-align: center;
+  }
+
+  & > a,
+  & > span{
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 35px;
+    height: 35px;
+    line-height: 35px;
+    font-size: @fz;
+    text-align: center;
+    padding-left: @pad/3;
+    padding-right: @pad/3;
+  }
+  & > a{
+    &:hover{
+      text-decoration: none;
+    }
+    &::before{
+      display: inline-block;
+      vertical-align: middle;
+      font-family: @ff-icons;
+    }
+  }
+  &__next::before,
+  &__prev::before{
+    content: "\e902";
+  }
+  &__start::before,
+  &__end::before{
+    content: "\e902 \e902";
+    letter-spacing: -10px;
+  }
+  &__start::before,
+  &__prev::before{
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+  }
+}
+
+.pages {
+  text-align: center;
+
+  .smallnav &{
+    text-align: right;
+  }
+
+  .content__footer &{
+    width: 100%;
+  }
+  &-nav {
+    display: inline-block;
+    vertical-align: middle;
+    .content__footer &{
+      display: block;
+    }
+
+    &__next,
+    &__prev {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: @fz/1.25;
+      position: relative;
+      .hov-foc-act(transparent, @color-primary, none);
+
+      .content__footer &{
+        max-width: 48%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+    &__prev {
+      padding-left: 20px;
+      &::before {
+        display: block;
+        font-family: @ff-icons;
+        content: "\e902";
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        position: absolute;
+        top: -2px;
+        left: 0;
+      }
+    }
+    &__next {
+      padding-right: 20px;
+      &::after {
+        display: block;
+        font-family: @ff-icons;
+        content: "\e902";
+        position: absolute;
+        top: -2px;
+        right: 0;
+      }
+    }
+    &__prev + &__next::before {
+      display: inline-block;
+      content: "|";
+      padding: 0 @pad;
+      color: @color-border;
+    }
+  }
+  &-download {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: @pad;
+    &__item {
+      display: inline-block;
+      vertical-align: middle;
+      color: @color-gray;
+      font-size: @fz*1.25;
+      line-height: @fz;
+      padding-left: @pad;
+      .hov-foc-act(none, @color-primary, none);
+      & + & {
+        margin-right: @pad/2;
+      }
+    }
+  }
+  &-ellipsis{
+    & a{
+      display: inline-block;
+      vertical-align: middle;
+      width: 45%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    @media @view-tablets{
+      margin-top: @pad*2;
+    }
+  }
+}

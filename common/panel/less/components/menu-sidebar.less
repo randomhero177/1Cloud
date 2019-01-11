@@ -1,0 +1,70 @@
+//@import "../themes/default/variables.less";
+.menu-sidebar {
+  font-family: @ff;
+  background-color: @color-inverse;
+  color: @color-base;
+  white-space: nowrap;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: -@pad*3;
+    right: -@pad*2;
+    display: block;
+    width: 1000px;
+    height: 40000px;
+    content: "";
+    background: @color-inverse;
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+  }
+
+  ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+
+    li {
+
+      a {
+        display: block;
+        font-size: @fz;
+        line-height: 1;
+        color: lighten(@color-base, 5%);
+        padding: @pad/1.5 @pad/3 @pad/1.5 @pad;
+        text-decoration: none;
+        transition: background-color 0.1s;
+
+        &:hover {
+          background-color: @color-even;
+          color: @link-color-hover;
+          text-decoration: none;
+        }
+
+        &:focus,
+        &:active {
+          color: @link-color-hover;
+          text-decoration: none;
+        }
+      }
+
+      &.active a {
+        color: @link-color-hover;
+        background-color: @color-even;
+        border-left: 3px solid @color-secondary;
+        padding-left: calc(~"@{pad} - 3px");
+      }
+
+      &.support {
+        position: relative;
+      }
+    }
+  }
+
+  & a.budge-menu-item {
+    position: absolute;
+    top: 8px;
+    left: 120px;
+  }
+}

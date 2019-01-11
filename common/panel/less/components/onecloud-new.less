@@ -1,0 +1,164 @@
+﻿/****** ONECLOUD FORM STYLES *****/
+@input-height: 44px;
+
+.form-custom {
+
+  & input[type="radio"],
+  & input[type="checkbox"] {
+    display: none;
+  }
+
+  @radio-size: 20px;
+
+  & input[type="radio"] + label,
+  & input[type="checkbox"] ~ label {
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: @pad;
+    margin-bottom: @pad;
+    font-size: @fz;
+    line-height: @radio-size; /* Like size of a ::before element */
+    padding-left: @pad*2;
+    color: @color-base;
+    cursor: pointer;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      box-sizing: border-box;
+      display: block;
+      content: "";
+      width: @radio-size;
+      height: @radio-size;
+      border-radius: 4px;
+      background: @color-inverse;
+      border: 1px solid @color-border;
+    }
+
+    &::after {
+      box-sizing: border-box;
+      display: none;
+      position: absolute;
+      font-weight: 400;
+    }
+  }
+
+    & input[type="radio"] + label::before {
+      border-radius: @radio-size / 2;
+    }
+
+    & input[type="radio"] + label::after {
+      content: "";
+      width: @radio-size / 2;
+      height: @radio-size / 2;
+      border-radius: @radio-size / 4;
+      background-color: @color-secondary;
+      left: 5px;
+      top: 5px;
+    }
+
+    & input[type="checkbox"] ~ label::after {
+      width: @radio-size;
+      height: @radio-size;
+      line-height: @radio-size;
+      text-align: center;
+      content: "\2714";
+      color: @color-secondary;
+      font-size: 17px;
+      left: 0;
+      top: 0;
+    }
+
+  & input[type="radio"]:checked + label::after,
+  & input[type="checkbox"]:checked ~ label::after {
+    display: block;
+  }
+
+  & input[type=text]:not([class*="smallinput"]) {
+
+    & + label {
+      top: 9px;
+    }
+
+      &:focus + label,
+      & + label.stay {
+        top: -2px;
+      }
+  }
+
+  & input[type=number] {
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  & .form-visual-tips {
+    font-size: @fz*0.875;
+    padding-top: @pad/2;
+  }
+
+  &--pt {
+    padding-top: @pad/2;
+  }
+}
+
+.form {
+  &-group {
+    .clear;
+
+    &--bigmarg {
+      margin-bottom: @pad*2;
+    }
+  }
+
+  &-control {
+    height: @input-height;
+    border-radius: @br-input;
+    color: @color-base;
+
+    &[disabled] {
+      opacity: 0.65;
+    }
+
+    &-feedback{
+      height: 100%;
+      line-height: 100%;
+    }
+  }
+}
+
+label {
+  margin-bottom: 0;
+  font-size: @fz-s;
+  font-weight: 400;
+  color: @color-base-light;
+}
+
+.label {
+  &--invisible {
+    display: block;
+    visibility: hidden;
+    line-height: 2;
+  }
+
+  &--text {
+    color: @color-base;
+    font-size: @fz - 1;
+  }
+}
+
+.smallinput {
+  width: 50px;
+  padding: @pad/3;
+  text-align: center;
+  margin-left: @pad;
+  border: 1px solid @color-primary;
+  color: @color-base;
+}

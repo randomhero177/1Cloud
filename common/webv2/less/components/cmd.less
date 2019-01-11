@@ -1,0 +1,78 @@
+// main: ../main.less
+
+.cmd{
+  display: block;
+  background-color: #000000;
+  color: @color-inverse;
+  font-size: @fz*0.875;
+  margin: @pad-root 0;
+  position: relative;
+  transition: height 0.2s;
+  border: 0;
+  padding: 0;
+  & code{
+    display: block;
+    padding: @pad*1.5;
+  }
+  & .nowrap{
+    // white-space: nowrap;
+  }
+
+  & ul{
+    list-style: none;
+  }
+
+  &--request{
+    border-left: 7px solid @color-primary;
+  }
+  &--reveal{
+    height: 265px;
+    overflow: hidden;
+    padding-bottom: 50px;
+    &::after{
+      display: block;
+      content: "";
+      background-color: #000;
+      position: absolute;
+      height: 50px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  &__trigger{
+    display: block;
+    width: 150px;
+    padding: @pad;
+    text-align: center;
+    cursor: pointer;
+    background-color: @color-blue-light;
+    color: @color-inverse;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    margin-left: -75px;
+    z-index: 1;
+    .hov-foc-act(@color-blue, @color-inverse, none);
+
+    &::after{
+      display: inline-block;
+      vertical-align: middle;
+      font-family: @ff-icons;
+      content: "\e91e";
+      padding-left: @pad/2;
+      position: relative;
+      top: -5px;
+      left: 5px;
+      transition: transform 0.2s;
+      transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+    }
+  }
+
+  &--active &__trigger::after{
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    top: 3px;
+  }
+}

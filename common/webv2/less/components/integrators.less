@@ -1,0 +1,218 @@
+// main: ../pages/private-cloud.less
+
+
+@integrators-gray: #f8f8f8;
+@integrators-gray-border: #c4c4c4;
+
+.integrators {
+  &-block {
+    padding: @pad*4 0;
+
+    &__heading {
+      margin-bottom: @pad*4;
+    }
+
+    &__title {
+      margin: 0;
+      font-size: @fz*1.75;
+
+      &--mg {
+        margin-bottom: @pad;
+      }
+    }
+  }
+
+  &-instruments {
+
+    &__item {
+      margin-bottom: @pad*4;
+
+      @media @view-desktop {
+        margin-bottom: @pad*2;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        top: 0;
+      }
+
+      &--template {
+        &:before {
+          background: url("@{img-path}/integrators/icons/instr_1.png") center top no-repeat;
+        }
+      }
+
+      &--copy {
+        &:before {
+          background: url("@{img-path}/integrators/icons/instr_2.png") center top no-repeat;
+        }
+      }
+
+      &--rest {
+        &:before {
+          background: url("@{img-path}/integrators/icons/instr_3.png") center top no-repeat;
+        }
+      }
+
+      &--snapshot {
+        &:before {
+          background: url("@{img-path}/integrators/icons/instr_4.png") center top no-repeat;
+        }
+      }
+
+      &:nth-child(2n+1) {
+        text-align: right;
+        padding-right: @pad*9;
+
+        &:before {
+          right: 0;
+        }
+      }
+
+      &:nth-child(2n+2) {
+        @media @view-desktop {
+          float: right;
+        }
+
+        padding-left: @pad*9;
+
+        &:before {
+          left: 0;
+        }
+      }
+    }
+  }
+
+  &-enterprise {
+    &__item {
+      margin-bottom: @pad*2;
+
+      @media @view-tablets {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+
+  &-profit {
+    background: url("@{img-path}/integrators/profit-bg.jpg") center center no-repeat;
+    background-size: cover;
+    color: @color-inverse;
+
+    &__list {
+      margin-bottom: @pad*4;
+    }
+
+    &__img {
+      margin-bottom: @pad;
+    }
+
+    &__item {
+      background: @color-inverse;
+      border-radius: 5px;
+      color: @color-base;
+      padding: @pad @pad*2;
+      margin-bottom: @pad*2;
+
+      @media @view-desktop {
+        margin-bottom: 0;
+      }
+
+      &--profit {
+        background: @color-primary;
+        color: @color-inverse;
+      }
+    }
+
+    &__desc {
+      position: relative;
+      margin-bottom: @pad*2;
+
+      @media @view-desktop {
+        margin-bottom: 0;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 60px;
+      }
+
+      &--first {
+        &:before {
+          background: url("@{img-path}/integrators/icons/profit_1.png") left top no-repeat;
+        }
+      }
+
+      &--card {
+        &:before {
+          background: url("@{img-path}/integrators/icons/profit_2.png") left top no-repeat;
+        }
+      }
+
+      &--get {
+        &:before {
+          background: url("@{img-path}/integrators/icons/profit_3.png") left top no-repeat;
+        }
+      }
+
+      &--stats {
+        &:before {
+          background: url("@{img-path}/integrators/icons/profit_4.png") left top no-repeat;
+        }
+      }
+
+
+      &:before {
+        background-position: center top;
+
+        @media @view-tablets {
+          background-position: left top;
+        }
+      }
+    }
+  }
+
+  &-vmware {
+    &__img {
+      margin-top: @pad*4;
+    }
+  }
+
+  &-map {
+    background: @color-blue-light;
+    background-size: cover;
+
+    @media @view-tablets {
+      background: url("@{img-path}/integrators/map.jpg") center top no-repeat;
+    }
+
+    &__article {
+      margin-bottom: @pad*2;
+    }
+  }
+
+  &-btn {
+    &--desktop {
+      display: none;
+
+      @media @view-tablets {
+        display: inline-block;
+      }
+    }
+
+    &--mobile {
+      display: block;
+
+      @media @view-tablets {
+        display: none;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,249 @@
+// main: main.less
+@header-icon-size: 41px;
+@header-icon-font-size: 20px;
+
+.main-header {
+  background-color: @color-inverse;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+
+  &--sticky {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+  }
+}
+
+.header {
+  &__top {
+    position: relative;
+    padding-top: (@pad*2 - @pad/3);
+    padding-bottom: (@pad*2 - @pad/3);
+    transition: margin 0.2s;
+  }
+
+  &__logo {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+  }
+
+  &__right {
+    float: right;
+    text-align: right;
+    padding-right: @pad;
+
+    &-block {
+      display: inline-block;
+      vertical-align: middle;
+
+      & + & {
+        //margin-left: @pad/3;
+      }
+
+      & .btn-blue {
+        padding: 10px 10px 8px 10px;
+        line-height: 1;
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: @header-icon-size;
+    height: @header-icon-size;
+    line-height: @header-icon-size;
+    border-radius: @header-icon-size/2;
+    text-align: center;
+    background-color: @color-blue-light;
+    color: @color-inverse;
+    text-indent: -10000px;
+    position: relative;
+    cursor: pointer;
+
+    &:before {
+      display: block;
+      width: @header-icon-size;
+      height: @header-icon-size;
+      text-align: center;
+      font-size: @header-icon-font-size;
+      line-height: @header-icon-size;
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-indent: 0;
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
+
+    &--active {
+      background-color: @color-primary;
+
+      &:hover {
+        color: @color-blue-light;
+      }
+    }
+
+    &--active {
+      background-color: @color-primary;
+
+      &:hover {
+        color: @color-blue-light;
+      }
+    }
+  }
+
+
+  &__social {
+    text-align: right;
+    padding-top: @pad/3;
+
+    & .social {
+      &__item {
+        color: spin(desaturate(lighten(@color-base, 37%), 2%), 2);
+        .hov-foc-act(transparent, @color-base, none);
+      }
+    }
+  }
+  // ============ STICKY HEADER ============
+}
+
+@media @view-desktop {
+  .header {
+    &__top {
+      padding: 0;
+
+      & .header {
+
+        &__logo {
+          &-img {
+            position: absolute;
+            top: 20px;
+          }
+        }
+      }
+
+      &--small .header {
+        &__logo {
+
+          &-img {
+            top: 10px;
+          }
+        }
+
+        &__right {
+          padding-top: @pad / 1.5;
+          transition: all .2s ease;
+        }
+      }
+    }
+
+    &__right {
+      padding-top: @pad*1.25;
+      transition: all .2s ease;
+    }
+  }
+}
+@media @view-large {
+  .header {
+    &__right {
+      padding-top: 22px;
+      padding-left: 0;
+    }
+  }
+}
+
+// .newsite {
+//   display: block;
+//   height: 0;
+//   width: 100%;
+//   font-size: 13px;
+//   line-height: 1;
+//   text-align: center;
+//   background: #5aa7cd;
+//   color: @color-inverse;
+//   padding: 3px @pad/1.5;
+//   position: absolute;
+//   top: -60px;
+//   left: 0;
+//   transition: all 0.2s;
+//
+//   &__button {
+//     display: inline-block;
+//     width: 16px;
+//     height: 15px;
+//     text-align: left;
+//     position: relative;
+//     vertical-align: middle;
+//     margin-left: 10px;
+//     &::after,
+//     &::before {
+//       display: block;
+//       content: "";
+//       width: 3px;
+//       height: 80%;
+//       background: @color-primary;
+//       position: absolute;
+//       transition: transform ease-in 0.2s;
+//     }
+//     &:hover::before,
+//     &:hover::after {
+//       background: @color-hover;
+//     }
+//   }
+//   &__ok{
+//     &::before {
+//       left: 1px;
+//       top: 4px;
+//       height: 60%;
+//       transform: rotate(-50deg);
+//       -webkit-transform: rotate(-50deg);
+//     }
+//     &::after {
+//       left: 6.5px;
+//       top: 0.5px;
+//       transform: rotate(40deg);
+//       -webkit-transform: rotate(40deg);
+//     }
+//     &:hover::before {
+//       transform: rotate(-230deg);
+//       -webkit-transform: rotate(-230deg);
+//     }
+//     &:hover::after {
+//       transform: rotate(220deg);
+//       -webkit-transform: rotate(220deg);
+//     }
+//   }
+//   &__cancel{
+//     &::before,
+//     &::after {
+//       left: 0;
+//       top: 2px;
+//     }
+//     &::before {
+//       transform: rotate(-45deg);
+//       -webkit-transform: rotate(-45deg);
+//     }
+//     &::after {
+//       transform: rotate(45deg);
+//       -webkit-transform: rotate(45deg);
+//     }
+//     &:hover::before {
+//       transform: rotate(-225deg);
+//       -webkit-transform: rotate(-225deg);
+//     }
+//     &:hover::after {
+//       transform: rotate(225deg);
+//       -webkit-transform: rotate(225deg);
+//     }
+//   }
+// }

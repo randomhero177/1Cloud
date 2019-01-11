@@ -1,0 +1,206 @@
+// main: ../main.less
+
+@switch-trigger-size: 26px;
+@switch-bar-border: 2px;
+@switch-bar-width: @switch-trigger-size*2;
+
+.switch{
+  position: relative;
+
+  &__input{
+    display: block;
+    width: @switch-trigger-size;
+    height: @switch-trigger-size;
+    position: absolute;
+    bottom: @switch-bar-border;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+
+    &:first-of-type{
+      left: calc(~"(100% - @{switch-bar-width})/2");
+    }
+    &:last-of-type{
+      right: calc(~"(100% - @{switch-bar-width})/2");
+    }
+    &:hover,
+    &:focus,
+    &:active{
+      border: 0;
+    }
+
+    // HACK FOR BOOTSTRAP
+    &[type="radio"],
+    &[type="checkbox"]{
+      margin: 0;
+      padding: 0;
+    }
+  }
+  &__label{
+    width: calc(~"(100% - @{switch-bar-width})/2");
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    margin: 0;
+    font-size: @fz;
+    font-weight: 400;
+    line-height: @switch-trigger-size;
+    color: @color-base;
+    opacity: 0.5;
+    cursor: pointer;
+    &:hover{
+      opacity: 0.75;
+    }
+  }
+  &--small &__label{
+    font-size: @fz*0.8;
+  }
+  &__input:checked + &__label{
+    opacity: 1;
+  }
+  &__input:disabled + &__label,
+  &__input:disabled + &__label:hover{
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+  &--horizontal &__input:first-of-type + &__label{
+    left: 0;
+    text-align: right;
+    padding-right: @pad/1.5;
+    @media @view-desktop{
+      padding-right: @pad*2;
+    }
+
+    .switch--small&{
+      padding-right: @pad;
+    }
+  }
+  &--horizontal &__input:last-of-type + &__label{
+    right: 0;
+    padding-left: @pad/1.5;
+    text-align: left;
+    @media @view-desktop{
+      padding-left: @pad*2;
+    }
+
+    .switch--small&{
+      padding-left: @pad;
+    }
+  }
+
+  &__bar{
+    width: @switch-bar-width;
+    height: @switch-trigger-size + @switch-bar-border*2;
+    padding: @switch-bar-border;
+    border-radius: (@switch-trigger-size + @switch-bar-border*2)/2;
+    background-color: #dee0e2;
+    position: relative;
+    overflow: hidden;
+    background-color: @color-blue-light;
+
+    .switch--horizontal &{
+      margin: 0 auto;
+    }
+    .switch--vertical &{
+      width: 100%;
+    }
+  }
+
+  &__trigger{
+    display: block;
+    width: @switch-trigger-size;
+    height: @switch-trigger-size;
+    background-color: @color-inverse;
+    border-radius: @switch-trigger-size/2;
+    cursor: pointer;
+    position: absolute;
+    top: @switch-bar-border;
+    left: @switch-bar-border;
+    z-index: 1;
+    transition: left 0.2s;
+
+  }
+  &__input:last-of-type:checked ~ &__bar{
+    & > .switch__trigger{
+      left: calc(~"100% - @{switch-bar-border} - @{switch-trigger-size}");
+    }
+  }
+
+  // ============ VERTICAL SWITCH WITH VARIOUS NUMBER OF INPUTS ============
+  @switch-inputs: 3;
+
+  .switchElemPos (@index) when (@index < @switch-inputs){
+    &:nth-of-type(@{index}){
+      left: (@index - 1) * (100% / (@switch-inputs - 1));
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+    }
+    .switchElemPos(@index + 1);
+  }
+  .switchTriggerPos (@index) when (@index < @switch-inputs){
+    &:nth-of-type(@{index}):checked ~ .switch__bar{
+      & > .switch__trigger{
+        left: calc( ~"((@{index} - 1) * (100% / (@{switch-inputs} - 1))) - @{switch-trigger-size}/2");
+      }
+    }
+    .switchTriggerPos(@index + 1);
+  }
+
+  &--vertical{
+    padding-top: @pad*3;
+
+    & .switch{
+      &__label,
+      &__input{
+        &:first-of-type{
+          left: @switch-bar-border;
+        }
+        &:last-of-type{
+          right: @switch-bar-border;
+          text-align: right;
+        }
+      }
+      &__label{
+        top: 0;
+        transform: none;
+        -webkit-transform: none;
+        width: auto;
+
+        .switchElemPos(2);
+        &::after{
+          display: block;
+          content: "";
+          width: 1px;
+          height: @pad/2;
+          background-color: @color-border;
+          position: absolute;
+          left: 50%;
+          bottom: -@pad;
+        }
+      }
+      &__input{
+        width: 100% / @switch-inputs;
+        .switchElemPos(2);
+        .switchTriggerPos(2);
+      }
+    }
+    &.only-two .switch {
+        &__label:last-of-type {
+            left: auto;
+            transform: none;
+        }
+
+        &__input:last-of-type {
+            left: auto;
+            right: -2px;
+            transform: none;
+        }
+    }
+  }
+  & &__input:last-of-type:checked ~ &__bar {
+        & > .switch__trigger {
+            left: calc(~"100% - @{switch-bar-border} - @{switch-trigger-size}");
+        }
+    }
+}

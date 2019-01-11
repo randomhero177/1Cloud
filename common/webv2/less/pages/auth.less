@@ -1,0 +1,232 @@
+﻿@fz: 17px;
+@fz-heading: 38px;
+ 
+// COLORS
+@color-base: #000000;
+@color-inverse: #fff;
+@color-primary: #5066ab;
+@color-hover: #f5b244;
+@color-bg: #f2f5f9;
+@color-border: #dee6eb;
+@color-placeholder: #8089a6;
+
+// STYLES
+@pad: 15px;
+@b-radius: 4px;
+
+// MEDIA
+@view-xs: ~"only screen and (max-width: 479px)";
+@view-mobile: ~"only screen and (min-width: 480px)";
+@view-tablets: ~"only screen and (min-width: 768px)";
+@view-desktop: ~"only screen and (min-width: 992px)";
+@view-large: ~"only screen and (min-width: 1200px)";
+
+@view-mobile-only: ~"only screen and (min-width: 480px) and (max-width: 767px)";
+@view-tablets-only: ~"only screen and (min-width: 768px) and (max-width: 991px)";
+@view-desktop-only: ~"only screen and (min-width: 992px) and (max-width: 1199px)";
+
+body, html {
+  min-height: 100%;
+}
+
+body {
+  background-color: @color-bg;
+}
+
+a:hover,
+a:focus,
+a:active{
+  outline: none;
+}
+
+.text {
+  &-placeholder {
+    color: @color-placeholder;
+  }
+  &-lg{
+    font-size: @fz * 1.125;
+    line-height: 1.25em;
+  }
+}
+
+.auth {
+  margin-top: @pad * 2;
+
+  @media @view-tablets {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: @pad * 4;
+  }
+
+  @media @view-desktop {
+    margin-top: @pad * 4;
+    width: 65%;
+  }
+
+  @media @view-large { 
+    width: 50%;
+  }
+
+  &__header {
+    margin-bottom: @pad * 2;
+    text-align: center;
+  }
+
+  &__logo {
+    display: block;
+    text-align: center;
+
+    &-img {
+      display: inline-block;
+      height: 75px;
+    }
+  }
+
+  &__block {
+    background-color: @color-inverse;
+    padding: @pad;
+    margin-bottom: @pad * 2;
+    border-radius: @b-radius;
+    border: 1px solid @color-placeholder;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+
+    @media @view-tablets {
+      padding: @pad * 2;
+    }
+
+    @media @view-desktop {
+      padding: @pad*3 @pad*5 @pad*2;
+    }
+
+    &-title {
+      margin-top: 0;
+      margin-bottom: @pad * 2;
+      font-size: @fz-heading;
+      text-align: center;
+
+      @media @view-tablets {
+        margin-bottom: @pad * 3;
+      }
+
+      &--sm {
+        font-size: @fz-heading / 1.25;
+        margin-bottom: @pad;
+      }
+    }
+  }
+
+  &__form {
+    & .soclogin {
+      height: auto !important;
+      padding-top: @pad / 1.5;
+    }
+  }
+
+  &__icon {
+    margin-right: @pad / 1.5;
+    font-size: @fz * 1.25;
+  }
+
+  &__social {
+    @icon-size: 36px;
+
+    text-align: center;
+    font-size: 0;
+    margin-top: @pad;
+
+    &-item {
+      display: inline-block;
+      vertical-align: top;
+      width: @icon-size;
+      height: @icon-size;
+      text-decoration: none;
+      text-indent: -40000px;
+      background-image: url("/img/social.png");
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+
+      &--fb {
+        background-position: 0 -@icon-size;
+      }
+
+      &--mail {
+        background-position: 0 -@icon-size * 2;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+
+      & + & {
+        margin-left: @pad;
+      }
+    }
+  }
+
+  &__footer {
+    margin-bottom: @pad * 2;
+    text-align: center;
+
+    & a {
+      text-decoration: underline;
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__external {
+    margin-top: @pad;
+    margin-bottom: @pad;
+    padding-top: @pad *2;
+    text-align: center;
+    border-top: 1px solid @color-border;
+
+    &--nomtop {
+      margin-top: 0;
+    }
+
+    &--nombot {
+      margin-bottom: 0;
+    }
+
+    &-item {
+      background-color: transparent;
+      border: 1px solid @color-border;
+      padding: 0;
+      transition: all 0.2s;
+
+      &:hover {
+        box-shadow: 0 0 5px rgba(0,0,0,0.4);
+      }
+
+      & + & {
+        margin-left: @pad / 2;
+      }
+    }
+
+    &-title {
+      display: inline-block;
+      height: 42px;
+      line-height: 42px;
+      text-transform: uppercase;
+      padding: 0 @pad / 1.5;
+    }
+  }
+}
+
+
+iframe.signout {
+  visibility: hidden;
+}
+.validation-summary-errors ul{
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}

@@ -1,0 +1,53 @@
+// main: ../main.less
+
+.features{
+  background-color: @color-blue;
+  color: @color-inverse;
+  padding-top: @pad-root*1.5;
+  padding-bottom: @pad-root*1.5;
+
+  &__list{
+    font-size: 0;
+    text-align: center;
+  }
+  &__item{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    font-size: @fz*2 - 2;
+    font-weight: 300;
+    line-height: 1.375;
+    margin-bottom: @pad;
+    text-align: left;
+    border-left: 5px solid @color-primary;
+    padding-left: @pad;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    @media @view-xs, @view-mobile-only{
+      height: auto !important;
+    }
+    @media @view-mobile{
+        width: auto;
+        max-width: 50%;
+        padding-right: @pad*2;
+    }
+
+    @media @view-tablets-only{
+      font-size: @fz*1.25;
+    }
+    @media @view-tablets{
+      margin-bottom: 0;
+      max-width: 33.33%;
+    }
+    @media @view-desktop{
+      padding-right: @pad*4;
+    }
+  }
+  &__list--four &__item{
+      @media @view-desktop{
+        max-width: 25%;
+        padding-right: @pad*4;
+    }
+  }
+}

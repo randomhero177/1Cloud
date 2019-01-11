@@ -1,0 +1,317 @@
+// main: ../pages/private-cloud.less
+
+.hosting {
+  &-block {
+    padding: @pad*2 0;
+
+    @media @view-tablets {
+      padding: @pad*4 0;
+    }
+
+    &--inverse {
+      color: @color-inverse;
+    }
+
+    &__heading {
+      margin-bottom: @pad*2;
+
+      @media @view-tablets {
+        margin-bottom: @pad*4;
+      }
+
+      &-title {
+        margin: 0;
+        font-size: @fz*2;
+
+        &--mg {
+          margin-bottom: @pad;
+        }
+      }
+
+      &-txt {
+        margin-bottom: 0;
+      }
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &-header {
+    background: @color-blue-light url("@{img-path}/hosting/header-bg.png") center 200px no-repeat;
+
+    &__main {
+      padding-top: @pad*2;
+      margin-bottom: @pad*2;
+      text-align: center;
+
+      @media @view-desktop {
+        text-align: left;
+        margin-bottom: 0;
+      }
+    }
+
+    &__title {
+      color: @color-inverse;
+      font-size: @fz*3;
+      margin-bottom: @pad;
+
+      @media @view-desktop {
+        margin-bottom: @pad*4;
+      }
+    }
+
+    &__control {
+      border: 1px solid @color-border;
+      height: 47px;
+      border-radius: @br;
+      margin-right: @pad;
+    }
+
+    &__img {
+      display: block;
+      margin: 0 auto;
+      max-width: 300px;
+
+      @media @view-desktop {
+        max-width: initial;
+      }
+    }
+  }
+
+  &-scale {
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    &__item {
+      width: 230px;
+      text-align: center;
+      position: relative;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: @pad*10;
+      }
+
+      &:nth-child(1) {
+        &:before {
+          background: url("@{img-path}/hosting/icons/li_2-1.png") center center no-repeat;
+        }
+      }
+
+      &:nth-child(2) {
+        &:before {
+          background: url("@{img-path}/hosting/icons/li_2-2.png") center center no-repeat;
+        }
+      }
+
+      &:nth-child(3) {
+        &:before {
+          background: url("@{img-path}/hosting/icons/li_2-3.png") center center no-repeat;
+        }
+      }
+    }
+  }
+
+  &-service {
+    background-color: @color-blue-light;
+
+    &__list {
+      @media @view-tablets {
+        padding-left: @pad*3;
+      }
+    }
+
+    &__heading {
+      @media @view-tablets {
+        padding-left: @pad*7;
+      }
+    }
+
+    &__img {
+      position: relative;
+      left: @pad*5;
+      display: none;
+
+      @media @view-tablets {
+        display: block;
+      }
+    }
+
+    &__item {
+      position: relative;
+      padding-left: @pad*4;
+      margin-bottom: @pad*3;
+
+      &-title {
+        font-weight: bold;
+        margin-bottom: @pad/2;
+      }
+
+      &-txt {
+        color: @color-border;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 35px;
+        height: 35px;
+      }
+
+      &:nth-child(1) {
+        &:before {
+          background: url("@{img-path}/hosting/icons/li_3-1.png") top left no-repeat;
+        }
+      }
+
+      &:nth-child(2) {
+        &:before {
+          background: url("@{img-path}/hosting/icons/li_3-2.png") top left no-repeat;
+        }
+      }
+
+      &:nth-child(3) {
+        &:before {
+          background: url("@{img-path}/hosting/icons/li_3-3.png") top left no-repeat;
+        }
+      }
+
+      &:nth-child(4) {
+        &:before {
+          background: url("@{img-path}/hosting/icons/li_3-4.png") top left no-repeat;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &-site {
+    &__item {
+      border: 1px solid @color-border;
+      border-radius: @br;
+      padding: @pad*2;
+      margin-bottom: @pad;
+
+      &-title {
+        position: relative;
+        padding-left: @pad*4;
+        margin-bottom: @pad*2;
+
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          top: -@pad;
+          width: 50px;
+          height: 50px;
+        }
+
+        &--cms {
+          &:before {
+            background: url("@{img-path}/hosting/icons/li_4-1.png") left center no-repeat;
+          }
+        }
+
+        &--windows {
+          &:before {
+            background: url("@{img-path}/hosting/icons/li_4-2.png") left center no-repeat;
+          }
+        }
+
+        &--linux {
+          &:before {
+            background: url("@{img-path}/hosting/icons/li_4-3.png") left center no-repeat;
+          }
+        }
+      }
+    }
+
+    &__list {
+      padding-left: @pad;
+      margin-left: @pad/2;
+      border-left: 2px solid @color-blue-light;
+
+      &-item {
+        margin-bottom: @pad;
+        position: relative;
+
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          background: @color-inverse;
+          border: 2px solid @color-blue-light;
+          border-radius: 100%;
+          width: @pad;
+          height: @pad;
+          left: -@pad*1.5 - 1;
+          top: @pad/2;
+        }
+      }
+    }
+  }
+
+  &-storage {
+    background-color: @color-blue-light;
+
+    &__heading {
+      padding-bottom: @pad*2;
+
+      &-title {
+        text-transform: none;
+        font-size: @fz*1.5;
+        margin-bottom: @pad/2;
+      }
+    }
+
+    &__img {
+      position: relative;
+      @media @view-desktop {
+        top: @pad*4;
+      }
+    }
+
+    &__list {
+      margin-bottom: @pad*2;
+    }
+
+    &__item {
+      margin-bottom: @pad;
+      position: relative;
+      padding-left: @pad*2;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: @pad/5;
+        width: 12px;
+        height: 12px;
+        background: url("@{img-path}/hosting/icons/arrow.png") left center no-repeat;
+      }
+    }
+  }
+
+  &-partners {
+    & .partners {
+      padding: 0 0 @pad*4;
+    }
+  }
+}

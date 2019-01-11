@@ -1,0 +1,324 @@
+﻿@br: 4px;
+
+.topblock {
+  background: #e7e7e7 url("@{img-path}/indextop/back.jpg") no-repeat center top;
+  color: #000;
+
+  @media @view-large {
+    padding-top: @pad*5;
+  }
+
+  &__heading {
+    text-align: center;
+
+    @media @view-tablets {
+      text-align: left;
+    }
+  }
+
+  &__title {
+    font-size: @fz*2.5;
+    font-weight: 600;
+    line-height: 1.25em;
+    margin-bottom: @pad;
+    margin-top: 0;
+
+    @media @view-tablets {
+      margin-top: @pad;
+    }
+
+    @media @view-desktop {
+      font-size: @fz*3;
+    }
+
+    @media @view-large {
+      font-size: @fz*4;
+    }
+  }
+
+  &__subtitle {
+    display: block;
+    font-size: @fz*1.25;
+    font-weight: 600;
+
+    @media @view-tablets {
+      font-size: @fz*1.5;
+    }
+  }
+
+  &__form {
+
+    @media @view-tablets {
+      float: right;
+    }
+
+    &-trigger {
+      margin-top: @pad *3;
+      border-radius: @br;
+
+      @media @view-tablets {
+        display: none;
+      }
+    }
+
+    &-inner {
+      display: none;
+      padding: @pad*7 @pad*3 @pad*3 @pad*3;
+      background: fadeout(@color-blue, 20%);
+      text-align: center;
+      border-radius: @br;
+
+      @media @view-tablets {
+        display: block;
+        padding: @pad*2 @pad;
+      }
+
+      @media @view-desktop {
+        padding: @pad*3;
+      }
+    }
+
+    &-close {
+      position: absolute;
+      top: @pad;
+      right: @pad;
+      width: 32px;
+      height: 32px;
+      line-height: 35px;
+      padding: 0;
+      text-align: center;
+      font-size: 35px;
+      background: transparent;
+      color: @color-inverse;
+      box-shadow: none;
+      border: 2px solid @color-inverse;
+      border-radius: 50%;
+
+      @media @view-tablets {
+        display: none;
+      }
+    }
+
+    &-header {
+      margin-bottom: @pad*3;
+    }
+
+    &-title {
+      color: @color-inverse;
+      margin: 0;
+      font-size: @fz*1.5;
+      font-weight: 600;
+      text-transform: none;
+    }
+
+    &-body {
+      margin-bottom: @pad*3;
+
+      & .form-control {
+        border: 0;
+        border-radius: @br;
+        background-color: @color-inverse;
+        text-align: center;
+        color: @color-base;
+
+        &::-webkit-input-placeholder {
+          color: #c4c4c4;
+        }
+
+        &::-moz-placeholder {
+          color: #c4c4c4;
+        }
+
+        &:-ms-input-placeholder {
+          color: #c4c4c4;
+        }
+      }
+
+      & [type="button"] {
+        border-radius: @br;
+      }
+    }
+
+    &-footer {
+      color: @color-inverse;
+      font-size: @fz*0.75;
+      line-height: 1.125;
+
+      & p {
+        margin: 0;
+      }
+
+      & a {
+        text-decoration: none;
+        color: #c4c4c4;
+        border-bottom: 1px solid #c4c4c4;
+        white-space: nowrap;
+
+        &:hover {
+          color: @color-primary;
+          border-color: @color-primary;
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &--opened {
+    overflow: hidden;
+  }
+
+  &--opened &__form-inner {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 150;
+    background: url("@{img-path}/indextop/form-back-xs.jpg") no-repeat center top;
+    background-size: cover;
+  }
+
+  &__row + &__row {
+    margin-top: @pad*4;
+
+    @media @view-large {
+      margin-top: @pad*5;
+    }
+  }
+
+
+
+  &__item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: @pad;
+    font-size: @fz;
+    text-align: left;
+    padding: 0 @pad;
+
+    @media @view-tablets {
+      width: 50%;
+      margin-bottom: @pad*2;
+    }
+
+    @media @view-desktop {
+      width: 33.33333333%;
+    }
+
+    &-wrap {
+      text-align: center;
+      font-size: 0;
+    }
+  }
+
+  &__service {
+    display: block;
+    padding: @pad+5 @pad*2 @pad+5 @pad*7;
+    margin-bottom: @pad;
+    background: @color-inverse;
+    color: #000;
+    position: relative;
+    overflow: hidden;
+    border-radius: @br;
+    box-shadow: 4px 8px 10px rgba(0,0,0,0.15);
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: #000;
+      text-decoration: none;
+    }
+
+    @media @view-desktop {
+      margin-bottom: 0;
+    }
+
+    @media @view-desktop-only {
+      padding: @pad+5 @pad @pad+5 @pad;
+    }
+
+    &::before {
+      display: block;
+      content: "";
+      width: 85px;
+      height: 151px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      background-position: 0 center;
+      background-repeat: no-repeat;
+      background-image: url("@{img-path}/indextop/icon-cloud.png");
+      transform: translateY(-50%);
+
+      @media @view-desktop-only {
+        display: none;
+      }
+    }
+
+    &--vds::before {
+      background-image: url("@{img-path}/indextop/icon-vps.png");
+    }
+
+    &--ssl::before {
+      background-image: url("@{img-path}/indextop/icon-ssl.png");
+    }
+
+    &--storage::before {
+      background-image: url("@{img-path}/indextop/icon-storage.png");
+    }
+
+    &--dns::before {
+      background-image: url("@{img-path}/indextop/icon-dns.png");
+    }
+
+    &-title {
+      display: block;
+      font-weight: 600;
+      font-size: @fz*1.625;
+      text-transform: none;
+      margin-top: 0;
+      margin-bottom: @pad/3;
+
+      @media @view-tablets-only {
+        font-size: @fz*1.5;
+      }
+    }
+
+    &-text {
+      display: block;
+      margin-top: 0;
+      margin-bottom: @pad;
+
+      @media @view-tablets-only {
+        font-size: @fz*0.875
+      }
+    }
+
+    &-link {
+      display: inline-block;
+      vertical-align: middle;
+      font-weight: 700;
+      color: @color-primary;
+
+      &::after {
+        display: inline-block;
+        vertical-align: middle;
+        font-family: @ff-icons;
+        font-size: 0.875em;
+        content: "\e902";
+        margin-left: @pad/2;
+        transition: all 0.2s;
+      }
+
+      &:hover {
+        text-decoration: underline;
+
+        &::after {
+          margin-left: @pad;
+        }
+      }
+    }
+  }
+}
