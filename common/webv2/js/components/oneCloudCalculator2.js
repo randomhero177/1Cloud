@@ -1,34 +1,48 @@
-﻿// создать модель собирающую данные
-//написать функцию по отрисовке с вьюхи с модели
-// посчитать
-//функция по изменению модели при событии
-// перерисовка вьюхи
-// посчитать
-
+﻿
 function initCalculatorVDS2(defaultObj) {
-  var cpuDigitVisibleObj = $('#cpu-slider-value .calculator__slider-digit'),
-    ramDigitVisibleObj = $('#ram-slider-value .calculator__slider-digit');
-
+  var cpuDigitVisibleObj = $('#cpu-slider-value .calculator__slider-digit');
+  var ramDigitVisibleObj = $('#ram-slider-value .calculator__slider-digit');
   var elemConfig = {
+    form: $('#order-form'),
     os: $('#os-select'),
     dc: $('#dc-select'),
     hdd: $('#storage-select'),
-    backUp: $('#backup-select'),
+    backup: $('#backup-select'),
     cpu: $('#cpu-slider'),
     ram: $('#ram-slider'),
     performanceElems: $('[name="performance-input"]'),
-    storageElems: $('[name="storage-type-input"]')
+    storageElems: $('[name="storage-type-input"]'),
+    periodElems: $('[name="price-per-input"]'),
+    soft: $('[name="isp-select"]'),
+    email: $('[name="customer-email"]')
   };
   
-
   var Calculator = {
     model: {
       curDcModel: {},
+      curBackup: null,
       curCpu: {},
       curRam: {},
       curHdd: {},
-      curDiskType: {},
-      curImage: {},
+      curHddObj: {},
+      curHddType: {},
+      curImage: -1,
+      curSoft: 0,
+      curSoftArr: [],
+      tariff: {
+        curCpu: {},
+        curRam: {},
+        curBackup: {},
+        curHdd: {}
+      },
+      order: {
+        email: '',
+        total: {
+          'price-per-month': 0,
+          'price-per-day': 0,
+          'price-per-hour': 0
+        }
+      },
 
       getDcModel: function (dcTitle) {
         for (var item in config.DataCenters) {
@@ -49,38 +63,95 @@ function initCalculatorVDS2(defaultObj) {
           }
         };
         Calculator.model.curDcModel.curPool = (typeof curModel == 'undefined' && model.length === 1) ? model[0] : curModel;
-        console.log('----');
       },
 
-      getCurrentHdd: function (type) {
+      getCurrentHddObj: function () {
         var model = Calculator.model.curDcModel.curPool.Disks;
+        var type = this.curHddType;
+        
         for (var item in model) {
-          
-          if (model[item].Type === type) {
-            Calculator.model.curHdd = model[item];
+          Calculator.model.curHddObj = model[item];
+          Calculator.model.curHddType = model[item].Type;
+          if (model[item].Type === type) { 
+            break
           }
         };
       },
 
-      getCurrentImage: function (imageId) {
+      getCurrentImage: function () {
         var model = Calculator.model.curDcModel.Images;
+        var imageId = parseInt(this.curImage);
         var curImage;
-        console.log(model);
-        console.log(imageId);
         for (var item in model) {
-          if (model[item].Id === parseInt(imageId)) {
-            curImage = model[item];
-            Calculator.model.curHdd.Min = model[item].MinDiskSize
-            break
+          if (model[item].Id === imageId) {
+            Calculator.model.curHddObj.Min = model[item].MinDiskSize;
+            Calculator.model.curSoftArr = model[item].AvailableSofts;
+            checkCpu(model[item].MinCpuCores);
+            checkRam(model[item].MinRamAmount);
+            break;
           }
+        };
+
+        function checkCpu(minCpu) {
+          var cpuArr = Calculator.model.curDcModel.curPool.Cpu.Cores;
+
+          for (var i = 0; cpuArr.length >= i; i++) {
+            if (minCpu > cpuArr[i]) {
+
+              if (minCpu > cpuArr[i + 1]) {
+                cpuArr.splice(i, i + 1);
+                i--;
+              } else {
+                cpuArr[i] = minCpu;
+              }
+            };
+          };
+
+          Calculator.model.curCpu = (Calculator.model.curCpu < cpuArr[0]) ? cpuArr[0] : Calculator.model.curCpu;
         }
-        console.log(curImage);
-        console.log(Calculator.model.curHdd);
+
+        function checkRam(minRam) {
+          var ramArr = Calculator.model.curDcModel.curPool.Ram.Amounts;
+          
+          for (var i = 0; ramArr.length >= i; i++) {
+            if (minRam > ramArr[i]) {
+              if (minRam >= ramArr[i + 1]) {
+                ramArr.splice(i, i + 1);
+                i--;
+              } else {
+                ramArr[i] = minRam;
+              }
+            };
+          };
+
+          Calculator.model.curRam = (Calculator.model.curRam < ramArr[0]) ? ramArr[0] : Calculator.model.curRam;
+        }
+      },
+
+      getOrderObj: function () {
+        var postObj = {};
+
+        postObj.DataCenterId = Calculator.model.curDcModel.Id;
+        postObj.Performance = Calculator.model.curDcModel.curPool.Performance;
+        postObj.ImageId = Calculator.model.curImage;
+        postObj.Email = Calculator.model.order.email;
+        postObj.Cpu = Calculator.model.curCpu;
+        postObj.Ram = Calculator.model.curRam;
+        postObj.DiskSize = Calculator.model.curHdd;
+        postObj.DiskType = Calculator.model.curHddType;
+        postObj.Soft = [];
+        postObj.Soft.push(Calculator.model.curSoft);
+        postObj.BackupDepth = Calculator.model.curBackup;
+        postObj.RegistrationTag = 'register';
+
+        return postObj;
       },
 
       createFullModel: function () {
-        Calculator.model.getDcModel(elemConfig.dc.val());
-        Calculator.model.getCurrentPerfomance($('[name="performance-input"]:checked').val());
+        this.getDcModel(elemConfig.dc.val());
+        this.getCurrentPerfomance($('[name="performance-input"]:checked').val());
+        this.getCurrentHddObj();
+        this.getCurrentImage();
       },
     },
     view: {
@@ -126,35 +197,42 @@ function initCalculatorVDS2(defaultObj) {
             select.append(option);
           });
 
+          var modelImageId = Calculator.model.curImage;
+
+          select.find((modelImageId) ? 'option[value="' + modelImageId + '"]' : 'option:first-child').prop('selected', true);
         },
-        hdd: function (minDiskSize) {
-          var resourcePool = Calculator.model.curHdd;
-          var performance = resourcePool || defaultObj.Perfomance;
-          var minSize = minDiskSize || resourcePool.Min;
+        hdd: function () {
+          var resourcePool = Calculator.model.curHddObj;
+          var minSize = resourcePool.Min;
+          var curSize = Calculator.model.curHdd;
           var select = elemConfig.hdd;
           var curDc = defaultObj.Dclocation;
+
+          Calculator.model.tariff.curHdd = resourcePool.Tariff;
 
           select.find('option').remove();
           for (var i = minSize; i <= resourcePool.Max; i += resourcePool.Step) {
             Calculator.common.addOption(select, i, i + ' ' + 'Гб');
           };
 
+          select.find('option[value="' + curSize + '"]').prop('selected', true);
         },
-        backUp: function () {
+        backup: function () {
           var backUpBlock = $('#backup');
           var model = Calculator.model.curDcModel;
-          var select = elemConfig.backUp;
+          var curBackup = Calculator.model.curBackup;
+          var select = elemConfig.backup;
           var firstOption = $('<option />', {
-            'text': 'Не нужно'
-          });
+            'text': 'Не нужно',
+            'value': 0
+          });          
 
+          Calculator.model.tariff.curBackup = (model.IsBackupSupported) ? model.Backup.Tariff : 0;
           backUpBlock[(model.IsBackupSupported) ? 'removeClass' : 'addClass']('hidden');
+          Calculator.model.curBackup = (model.IsBackupSupported) ? Calculator.model.curBackup : null;
           select.find('option').remove();
 
-          
           firstOption.prop('selected', true);
-          firstOption.prop('disabled', true);
-
           select.append(firstOption);
 
           if (model.IsBackupSupported) {
@@ -165,29 +243,54 @@ function initCalculatorVDS2(defaultObj) {
               });
               select.append(option);
             });
+            select.find((curBackup) ? 'option[value="' + curBackup + '"]' : 'option:first-child').prop('selected', true);
           };
+        },
+        soft: function () {
+          var block = $('#isp-component');
+          var select = elemConfig.soft;
+          var curModel = Calculator.model.curSoftArr;
+          var soft = config.Soft;
+          var firstOption = $('<option />', {
+            text: 'Не устанавливать',
+            value: 0
+          });
 
+          Calculator.model.curSoft = '';
+          firstOption.prop('selected', true);
+          block[(curModel.length > 0) ? 'removeClass' : 'addClass']('hidden');
+          select.find('option').remove();
+          select.append(firstOption);
+
+          curModel.forEach(function (el, i) {
+            Calculator.common.addOption(select, el);
+          });
         },
         init: function () {
           this.dc();
           this.image();
-          this.backUp();
+          this.backup();
+          this.soft();
         },
       },
       sliders: {
         cpu: function () {
           var cpuScaleArray = Calculator.model.curDcModel.curPool.Cpu.Cores;
-          var cpuStartValue = Calculator.model.curCpu;
+          var cpuStartValue = (cpuScaleArray.indexOf(cpuStartValue) > -1) ? Calculator.model.curCpu : cpuScaleArray[0];
           var slider = elemConfig.cpu;
+
+          Calculator.model.tariff.curCpu = Calculator.model.curDcModel.curPool.Cpu.Tariff;
 
           slider.slider({
             value: cpuScaleArray.indexOf(cpuStartValue),
-            max: cpuScaleArray.length,
+            max: cpuScaleArray.length - 1,
             min: 0,
             range: 'min',
+            step: 1,
             slide: function (event, ui) {
-              console.log(ui.value);
               Calculator.view.sliders.cpuSlide(event, ui);
+              Calculator.view.radioButtons.showPerfomanceText();
+              Calculator.controller.calculate();
             }
           });
 
@@ -198,21 +301,15 @@ function initCalculatorVDS2(defaultObj) {
           var cpuScaleArray = Calculator.model.curDcModel.curPool.Cpu.Cores;
           Calculator.model.curCpu = cpuScaleArray[ui.value];
 
-          if (ui.value == 0) {
-            $('#cpu-slider').slider('value', 1);
-            $("#CPU_Val").val(parseInt(cpuScaleArray[0]));
-            $('#cpu-slider-value .calculator__slider-digit').text(parseInt(cpuScaleArray[0]));
-            event.preventDefault();
-            return false;
-          }
-          
           cpuDigitVisibleObj.text(Calculator.model.curCpu);
           $('#CPU_Val').val(Calculator.model.curCpu);
         },
         ram: function () {
           var ramScaleArray = Calculator.model.curDcModel.curPool.Ram.Amounts;
-          var ramStartValue = Calculator.model.curRam;
+          var ramStartValue = (ramScaleArray.indexOf(Calculator.model.curRam) > -1) ? Calculator.model.curRam : ramScaleArray[0];
           var slider = elemConfig.ram;
+
+          Calculator.model.tariff.curRam = Calculator.model.curDcModel.curPool.Ram.Tariff;
 
           slider.slider({
             range: 'min',
@@ -220,8 +317,8 @@ function initCalculatorVDS2(defaultObj) {
             min: 0,
             max: ramScaleArray.length,
             slide: function (event, ui) {
-              console.log(ui.value);
               Calculator.view.sliders.ramSlide(event, ui);
+              Calculator.controller.calculate();
             }
           });
           
@@ -255,7 +352,6 @@ function initCalculatorVDS2(defaultObj) {
           var curPerfomanceTitle = Calculator.model.curDcModel.curPool.Perfomance;
           var curPerfomModel = Calculator.model.curDcModel.curPool;
 
-          
           Calculator.model.curDcModel.Performance = curPerfomanceTitle;
           elements.each(function () {
             var radio = $(this);
@@ -265,20 +361,37 @@ function initCalculatorVDS2(defaultObj) {
 
             radio.on('change', function () {
               Calculator.model.curDcModel.Performance = radio.val();
-              console.log(Calculator.model.curDcModel);
             });
           });       
+        },
+        showPerfomanceText: function () {
+          var descrArray = Calculator.model.curDcModel.curPool.HardwareDescirptions;
+          var curCpu = Calculator.model.curCpu;
+          var curTechDescr;
+
+          var poolDesc = (Calculator.model.curDcModel.curPool.Performance === 'perfhigh') ? 'Высокопроизводительный пул построен на базе серверов:' : 'Базовый пул построен на базе серверов:';
+
+          for (var item in descrArray) {
+            if (curCpu >= descrArray[item].FromCpu && curCpu <= descrArray[item].ToCpu) {
+              curTechDescr = descrArray[item].Title;
+              break;
+            }
+          };
+
+          var foolDescr = poolDesc + ' ' + curTechDescr;
+
+          $('#performance-solution-text').text(foolDescr);
         },
         storage: function () {
           var elements = elemConfig.storageElems;
           var curModel = Calculator.model.curDcModel.ResourcePools;
-          var curDiskType = Calculator.model.curDiskType;
+          var curHddType = Calculator.model.curHddType;
           var curPerfomModel = Calculator.model.curDcModel.curPool;
 
           elements.each(function () {
             var radio = $(this);
-            radio.prop('checked', radio.val() === curDiskType);
-            radio.prop('disabled', (elements.length > curPerfomModel.Disks.length && radio.val() !== curDiskType));
+            radio.prop('checked', radio.val() === curHddType);
+            radio.prop('disabled', (elements.length > curPerfomModel.Disks.length && radio.val() !== curHddType));
           });
           Calculator.view.selects.hdd();
         },
@@ -286,17 +399,23 @@ function initCalculatorVDS2(defaultObj) {
         init: function () {
           this.perfomance();
           this.storage();
+          this.showPerfomanceText();
         }
       },
       onModelChange: function () {
         Calculator.view.selects.image();
-        Calculator.view.selects.backUp();
+        Calculator.view.selects.backup();
         Calculator.view.sliders.destroySliders();
         Calculator.view.sliders.cpu();
         Calculator.view.sliders.ram();
 
         Calculator.view.radioButtons.init();
       },
+      showPrice: function () {
+        var priceElem = $('#price-sum');
+        var pricePer = $('input[name="price-per-input"]:checked').attr('id');
+        priceElem.text(Calculator.model.order.total[pricePer].toLocaleString('ru'));
+      }
     },
     common: {
       addOption: function(selectElem, val, text, extraParams) {
@@ -309,7 +428,7 @@ function initCalculatorVDS2(defaultObj) {
           for (var key in extraParams) {
             option.data(key, extraParams[key]);
           }
-        }
+        };
         selectElem.append(option);
       }
     },
@@ -318,52 +437,149 @@ function initCalculatorVDS2(defaultObj) {
         elemConfig.dc.on('change', function () {
           Calculator.model.createFullModel();
           Calculator.view.onModelChange();
-          console.log(Calculator.model);
+          Calculator.controller.calculate();
         });
 
         elemConfig.os.on('change', function () {
+          Calculator.model.curImage = parseInt($(this).val());
+          Calculator.model.getCurrentImage();
+          Calculator.view.selects.backup();
+          Calculator.view.selects.soft();
+          Calculator.view.sliders.destroySliders();
+          Calculator.view.sliders.cpu();
+          Calculator.view.sliders.ram();
+          Calculator.view.radioButtons.init();
+        });
+
+        elemConfig.soft.on('change', function () {
+          Calculator.model.curSoft = ($(this).val() !== '0') ? $(this).val() : '';
+        });
+
+        elemConfig.hdd.on('change', function () {
+          Calculator.model.curHdd = $(this).val();
+          Calculator.controller.calculate();
+        });
+
+        elemConfig.performanceElems.on('change', function () {
+          Calculator.model.curDcModel.Performance = $(this).val();
+          Calculator.model.createFullModel();
+          Calculator.view.radioButtons.showPerfomanceText();
+          Calculator.view.sliders.destroySliders();
+          Calculator.view.sliders.cpu();
+          Calculator.view.sliders.ram();
+          Calculator.controller.calculate();
+        });
+
+        elemConfig.storageElems.on('change', function () {
+          Calculator.model.curHddType = $(this).val();
+          Calculator.model.getCurrentHddObj();
+          Calculator.view.selects.hdd();
+          Calculator.controller.calculate();
+        });
+
+        elemConfig.backup.on('change', function () {
+          Calculator.model.curBackup = (parseInt($(this).val())) ? parseInt($(this).val()) : null;
+          Calculator.controller.calculate();
+        });
+
+        elemConfig.periodElems.on('change', function () {
+          Calculator.view.showPrice();
+        });
+
+        elemConfig.email.on('change', function () {
+          Calculator.model.order.email = $(this).val();
+        });
+      },
+      calculate: function () {
+        var cpuPrice = Calculator.model.tariff.curCpu * Calculator.model.curCpu;
+        var ramPrice = (Calculator.model.tariff.curRam / 4) * (Calculator.model.curRam / 256);
+        var hddPrice = Calculator.model.tariff.curHdd * Calculator.model.curHdd;
+        var backupPrice = (Calculator.model.tariff.curBackup / 7) * (Calculator.model.curBackup * Calculator.model.curHdd);
+        var total = cpuPrice + ramPrice + hddPrice + backupPrice;
+
+        Calculator.model.order.total['price-per-month'] = Math.round(total);
+        Calculator.model.order.total['price-per-day'] = Math.round(total / 30);
+        Calculator.model.order.total['price-per-hour'] = Math.round(total / (30 * 24));
+        Calculator.view.showPrice();
+      },
+      order: function () {
+        var calcValidator = $('#order-form').validate({
+          onkeyup: false,
+          onfocusin: function (element) {
+            errorMessageRemove($(element));
+          },
+          rules: {
+            'os-select': 'required',
+            'customer-email': {
+              required: true,
+              email: true
+            }
+          },
+          messages: {
+            'customer-email': {
+              email: textEmailInvalid
+            }
+          },
+          errorPlacement: function (error, element) {
+            error.insertAfter(element);
+            if (element.siblings('.btn').length > 0) {
+              element.siblings('.btn').bind('click',
+                function () {
+                  errorMessageRemove(element);
+                });
+            }
+          },
+          highlight: function (element) {
+            $(element).parent().addClass('error');
+          },
+          errorElement: 'span',
+          errorClass: errorClass
+        });
+
+        function incorrectPost(data) {
+          if (data.Email != undefined && data.Email != '') {
+            var c = elemConfig.email.val();
+            $.validator.addMethod('emailerrors', function (value) {
+              return value != c;
+            }, data.Email);
+
+            $(calcElemEmail).rules('remove', 'emailerrors');
+            $(calcElemEmail).rules('add', {
+              'emailerrors': true
+            });
+          }
+        }
+
+        elemConfig.form.submit(function (e) {
+          e.preventDefault();
+          var postObj = Calculator.model.getOrderObj();
           
-          console.log(Calculator.model);
-          Calculator.model.getCurrentImage($(this).val())
-        });
-
-        elemConfig.performanceElems.each(function () {
-          var radio = $(this);
-          radio.on('change', function () {
-            Calculator.model.curDcModel.Performance = radio.val();
-            console.log(Calculator.model.curDcModel);
-          });
-        });
-
-        elemConfig.storageElems.each(function () {
-          var radio = $(this);
-
-          radio.on('change', function () {
-            var curVal = $(this).val();
-            Calculator.model.getCurrentHdd(curVal);
-            Calculator.view.selects.hdd();
-          });
-        });
-
-
-
+          if (calcValidator.form()) {
+            sendPostRequest('#order-form', urlRegisterServer, postObj, function () {
+              window.location.href = successURL;
+            }, incorrectPost);
+          };
+        })
       }
     },
     init: function () {
       this.model.getDcModel(defaultObj.Dclocation);
       this.model.getCurrentPerfomance(defaultObj.Perfomance);
-      this.model.curDiskType = defaultObj.DiskType;
-      this.model.getCurrentHdd(defaultObj.DiskType);
+      this.model.curHddType = defaultObj.DiskType;
+      this.model.getCurrentHddObj(defaultObj.DiskType);
 
       this.model.curCpu = defaultObj.Cpu;
       this.model.curRam = defaultObj.Ram;
-      
+      Calculator.model.curHdd = defaultObj.HddSize;
+
       this.view.selects.init();
       this.view.radioButtons.init();
       this.view.sliders.cpu();
       this.view.sliders.ram();
 
       this.controller.onChange();
+      this.controller.calculate();
+      this.controller.order();
     }
   };
 
